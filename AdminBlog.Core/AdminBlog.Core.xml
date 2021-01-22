@@ -1,0 +1,443 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AdminBlog.Core</name>
+    </assembly>
+    <members>
+        <member name="T:AdminBlog.Core.Blog">
+            <summary>
+            博客表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.BlogType">
+            <summary>
+            文章类型
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.PublishTime">
+            <summary>
+            发布时间
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.Cover">
+            <summary>
+            封面
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.Synopsis">
+            <summary>
+            简介
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.Tags">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.ReadingVolume">
+            <summary>
+            阅读数
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.Likes">
+            <summary>
+            点赞数
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.Comment">
+            <summary>
+            博客评论表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.ShowName">
+            <summary>
+            展示昵称
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.EMail">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.Site">
+            <summary>
+            网站  站点
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.Browser">
+            <summary>
+            浏览器
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.SystemVersion">
+            <summary>
+            系统版本
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.IP">
+            <summary>
+            IP地址
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.IPHome">
+            <summary>
+            根据IP地址 推断所在地
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.QQ">
+            <summary>
+            QQ
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.Value">
+            <summary>
+            评论内容
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Comment.Time">
+            <summary>
+            评论时间
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.Dictionaries">
+            <summary>
+            字典表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Dictionaries.Name">
+            <summary>
+            中文姓名
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Dictionaries.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Dictionaries.Pid">
+            <summary>
+            父级
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Dictionaries.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.OnlineType">
+            <summary>
+            用户是否在线
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.OnlineType.NonOnline">
+            <summary>
+            不在线
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.OnlineType.Online">
+            <summary>
+            在线
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.ValidFlagType">
+            <summary>
+            该条数据是否被禁用
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.ValidFlagType.Effective">
+            <summary>
+            有效
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.ValidFlagType.Invalid">
+            <summary>
+            无效
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.UseType">
+            <summary>
+            该条数据是否被禁用
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.UseType.Active">
+            <summary>
+            可用
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.UseType.NonUse">
+            <summary>
+            禁用
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.AdminType">
+            <summary>
+            是否为管理员
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.AdminType.Yes">
+            <summary>
+            是管理员
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.AdminType.No">
+            <summary>
+            不是管理员
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.MenuType">
+            <summary>
+            菜单类型
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.MenuType.Page">
+            <summary>
+            页面
+            </summary>
+        </member>
+        <member name="F:AdminBlog.Core.MenuType.Button">
+            <summary>
+            按钮
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.EntityExtend">
+            <summary>
+            框架基础实体扩展，增加创建者、修改者
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.EntityExtend.CreateBy">
+            <summary>
+            创建者
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.EntityExtend.UpdateBy">
+            <summary>
+            上个修改者
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.SysMenu">
+            <summary>
+            后台菜单表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.MenuName">
+            <summary>
+            菜单名称
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.MenuCode">
+            <summary>
+            菜单Code
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.MenuIcon">
+            <summary>
+            菜单图标
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.MenuTitle">
+            <summary>
+            菜单标题
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.ParentModuleID">
+            <summary>
+            父级菜单
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.MenuPath">
+            <summary>
+            菜单路径
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.SortIndex">
+            <summary>
+            排序值
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.IsUse">
+            <summary>
+            是否禁用
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.MenuType">
+            <summary>
+            菜单类型（按钮/页面）
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.SysRole">
+            <summary>
+            系统角色表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysRole.RoleName">
+            <summary>
+            角色名称
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysRole.RoleDesc">
+            <summary>
+            角色描述
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysRole.AdminFlag">
+            <summary>
+            是否为管理员
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysRole.IsUse">
+            <summary>
+            是否禁用
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.SysRoleMenu">
+            <summary>
+            角色对应的菜单表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysRoleMenu.RoleID">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysRoleMenu.MenuID">
+            <summary>
+            菜单ID 
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysRoleMenu.ValidFlag">
+            <summary>
+            是否可用
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.SysUser">
+            <summary>
+            用户登录信息表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.UserLoginName">
+            <summary>
+            用户登录名
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.UserPassworrd">
+            <summary>
+            用户密码
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.Descripts">
+            <summary>
+            用户描述
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.IsOnline">
+            <summary>
+            是否在线
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.LoginTimes">
+            <summary>
+            登陆次数
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.LastLoginTime">
+            <summary>
+            上次登录时间
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.LastLoginIP">
+            <summary>
+            上次登录IP
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.IsUse">
+            <summary>
+            是否可用
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysUser.ValigFlag">
+            <summary>
+            是否被删除
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.SystemEntities.SysUserInfo">
+            <summary>
+            用户信息详情表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.UserShowName">
+            <summary>
+            用户展示名称（昵称）
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.HeadPortrait">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.Phone">
+            <summary>
+            手机
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.EMail">
+            <summary>
+            邮箱
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.BirthDate">
+            <summary>
+            出生日期
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.IDCard">
+            <summary>
+            身份证号
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.QQ">
+            <summary>
+            QQ
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.WeChat">
+            <summary>
+            微信
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserRole.UserID">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserRole.RoleID">
+            <summary>
+            角色ID
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUserRole.ValidFlag">
+            <summary>
+            是否可用
+            </summary>
+        </member>
+    </members>
+</doc>

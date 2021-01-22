@@ -1,0 +1,11 @@
+{
+  //密码配置
+  "PasswordSetting": {
+    //加密方式（0：不加密；1：MD5加密；2：MD5加密后截取）
+    "EncryptType": "2",
+    //密码截取开始索引
+    "SubStart": "6",
+    //密码截取位数
+    "SubString": "20"
+  }
+}

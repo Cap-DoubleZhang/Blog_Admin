@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DocumentationFile>AdminBlog.Web.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AdminBlog.Web.Core.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdminBlog.Application\AdminBlog.Application.csproj" />
+    <ProjectReference Include="..\AdminBlog.Database.Migrations\AdminBlog.Database.Migrations.csproj" />
+  </ItemGroup>
+
+</Project>
