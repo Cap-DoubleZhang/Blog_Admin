@@ -26,8 +26,8 @@ namespace AdminBlog.Core
         /// 用户密码
         /// </summary>
         [StringLength(100)]
-        [Column("UserPassworrd")]
-        public string UserPassworrd { get; set; }
+        [Column("UserPassword")]
+        public string UserPassword { get; set; }
         /// <summary>
         /// 用户描述
         /// </summary>

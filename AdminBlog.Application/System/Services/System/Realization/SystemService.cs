@@ -13,8 +13,8 @@ namespace AdminBlog.Application
     [DynamicApiController]
     public class SystemService
     {
-        private readonly EFCoreRepository<SysUser> _sysUserRepository;
-        public SystemService(EFCoreRepository<SysUser> sysUserRepository)
+        private readonly IRepository<SysUser> _sysUserRepository;
+        public SystemService(IRepository<SysUser> sysUserRepository)
         {
             _sysUserRepository = sysUserRepository;
         }
@@ -26,7 +26,7 @@ namespace AdminBlog.Application
         [HttpGet]
         public async Task<SysUser> GetSysUsersAsync()
         {
-            return await _sysUserRepository.LastOrDefaultAsync();
+            return await _sysUserRepository.FindAsync(2);
         }
 
         public string Get()

@@ -334,7 +334,7 @@
             用户登录名
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SysUser.UserPassworrd">
+        <member name="P:AdminBlog.Core.SysUser.UserPassword">
             <summary>
             用户密码
             </summary>
