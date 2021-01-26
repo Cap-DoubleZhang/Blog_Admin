@@ -22,8 +22,4 @@
     <ProjectReference Include="..\AdminBlog.Core\AdminBlog.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="System\Services\System\Realization\" />
-  </ItemGroup>
-
 </Project>

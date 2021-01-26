@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Application.System.Services.System.Interface
+namespace AdminBlog.Application
 {
-    public class ISystemService
+    public interface ISystemService
     {
 
 
