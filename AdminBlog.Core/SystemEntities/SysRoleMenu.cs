@@ -25,10 +25,5 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("MenuID")]
         public long MenuID { get; set; }
-        /// <summary>
-        /// 是否可用
-        /// </summary>
-        [Column("ValidFlag")]
-        public ValidFlagType ValidFlag { get; set; }
     }
 }

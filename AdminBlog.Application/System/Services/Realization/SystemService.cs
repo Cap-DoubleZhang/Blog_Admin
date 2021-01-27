@@ -1,4 +1,5 @@
-﻿using AdminBlog.Core;
+﻿using AdminBlog.Application.System;
+using AdminBlog.Core;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
 using Furion.LinqBuilder;
@@ -31,7 +32,7 @@ namespace AdminBlog.Application
         /// <param name="searchDto"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedList<SysUser>> GetSysUsersAsync(SearchDto searchDto)
+        public async Task<PagedList<ResultDto>> GetSysUsersAsync(SearchDto searchDto)
         {
             #region 关键词进行条件查询 多条件使用空格分开
             string[] keys = searchDto.keyword.Split(' ');
@@ -53,9 +54,9 @@ namespace AdminBlog.Application
             }
             #endregion
             PagedList<SysUser> sysUsers = await _sysUserRepository.Where(expression).OrderByDescending(a => a.CreatedTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
-            return sysUsers;
+            return sysUsers.Adapt<PagedList<ResultDto>>();
         }
-        
+
         #endregion
     }
 }

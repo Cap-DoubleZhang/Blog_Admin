@@ -16,4 +16,8 @@
     <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="1.5.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdminBlog.Core.Enum\AdminBlog.Core.Enum.csproj" />
+  </ItemGroup>
+
 </Project>

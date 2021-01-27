@@ -139,81 +139,6 @@
             值
             </summary>
         </member>
-        <member name="T:AdminBlog.Core.OnlineType">
-            <summary>
-            用户是否在线
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.OnlineType.NonOnline">
-            <summary>
-            不在线
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.OnlineType.Online">
-            <summary>
-            在线
-            </summary>
-        </member>
-        <member name="T:AdminBlog.Core.ValidFlagType">
-            <summary>
-            该条数据是否被禁用
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.ValidFlagType.Effective">
-            <summary>
-            有效
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.ValidFlagType.Invalid">
-            <summary>
-            无效
-            </summary>
-        </member>
-        <member name="T:AdminBlog.Core.UseType">
-            <summary>
-            该条数据是否被禁用
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.UseType.Active">
-            <summary>
-            可用
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.UseType.NonUse">
-            <summary>
-            禁用
-            </summary>
-        </member>
-        <member name="T:AdminBlog.Core.AdminType">
-            <summary>
-            是否为管理员
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.AdminType.Yes">
-            <summary>
-            是管理员
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.AdminType.No">
-            <summary>
-            不是管理员
-            </summary>
-        </member>
-        <member name="T:AdminBlog.Core.MenuType">
-            <summary>
-            菜单类型
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.MenuType.Page">
-            <summary>
-            页面
-            </summary>
-        </member>
-        <member name="F:AdminBlog.Core.MenuType.Button">
-            <summary>
-            按钮
-            </summary>
-        </member>
         <member name="T:AdminBlog.Core.EntityExtend">
             <summary>
             框架基础实体扩展，增加创建者、修改者
@@ -319,11 +244,6 @@
             菜单ID 
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SysRoleMenu.ValidFlag">
-            <summary>
-            是否可用
-            </summary>
-        </member>
         <member name="T:AdminBlog.Core.SysUser">
             <summary>
             用户登录信息表
@@ -367,11 +287,6 @@
         <member name="P:AdminBlog.Core.SysUser.IsUse">
             <summary>
             是否可用
-            </summary>
-        </member>
-        <member name="P:AdminBlog.Core.SysUser.ValigFlag">
-            <summary>
-            是否被删除
             </summary>
         </member>
         <member name="T:AdminBlog.Core.SystemEntities.SysUserInfo">
@@ -432,11 +347,6 @@
         <member name="P:AdminBlog.Core.SystemEntities.SysUserRole.RoleID">
             <summary>
             角色ID
-            </summary>
-        </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserRole.ValidFlag">
-            <summary>
-            是否可用
             </summary>
         </member>
     </members>

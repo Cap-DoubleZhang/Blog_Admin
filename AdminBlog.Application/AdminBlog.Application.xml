@@ -4,10 +4,11 @@
         <name>AdminBlog.Application</name>
     </assembly>
     <members>
-        <member name="M:AdminBlog.Application.SystemService.GetSysUsersAsync">
+        <member name="M:AdminBlog.Application.SystemService.GetSysUsersAsync(AdminBlog.Application.System.SearchDto)">
             <summary>
-            获取用户详情
+            获取系统用户分页列表
             </summary>
+            <param name="searchDto"></param>
             <returns></returns>
         </member>
     </members>

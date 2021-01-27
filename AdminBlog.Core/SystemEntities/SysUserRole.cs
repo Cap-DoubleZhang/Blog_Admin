@@ -22,10 +22,5 @@ namespace AdminBlog.Core.SystemEntities
         /// </summary>
         [Column("RoleID")]
         public long RoleID { get; set; }
-        /// <summary>
-        /// 是否可用
-        /// </summary>
-        [Column("ValidFlag")]
-        public ValidFlagType ValidFlag { get; set; }
     }
 }

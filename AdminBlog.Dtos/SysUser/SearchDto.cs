@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Application
+namespace AdminBlog.Application.System
 {
     /// <summary>
     /// 搜索系统用户Dto
