@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Application
+namespace AdminBlog.Dtos
 {
     /// <summary>
     /// 结果集/结果Dto 基类

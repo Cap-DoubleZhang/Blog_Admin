@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Application.System.Dtos
+namespace AdminBlog.Dtos
 {
     /// <summary>
     /// 保存Dto 基类

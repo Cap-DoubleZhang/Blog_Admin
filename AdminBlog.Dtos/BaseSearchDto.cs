@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Application
+namespace AdminBlog.Dtos
 {
     /// <summary>
     /// 搜索Dto 基类
@@ -22,6 +22,6 @@ namespace AdminBlog.Application
         /// <summary>
         /// 搜索关键词
         /// </summary>
-        public string keyword { get; set; }
+        public string keyword { get; set; } = "";
     }
 }

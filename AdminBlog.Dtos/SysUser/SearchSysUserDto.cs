@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Application.System
+namespace AdminBlog.Dtos
 {
     /// <summary>
     /// 搜索系统用户Dto
     /// </summary>
-    public class SearchDto : BaseSearchDto
+    public class SearchSysUserDto : BaseSearchDto
     {
     }
 }

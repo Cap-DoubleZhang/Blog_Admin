@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Application.System
+namespace AdminBlog.Dtos
 {
     /// <summary>
     /// 系统用户结果集Dto
     /// </summary>
-    public class ResultDto : BaseResultDto
+    public class ResultSysUserDto : BaseResultDto
     {
         /// <summary>
         /// 用户登录名
