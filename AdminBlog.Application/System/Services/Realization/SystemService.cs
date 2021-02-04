@@ -1,4 +1,4 @@
-﻿using AdminBlog.Application.System;
+﻿using AdminBlog.Common;
 using AdminBlog.Core;
 using AdminBlog.Dtos;
 using Furion.DatabaseAccessor;
@@ -21,9 +21,11 @@ namespace AdminBlog.Application
     {
         #region 依赖注入
         private readonly IRepository<SysUser> _sysUserRepository;
-        public SystemService(IRepository<SysUser> sysUserRepository)
+        public EncryptHelper _encryptHelper { get; set; }
+        public SystemService(IRepository<SysUser> sysUserRepository, EncryptHelper encryptHelper)
         {
             _sysUserRepository = sysUserRepository;
+            _encryptHelper = encryptHelper;
         }
         #endregion
 
@@ -65,28 +67,36 @@ namespace AdminBlog.Application
         /// <summary>
         /// 新增或更改系统用户
         /// </summary>
-        /// <param name="sysUser"></param>
+        /// <param name="sysUserDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<bool> SaveSysUserAsync(SysUser sysUser)
+        [UnitOfWork]
+        public async Task<bool> SaveSysUserAsync(SaveSysUserDto sysUserDto)
         {
-            if (sysUser == null || sysUser.Id == 0)
+            if (sysUserDto.Id == 0)
             {
+                SysUser sysUser = sysUserDto.Adapt<SysUser>();
+                sysUser.UserPassword = _encryptHelper.DefaultPassword();
                 sysUser.CreatedTime = DateTime.UtcNow;
-                await _sysUserRepository.InsertNowAsync(sysUser);
+                var userAdd = await _sysUserRepository.InsertNowAsync(sysUser);
+                SysUserInfo sysUserInfo = sysUserDto.Adapt<SysUserInfo>();
+                sysUserInfo.UserID = userAdd.Entity.Id;
+                sysUserInfo.CreatedTime = DateTime.UtcNow;
             }
             else
             {
-                bool IsExist = await _sysUserRepository.AnyAsync(a => a.Id == sysUser.Id);
+                bool IsExist = await _sysUserRepository.AnyAsync(a => a.Id == sysUserDto.Id);
                 if (IsExist)
                 {
+                    SysUser sysUser = sysUserDto.Adapt<SysUser>();
                     sysUser.UpdatedTime = DateTime.UtcNow;
-                    await _sysUserRepository.UpdateExcludeNowAsync(sysUser, new[] { nameof(sysUser.CreateBy), nameof(sysUser.CreatedTime) }, true
+                    await _sysUserRepository.UpdateIncludeExistsNowAsync(sysUser, new[] { nameof(sysUser.Descripts) }, true
                         );
+
                 }
                 else
                 {
-                    throw Oops.Oh("该条数据不存在.");
+                    throw Oops.Oh("该条数据不存在或已被删除.");
                 }
             }
             return true;

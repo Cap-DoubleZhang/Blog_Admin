@@ -6,6 +6,8 @@
     //密码截取开始索引
     "SubStart": "6",
     //密码截取位数
-    "SubString": "20"
+    "SubString": "20",
+    //初始默认密码
+    "DefaultPassword": "000000"
   }
 }

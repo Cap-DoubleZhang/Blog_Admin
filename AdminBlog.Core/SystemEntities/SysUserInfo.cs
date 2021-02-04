@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Core.SystemEntities
+namespace AdminBlog.Core
 {
     /// <summary>
     /// 用户信息详情表
