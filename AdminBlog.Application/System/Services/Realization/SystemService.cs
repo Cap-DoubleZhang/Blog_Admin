@@ -21,11 +21,11 @@ namespace AdminBlog.Application
     {
         #region 依赖注入
         private readonly IRepository<SysUser> _sysUserRepository;
-        public EncryptHelper _encryptHelper { get; set; }
-        public SystemService(IRepository<SysUser> sysUserRepository, EncryptHelper encryptHelper)
+        private readonly IRepository<SysUserInfo> _sysUserInfoRepository;
+        public SystemService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository)
         {
             _sysUserRepository = sysUserRepository;
-            _encryptHelper = encryptHelper;
+            _sysUserInfoRepository = sysUserInfoRepository;
         }
         #endregion
 
@@ -75,24 +75,36 @@ namespace AdminBlog.Application
         {
             if (sysUserDto.Id == 0)
             {
+                //新增用户登录信息
                 SysUser sysUser = sysUserDto.Adapt<SysUser>();
-                sysUser.UserPassword = _encryptHelper.DefaultPassword();
+                sysUser.UserPassword = EncryptHelper.DefaultPassword();
                 sysUser.CreatedTime = DateTime.UtcNow;
                 var userAdd = await _sysUserRepository.InsertNowAsync(sysUser);
+                //新增用户详情
                 SysUserInfo sysUserInfo = sysUserDto.Adapt<SysUserInfo>();
                 sysUserInfo.UserID = userAdd.Entity.Id;
                 sysUserInfo.CreatedTime = DateTime.UtcNow;
+                await _sysUserInfoRepository.InsertNowAsync(sysUserInfo);
             }
             else
             {
+                //判断用户是否存在
                 bool IsExist = await _sysUserRepository.AnyAsync(a => a.Id == sysUserDto.Id);
                 if (IsExist)
                 {
+                    //更改用户登录信息
                     SysUser sysUser = sysUserDto.Adapt<SysUser>();
                     sysUser.UpdatedTime = DateTime.UtcNow;
                     await _sysUserRepository.UpdateIncludeExistsNowAsync(sysUser, new[] { nameof(sysUser.Descripts) }, true
                         );
-
+                    //更改用户详情
+                    SysUserInfo sysUserInfo = sysUserDto.Adapt<SysUserInfo>();
+                    await _sysUserInfoRepository.UpdateExcludeExistsNowAsync(sysUserInfo, new[] {
+                        nameof(sysUserInfo.UserID),
+                        nameof(sysUserInfo.CreateBy),
+                        nameof(sysUserInfo.CreatedTime),
+                        nameof(sysUserInfo.IsDeleted)}, true
+                        );
                 }
                 else
                 {

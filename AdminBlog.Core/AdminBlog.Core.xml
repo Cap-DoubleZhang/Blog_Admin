@@ -289,52 +289,52 @@
             是否可用
             </summary>
         </member>
-        <member name="T:AdminBlog.Core.SystemEntities.SysUserInfo">
+        <member name="T:AdminBlog.Core.SysUserInfo">
             <summary>
             用户信息详情表
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.UserID">
+        <member name="P:AdminBlog.Core.SysUserInfo.UserID">
             <summary>
             用户ID
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.UserShowName">
+        <member name="P:AdminBlog.Core.SysUserInfo.UserShowName">
             <summary>
             用户展示名称（昵称）
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.HeadPortrait">
+        <member name="P:AdminBlog.Core.SysUserInfo.HeadPortrait">
             <summary>
             头像
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.Phone">
+        <member name="P:AdminBlog.Core.SysUserInfo.Phone">
             <summary>
             手机
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.EMail">
+        <member name="P:AdminBlog.Core.SysUserInfo.EMail">
             <summary>
             邮箱
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.BirthDate">
+        <member name="P:AdminBlog.Core.SysUserInfo.BirthDate">
             <summary>
             出生日期
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.IDCard">
+        <member name="P:AdminBlog.Core.SysUserInfo.IDCard">
             <summary>
             身份证号
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.QQ">
+        <member name="P:AdminBlog.Core.SysUserInfo.QQ">
             <summary>
             QQ
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserInfo.WeChat">
+        <member name="P:AdminBlog.Core.SysUserInfo.WeChat">
             <summary>
             微信
             </summary>

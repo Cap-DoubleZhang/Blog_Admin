@@ -10,7 +10,7 @@ namespace AdminBlog.Common
     /// <summary>
     /// 用户密码配置项
     /// </summary>
-    [OptionsSettings("AppSettings:PasswordSetting")]
+    [OptionsSettings("AppSetting:PasswordSetting")]
     public class PasswordSettingOptions : IConfigurableOptions
     {
         /// <summary>

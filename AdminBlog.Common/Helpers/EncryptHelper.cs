@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Furion;
+using Microsoft.Extensions.Options;
 using System;
 using System.Security.Cryptography;
 using System.Text;
@@ -11,18 +12,22 @@ namespace AdminBlog.Common
     public class EncryptHelper
     {
         #region 依赖注入密码配置类
-        private readonly PasswordSettingOptions passwordSetting;
-        public EncryptHelper(IOptions<PasswordSettingOptions> passwordOptions)
-        {
-            passwordSetting = passwordOptions.Value;
-        }
+        //private readonly PasswordSettingOptions passwordSetting;
+        //public EncryptHelper()
+        //{
+        //}
+        //public EncryptHelper(IOptions<PasswordSettingOptions> passwordOptions)
+        //{
+        //    passwordSetting = passwordOptions.Value;
+        //}
+        static PasswordSettingOptions passwordSetting = App.GetOptions<PasswordSettingOptions>();
         #endregion
 
         /// <summary>
         /// 系统用户初始密码
         /// </summary>
         /// <returns></returns>
-        public string DefaultPassword()
+        public static string DefaultPassword()
         {
             return MD5Encode(passwordSetting.DefaultPassword);
         }
@@ -32,7 +37,7 @@ namespace AdminBlog.Common
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public string MD5Encode(string source)
+        public static string MD5Encode(string source)
         {
             string newStr = "";
             if (passwordSetting.EncryptType != 0)

@@ -4,11 +4,18 @@
         <name>AdminBlog.Application</name>
     </assembly>
     <members>
-        <member name="M:AdminBlog.Application.SystemService.GetSysUsersAsync(AdminBlog.Application.System.SearchDto)">
+        <member name="M:AdminBlog.Application.SystemService.GetSysUsersAsync(AdminBlog.Dtos.SearchSysUserDto)">
             <summary>
             获取系统用户分页列表
             </summary>
             <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.SaveSysUserAsync(AdminBlog.Dtos.SaveSysUserDto)">
+            <summary>
+            新增或更改系统用户
+            </summary>
+            <param name="sysUserDto"></param>
             <returns></returns>
         </member>
     </members>
