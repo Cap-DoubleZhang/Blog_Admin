@@ -75,6 +75,10 @@ namespace AdminBlog.Application
         {
             if (sysUserDto.Id == 0)
             {
+                //判断用户是否存在
+                bool IsExist = await _sysUserRepository.AnyAsync(a => a.UserLoginName == sysUserDto.UserLoginName);
+                if (IsExist)
+                    throw Oops.Oh("该用户名已存在.");
                 //新增用户登录信息
                 SysUser sysUser = sysUserDto.Adapt<SysUser>();
                 sysUser.UserPassword = EncryptHelper.DefaultPassword();
@@ -89,7 +93,7 @@ namespace AdminBlog.Application
             else
             {
                 //判断用户是否存在
-                bool IsExist = await _sysUserRepository.AnyAsync(a => a.Id == sysUserDto.Id);
+                bool IsExist = await _sysUserRepository.AnyAsync(a => a.Id == sysUserDto.Id && a.UserLoginName == sysUserDto.UserLoginName);
                 if (IsExist)
                 {
                     //更改用户登录信息
@@ -108,9 +112,30 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh("该条数据不存在或已被删除.");
+                    throw Oops.Oh("该用户数据不存在或已被删除.");
                 }
             }
+            return true;
+        }
+
+        /// <summary>
+        /// 更改用户密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<bool> UpdateUserPassword(SaveSysUserPasswordDto saveSysUserPasswordDto)
+        {
+            SysUser user = await _sysUserRepository.FindAsync(saveSysUserPasswordDto.Id) ?? new SysUser();
+            if (user.Id <= 0)
+                throw Oops.Oh("该用户数据不存在或已被删除.");
+            if (string.Compare(user.UserPassword, EncryptHelper.MD5Encode(saveSysUserPasswordDto.oldPassword)) != 0)
+                throw Oops.Oh("原密码不正确.");
+            if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword)) != 0)
+                throw Oops.Oh("新密码与确认密码不相同.");
+            user.UpdatedTime = DateTime.UtcNow;
+            user.UserPassword = EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword);
+            await _sysUserRepository.UpdateIncludeExistsNowAsync(user, new[] { nameof(user.UserPassword) }, true
+                );
             return true;
         }
         #endregion

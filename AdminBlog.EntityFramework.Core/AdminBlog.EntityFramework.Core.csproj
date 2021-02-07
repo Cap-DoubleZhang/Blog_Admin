@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="dbsettings.json" />
     <None Remove="sqlsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="dbsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -14,12 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AdminBlog.Core\AdminBlog.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="dbsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

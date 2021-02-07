@@ -5,13 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Furion" Version="1.13.7" />
+    <None Remove="commonSetting.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="commonSetting.json">
+    <Content Include="commonSetting.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Furion" Version="1.13.7" />
   </ItemGroup>
 
 </Project>

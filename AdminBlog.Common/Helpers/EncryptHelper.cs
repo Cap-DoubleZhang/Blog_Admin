@@ -20,7 +20,7 @@ namespace AdminBlog.Common
         //{
         //    passwordSetting = passwordOptions.Value;
         //}
-        static PasswordSettingOptions passwordSetting = App.GetOptions<PasswordSettingOptions>();
+        //static PasswordSettingOptions passwordSetting = App.GetOptions<PasswordSettingOptions>();
         #endregion
 
         /// <summary>
@@ -29,6 +29,7 @@ namespace AdminBlog.Common
         /// <returns></returns>
         public static string DefaultPassword()
         {
+            PasswordSettingOptions passwordSetting = App.GetOptions<PasswordSettingOptions>();
             return MD5Encode(passwordSetting.DefaultPassword);
         }
 
@@ -40,6 +41,7 @@ namespace AdminBlog.Common
         public static string MD5Encode(string source)
         {
             string newStr = "";
+            PasswordSettingOptions passwordSetting = App.GetOptions<PasswordSettingOptions>();
             if (passwordSetting.EncryptType != 0)
             {
                 using (var md5 = MD5.Create())
