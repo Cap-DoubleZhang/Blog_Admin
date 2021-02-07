@@ -1,5 +1,6 @@
 ﻿using AdminBlog.Common;
 using AdminBlog.Core;
+using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
@@ -131,11 +132,28 @@ namespace AdminBlog.Application
             if (string.Compare(user.UserPassword, EncryptHelper.MD5Encode(saveSysUserPasswordDto.oldPassword)) != 0)
                 throw Oops.Oh("原密码不正确.");
             if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword)) != 0)
-                throw Oops.Oh("新密码与确认密码不相同.");
+                throw Oops.Oh("新密码与确认密码不一致.");
             user.UpdatedTime = DateTime.UtcNow;
             user.UserPassword = EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword);
             await _sysUserRepository.UpdateIncludeExistsNowAsync(user, new[] { nameof(user.UserPassword) }, true
                 );
+            return true;
+        }
+
+        /// <summary>
+        /// 系统用户登录
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<bool> UserLogin(SysUserLoginDto loginDto)
+        {
+            string MD5Password = EncryptHelper.MD5Encode(loginDto.UserPassword);
+            SysUser userLogin = await _sysUserRepository.SingleAsync(a => a.UserPassword == loginDto.UserPassword && a.UserLoginName == loginDto.UserLoginName);
+            if (userLogin == null || userLogin.Id <= 0)
+                throw Oops.Oh("用户名或密码不正确.");
+            if (userLogin.IsUse == UseTypeEnum.NonUse)
+                throw Oops.Oh("该用户已被禁用.");
             return true;
         }
         #endregion

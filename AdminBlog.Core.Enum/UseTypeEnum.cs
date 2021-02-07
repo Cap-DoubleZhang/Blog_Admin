@@ -5,17 +5,17 @@ using System.Text;
 namespace AdminBlog.Core.Enum
 {
     /// <summary>
-    /// 菜单类型
+    /// 该条数据是否被禁用
     /// </summary>
-    public enum MenuType
+    public enum UseTypeEnum
     {
         /// <summary>
-        /// 页面
+        /// 可用
         /// </summary>
-        Page = 0,
+        Active = 0,
         /// <summary>
-        /// 按钮
+        /// 禁用
         /// </summary>
-        Button = 1
+        NonUse = 1,
     }
 }

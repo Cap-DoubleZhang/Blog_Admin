@@ -5,17 +5,17 @@ using System.Text;
 namespace AdminBlog.Core.Enum
 {
     /// <summary>
-    /// 该条数据是否被禁用
+    /// 用户是否在线
     /// </summary>
-    public enum ValidFlagType
+    public enum OnlineTypeEnum
     {
         /// <summary>
-        /// 有效
+        /// 不在线
         /// </summary>
-        Effective = 0,
+        NonOnline = 0,
         /// <summary>
-        /// 无效
+        /// 在线
         /// </summary>
-        Invalid = 1,
+        Online = 1,
     }
 }

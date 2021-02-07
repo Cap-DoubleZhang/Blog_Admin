@@ -39,7 +39,7 @@ namespace AdminBlog.Core
         /// 是否在线
         /// </summary>
         [Column("IsOnline")]
-        public OnlineType IsOnline { get; set; }
+        public OnlineTypeEnum IsOnline { get; set; }
         /// <summary>
         /// 登陆次数
         /// </summary>
@@ -59,6 +59,6 @@ namespace AdminBlog.Core
         /// 是否可用
         /// </summary>
         [Column("IsUse")]
-        public UseType IsUse { get; set; }
+        public UseTypeEnum IsUse { get; set; }
     }
 }

@@ -30,11 +30,11 @@ namespace AdminBlog.Core
         /// 是否为管理员
         /// </summary>
         [Column("AdminFlag")]
-        public AdminType AdminFlag { get; set; }
+        public AdminTypeEnum AdminFlag { get; set; }
         /// <summary>
         /// 是否禁用
         /// </summary>
         [Column("IsUse")]
-        public UseType IsUse { get; set; }
+        public UseTypeEnum IsUse { get; set; }
     }
 }

@@ -5,17 +5,17 @@ using System.Text;
 namespace AdminBlog.Core.Enum
 {
     /// <summary>
-    /// 是否为管理员
+    /// 该条数据是否被禁用
     /// </summary>
-    public enum AdminType
+    public enum ValidFlagTypeEnum
     {
         /// <summary>
-        /// 是管理员
+        /// 有效
         /// </summary>
-        Yes = 1,
+        Effective = 0,
         /// <summary>
-        /// 不是管理员
+        /// 无效
         /// </summary>
-        No = 0,
+        Invalid = 1,
     }
 }

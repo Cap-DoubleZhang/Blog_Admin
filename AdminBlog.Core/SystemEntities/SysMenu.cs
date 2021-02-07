@@ -62,12 +62,12 @@ namespace AdminBlog.Core
         /// 是否禁用
         /// </summary>
         [Column("IsUse")]
-        public UseType IsUse { get; set; }
+        public UseTypeEnum IsUse { get; set; }
 
         /// <summary>
         /// 菜单类型（按钮/页面）
         /// </summary>
         [Column("RoleName")]
-        public MenuType MenuType { get; set; }
+        public MenuTypeEnum MenuType { get; set; }
     }
 }

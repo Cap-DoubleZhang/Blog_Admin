@@ -18,5 +18,18 @@
             <param name="sysUserDto"></param>
             <returns></returns>
         </member>
+        <member name="M:AdminBlog.Application.SystemService.UpdateUserPassword(AdminBlog.Dtos.SaveSysUserPasswordDto)">
+            <summary>
+            更改用户密码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.UserLogin(AdminBlog.Dtos.SysUserLoginDto)">
+            <summary>
+            系统用户登录
+            </summary>
+            <param name="loginDto"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

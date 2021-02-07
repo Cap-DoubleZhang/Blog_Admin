@@ -5,17 +5,17 @@ using System.Text;
 namespace AdminBlog.Core.Enum
 {
     /// <summary>
-    /// 用户是否在线
+    /// 是否为管理员
     /// </summary>
-    public enum OnlineType
+    public enum AdminTypeEnum
     {
         /// <summary>
-        /// 不在线
+        /// 是管理员
         /// </summary>
-        NonOnline = 0,
+        Yes = 1,
         /// <summary>
-        /// 在线
+        /// 不是管理员
         /// </summary>
-        Online = 1,
+        No = 0,
     }
 }
