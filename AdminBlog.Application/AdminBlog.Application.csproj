@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EFCore.BulkExtensions" Version="3.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AdminBlog.Common\AdminBlog.Common.csproj" />
     <ProjectReference Include="..\AdminBlog.Core.Enum\AdminBlog.Core.Enum.csproj" />
     <ProjectReference Include="..\AdminBlog.Core\AdminBlog.Core.csproj" />

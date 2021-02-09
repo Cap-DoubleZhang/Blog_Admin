@@ -2,7 +2,9 @@
 using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
+using EFCore.BulkExtensions;
 using Furion.DatabaseAccessor;
+using Furion.DataEncryption;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
 using Furion.LinqBuilder;
@@ -23,10 +25,12 @@ namespace AdminBlog.Application
         #region 依赖注入
         private readonly IRepository<SysUser> _sysUserRepository;
         private readonly IRepository<SysUserInfo> _sysUserInfoRepository;
-        public SystemService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository)
+        private readonly IRepository<SysRole> _sysRoleRepository;
+        public SystemService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, IRepository<SysRole> sysRoleRepository)
         {
             _sysUserRepository = sysUserRepository;
             _sysUserInfoRepository = sysUserInfoRepository;
+            _sysRoleRepository = sysRoleRepository;
         }
         #endregion
 
@@ -37,7 +41,7 @@ namespace AdminBlog.Application
         /// <param name="searchDto"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PagedList<ResultSysUserDto>> GetSysUsersAsync([FromQuery] SearchSysUserDto searchDto)
+        public async Task<PagedList<ResultSysUserDto>> GetPagedSysUsersAsync([FromQuery] SearchSysUserDto searchDto)
         {
             #region 关键词进行条件查询 多条件使用空格分开
             string[] keys = searchDto.keyword.Trim().Split(' ');
@@ -123,8 +127,8 @@ namespace AdminBlog.Application
         /// 更改用户密码
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
-        public async Task<bool> UpdateUserPassword(SaveSysUserPasswordDto saveSysUserPasswordDto)
+        [HttpPut]
+        public async Task<bool> UpdateUserPasswordAsync(SaveSysUserPasswordDto saveSysUserPasswordDto)
         {
             SysUser user = await _sysUserRepository.FindAsync(saveSysUserPasswordDto.Id) ?? new SysUser();
             if (user.Id <= 0)
@@ -146,16 +150,50 @@ namespace AdminBlog.Application
         /// <param name="loginDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<bool> UserLogin(SysUserLoginDto loginDto)
+        public async Task<string> UserLoginAsync(SysUserLoginDto loginDto)
         {
             string MD5Password = EncryptHelper.MD5Encode(loginDto.UserPassword);
-            SysUser userLogin = await _sysUserRepository.SingleAsync(a => a.UserPassword == loginDto.UserPassword && a.UserLoginName == loginDto.UserLoginName);
+            SysUser userLogin = await _sysUserRepository.SingleAsync(a => a.UserPassword == MD5Password && a.UserLoginName == loginDto.UserLoginName);
             if (userLogin == null || userLogin.Id <= 0)
                 throw Oops.Oh("用户名或密码不正确.");
             if (userLogin.IsUse == UseTypeEnum.NonUse)
                 throw Oops.Oh("该用户已被禁用.");
+
+            string accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>()
+            {
+                { "Id",userLogin.Id },
+                { "UserLoginName",userLogin.UserLoginName }
+            });
+            return accessToken;
+        }
+
+        /// <summary>
+        /// 更新单个/批量用户是否可用
+        /// </summary>
+        /// <param name="updateSysUserUseDto"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<bool> UpdateUserIsUseAsync(UpdateSysUserUseDto updateSysUserUseDto)
+        {
+            await _sysUserRepository.Where(a => updateSysUserUseDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsUse = updateSysUserUseDto.IsUse, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysUser.IsUse), nameof(SysUser.UpdatedTime) });
             return true;
         }
+
+        /// <summary>
+        /// 单个/批量删除用户
+        /// </summary>
+        /// <param name="baseBatchUpdateDto"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<bool> DeleteUserAsync(BaseBatchUpdateDto baseBatchUpdateDto)
+        {
+            await _sysUserRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysUser.IsDeleted), nameof(SysUser.UpdatedTime) });
+
+            return true;
+        }
+        #endregion
+
+        #region 系统角色
         #endregion
     }
 }

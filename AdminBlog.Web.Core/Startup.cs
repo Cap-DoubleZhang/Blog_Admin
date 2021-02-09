@@ -12,6 +12,8 @@ namespace AdminBlog.Web.Core
         {
             //services.AddJwt<JwtHandler>();
 
+            services.AddJwt();
+
             services.AddCorsAccessor();
 
             services.AddControllers()
