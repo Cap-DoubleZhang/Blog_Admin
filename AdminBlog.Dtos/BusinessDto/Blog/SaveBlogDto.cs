@@ -1,20 +1,15 @@
-﻿using Furion.DatabaseAccessor;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Core
+namespace AdminBlog.Dtos
 {
     /// <summary>
-    /// 博客表
+    /// 保存博客详情Dto
     /// </summary>
-    [Table("Blog")]
-    [Description("博客列表")]
-    public class Blog : EntityExtend
+    public class SaveBlogDto : BaseSaveDto
     {
         /// <summary>
         /// 标题
@@ -44,14 +39,6 @@ namespace AdminBlog.Core
         /// 标签
         /// </summary>
         public string Tags { get; set; }
-        /// <summary>
-        /// 阅读数
-        /// </summary>
-        public int ReadingVolume { get; set; }
-        /// <summary>
-        /// 点赞数
-        /// </summary>
-        public int Likes { get; set; }
         /// <summary>
         /// 内容
         /// </summary>

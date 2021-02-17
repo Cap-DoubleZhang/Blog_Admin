@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Core.SystemEntities
+namespace AdminBlog.Core
 {
     [Table("Sys_UserRole")]
     [Description("用户角色表")]

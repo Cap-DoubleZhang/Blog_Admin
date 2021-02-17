@@ -4,7 +4,7 @@
         <name>AdminBlog.Application</name>
     </assembly>
     <members>
-        <member name="M:AdminBlog.Application.SystemService.GetSysUsersAsync(AdminBlog.Dtos.SearchSysUserDto)">
+        <member name="M:AdminBlog.Application.SystemService.GetPagedSysUsersAsync(AdminBlog.Dtos.SearchSysUserDto)">
             <summary>
             获取系统用户分页列表
             </summary>
@@ -18,17 +18,127 @@
             <param name="sysUserDto"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.SystemService.UpdateUserPassword(AdminBlog.Dtos.SaveSysUserPasswordDto)">
+        <member name="M:AdminBlog.Application.SystemService.UpdateUserPasswordAsync(AdminBlog.Dtos.SaveSysUserPasswordDto)">
             <summary>
             更改用户密码
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.SystemService.UserLogin(AdminBlog.Dtos.SysUserLoginDto)">
+        <member name="M:AdminBlog.Application.SystemService.UserLoginAsync(AdminBlog.Dtos.SysUserLoginDto)">
             <summary>
             系统用户登录
             </summary>
             <param name="loginDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.UpdateUserIsUseAsync(AdminBlog.Dtos.UpdateSysUserUseDto)">
+            <summary>
+            更新单个/批量用户是否可用
+            </summary>
+            <param name="updateSysUserUseDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.DeleteUserAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除用户
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.GetPagedSysRolesAsync(AdminBlog.Dtos.SearchSysRoleDto)">
+            <summary>
+            获取系统角色分页列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.SaveSysRoleAsync(AdminBlog.Dtos.SaveSysRoleDto)">
+            <summary>
+            新增/编辑 角色信息
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.UpdateRoleIsUseAsync(AdminBlog.Dtos.UpdateSysRoleUseDto)">
+            <summary>
+            更新单个/批量角色是否可用
+            </summary>
+            <param name="updateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.DeleteRoleAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除角色
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.GetMenuAsync(System.Int32[])">
+            <summary>
+            获取级联菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.GetChildMenu(System.Collections.Generic.List{AdminBlog.Core.SysMenu},System.Collections.Generic.List{AdminBlog.Core.SysMenu})">
+            <summary>
+            递归获取子菜单
+            </summary>
+            <param name="childrenMenus"></param>
+            <param name="allMenus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.SaveSysMenuAsync(AdminBlog.Dtos.SaveSysMenuDto)">
+            <summary>
+            新增/编辑 菜单信息
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.UpdateMenuIsUseAsync(AdminBlog.Dtos.UpdateSysMenuUseDto)">
+            <summary>
+            更新单个/批量菜单是否可用
+            </summary>
+            <param name="updateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.DeleteMenuAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除菜单
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.GetRoleMenu">
+            <summary>
+            获取角色菜单列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.SaveRoleMenu(AdminBlog.Dtos.SaveRoleMenuDto)">
+            <summary>
+            删除原角色下菜单并保存新菜单列表
+            </summary>
+            <param name="roleMenuDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.GetUserRole">
+            <summary>
+            获取用户角色列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.SaveUserRole(AdminBlog.Dtos.SaveUserRoleDto)">
+            <summary>
+            删除原用户下角色并保存新角色 列表
+            </summary>
+            <param name="userRoleDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.GetPagedDictionariesAsync(AdminBlog.Dtos.SearchDirctionaryDto)">
+            <summary>
+            获取系统字典分页列表
+            </summary>
+            <param name="searchDto"></param>
             <returns></returns>
         </member>
     </members>

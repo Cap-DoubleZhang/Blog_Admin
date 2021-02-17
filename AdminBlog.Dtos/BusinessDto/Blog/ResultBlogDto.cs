@@ -1,20 +1,15 @@
-﻿using Furion.DatabaseAccessor;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Core
+namespace AdminBlog.Dtos
 {
     /// <summary>
-    /// 博客表
+    /// 博客结果集Dto
     /// </summary>
-    [Table("Blog")]
-    [Description("博客列表")]
-    public class Blog : EntityExtend
+    public class ResultBlogDto : BaseResultDto
     {
         /// <summary>
         /// 标题
@@ -24,10 +19,6 @@ namespace AdminBlog.Core
         /// 文章类型
         /// </summary>
         public string BlogType { get; set; }
-        /// <summary>
-        /// 是否发布
-        /// </summary>
-        public bool IsPublish { get; set; }
         /// <summary>
         /// 发布时间
         /// </summary>

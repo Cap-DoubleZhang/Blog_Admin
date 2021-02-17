@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Core
+namespace AdminBlog.Dtos
 {
     /// <summary>
-    /// 博客评论表
+    /// 评论结果集Dto
     /// </summary>
-    [Table("Comment")]
-    [Description("博客评论列表")]
-    public class Comment : EntityExtend
+    public class ResultCommentDto : BaseResultDto
     {
-        /// <summary>
-        /// 所属博客ID
-        /// </summary>
-        public int BlogId { get; set; }
         /// <summary>
         /// 展示昵称
         /// </summary>
@@ -59,7 +50,10 @@ namespace AdminBlog.Core
         /// <summary>
         /// 评论内容
         /// </summary>
-        [StringLength(500)]
         public string Value { get; set; }
+        /// <summary>
+        /// 评论文章
+        /// </summary>
+        public string BlogTitle { get; set; }
     }
 }

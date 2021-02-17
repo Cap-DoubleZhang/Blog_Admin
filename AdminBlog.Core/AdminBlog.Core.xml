@@ -114,31 +114,6 @@
             评论时间
             </summary>
         </member>
-        <member name="T:AdminBlog.Core.Dictionaries">
-            <summary>
-            字典表
-            </summary>
-        </member>
-        <member name="P:AdminBlog.Core.Dictionaries.Name">
-            <summary>
-            中文姓名
-            </summary>
-        </member>
-        <member name="P:AdminBlog.Core.Dictionaries.Code">
-            <summary>
-            编码
-            </summary>
-        </member>
-        <member name="P:AdminBlog.Core.Dictionaries.Pid">
-            <summary>
-            父级
-            </summary>
-        </member>
-        <member name="P:AdminBlog.Core.Dictionaries.Value">
-            <summary>
-            值
-            </summary>
-        </member>
         <member name="T:AdminBlog.Core.EntityExtend">
             <summary>
             框架基础实体扩展，增加创建者、修改者
@@ -152,6 +127,26 @@
         <member name="P:AdminBlog.Core.EntityExtend.UpdateBy">
             <summary>
             上个修改者
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.SysDictionary">
+            <summary>
+            字典表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysDictionary.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysDictionary.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysDictionary.Value">
+            <summary>
+            值
             </summary>
         </member>
         <member name="T:AdminBlog.Core.SysMenu">
@@ -339,12 +334,12 @@
             微信
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserRole.UserID">
+        <member name="P:AdminBlog.Core.SysUserRole.UserID">
             <summary>
             用户ID
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SystemEntities.SysUserRole.RoleID">
+        <member name="P:AdminBlog.Core.SysUserRole.RoleID">
             <summary>
             角色ID
             </summary>

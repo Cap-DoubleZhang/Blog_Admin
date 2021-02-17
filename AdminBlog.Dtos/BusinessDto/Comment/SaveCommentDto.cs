@@ -1,65 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Core
+namespace AdminBlog.Dtos
 {
     /// <summary>
-    /// 博客评论表
+    /// 保存评论Dto
     /// </summary>
-    [Table("Comment")]
-    [Description("博客评论列表")]
-    public class Comment : EntityExtend
+    public class SaveCommentDto
     {
-        /// <summary>
-        /// 所属博客ID
-        /// </summary>
-        public int BlogId { get; set; }
+        public int blogId { get; set; }
         /// <summary>
         /// 展示昵称
         /// </summary>
-        public string ShowName { get; set; }
+        public string showName { get; set; }
         /// <summary>
         /// 头像
         /// </summary>
-        public string HeadPortrait { get; set; }
+        public string headPortrait { get; set; }
         /// <summary>
         /// 邮箱
         /// </summary>
-        public string EMail { get; set; }
+        public string email { get; set; }
         /// <summary>
         /// 网站  站点
         /// </summary>
-        public string Site { get; set; }
+        public string site { get; set; }
         /// <summary>
         /// 浏览器
         /// </summary>
-        public string Browser { get; set; }
+        public string browser { get; set; }
         /// <summary>
         /// 系统版本
         /// </summary>
-        public string SystemVersion { get; set; }
+        public string systemVersion { get; set; }
         /// <summary>
         /// IP地址
         /// </summary>
-        public string IP { get; set; }
+        public string ip { get; set; }
         /// <summary>
         /// 根据IP地址 推断所在地
         /// </summary>
-        public string IPHome { get; set; }
+        public string iPHome { get; set; }
         /// <summary>
         /// QQ
         /// </summary>
-        public string QQ { get; set; }
+        public string qq { get; set; }
         /// <summary>
         /// 评论内容
         /// </summary>
-        [StringLength(500)]
-        public string Value { get; set; }
+        public string value { get; set; }
     }
 }

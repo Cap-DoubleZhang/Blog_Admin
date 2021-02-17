@@ -4,14 +4,16 @@ using AdminBlog.EntityFramework.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminBlog.Database.Migrations.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210211181534_v1.0.4")]
+    partial class v104
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,7 +136,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("AdminBlog.Core.SysDictionary", b =>
+            modelBuilder.Entity("AdminBlog.Core.Dictionaries", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,6 +158,9 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("Pid")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("UpdateBy")
                         .HasColumnType("int");
 
@@ -167,7 +172,7 @@ namespace AdminBlog.Database.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sys_Dictionary");
+                    b.ToTable("Dictionaries");
                 });
 
             modelBuilder.Entity("AdminBlog.Core.SysMenu", b =>
@@ -436,7 +441,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.ToTable("Sys_UserInfo");
                 });
 
-            modelBuilder.Entity("AdminBlog.Core.SysUserRole", b =>
+            modelBuilder.Entity("AdminBlog.Core.SystemEntities.SysUserRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
