@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="commonSetting.json" />
+    <None Remove="commonsettings.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="commonSetting.json">
+    <Content Include="commonsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

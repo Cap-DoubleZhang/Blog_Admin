@@ -4,6 +4,46 @@
         <name>AdminBlog.Application</name>
     </assembly>
     <members>
+        <member name="T:AdminBlog.Application.System.Services.Realization.BusinessService">
+            <summary>
+            博客 业务
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.GetPagedBlogAsync(AdminBlog.Dtos.SearchBlogDto)">
+            <summary>
+            获取分页博客列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.SaveBlogAsync(AdminBlog.Dtos.SaveBlogDto)">
+            <summary>
+            保存博客详情
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.DeleteUserAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除博客
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.GetPagedCommentAsync(AdminBlog.Dtos.SearchCommentDto)">
+            <summary>
+            获取分页评论列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.DeleteCommentAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除评论
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:AdminBlog.Application.SystemService.GetPagedSysUsersAsync(AdminBlog.Dtos.SearchSysUserDto)">
             <summary>
             获取系统用户分页列表
@@ -139,6 +179,20 @@
             获取系统字典分页列表
             </summary>
             <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.SaveDictionaryAsync(AdminBlog.Dtos.SaveDictionaryDto)">
+            <summary>
+            编辑/新增 系统字典
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.DeleteDictionaryAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除角色
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
             <returns></returns>
         </member>
     </members>

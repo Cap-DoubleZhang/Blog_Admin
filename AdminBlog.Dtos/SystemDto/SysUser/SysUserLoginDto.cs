@@ -16,11 +16,11 @@ namespace AdminBlog.Dtos
         /// 登录名
         /// </summary>
         [Required(ErrorMessage = "登录名不能为空.")]
-        public string UserLoginName { get; set; }
+        public string username { get; set; }
         /// <summary>
         /// 密码
         /// </summary>
         [Required(ErrorMessage = "密码不能为空.")]
-        public string UserPassword { get; set; }
+        public string password { get; set; }
     }
 }

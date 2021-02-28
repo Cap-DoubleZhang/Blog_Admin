@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AdminBlog.Common
 {
+    [AppStartup(800)]
     public class Startup : AppStartup
     {
         public void ConfigureServices(IServiceCollection services)

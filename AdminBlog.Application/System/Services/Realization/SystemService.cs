@@ -159,10 +159,10 @@ namespace AdminBlog.Application
         /// <param name="loginDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> UserLoginAsync(SysUserLoginDto loginDto)
+        public async Task<string> UserLoginAsync([FromBody]SysUserLoginDto loginDto)
         {
-            string MD5Password = EncryptHelper.MD5Encode(loginDto.UserPassword);
-            SysUser userLogin = await _sysUserRepository.SingleAsync(a => a.UserPassword == MD5Password && a.UserLoginName == loginDto.UserLoginName);
+            string MD5Password = EncryptHelper.MD5Encode(loginDto.password);
+            SysUser userLogin = await _sysUserRepository.SingleAsync(a => a.UserPassword == MD5Password && a.UserLoginName == loginDto.username);
             if (userLogin == null || userLogin.Id <= 0)
                 throw Oops.Oh("用户名或密码不正确.");
             if (userLogin.IsUse == UseTypeEnum.NonUse)
