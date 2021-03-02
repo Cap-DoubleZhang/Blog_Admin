@@ -3,6 +3,7 @@ using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
 using EFCore.BulkExtensions;
+using Furion;
 using Furion.DatabaseAccessor;
 using Furion.DataEncryption;
 using Furion.DynamicApiController;
@@ -14,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -76,6 +78,22 @@ namespace AdminBlog.Application
             #endregion
             PagedList<SysUser> sysUsersPaged = await _sysUserRepository.Where(expression).OrderByDescending(a => a.CreatedTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
             return sysUsersPaged.Adapt<PagedList<ResultSysUserDto>>();
+        }
+
+        /// <summary>
+        /// 根据token 获取用户信息
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        [HttpGet("/user/info")]
+        public async Task<ResultSysUserDto> GetCurrentUserByToken([FromHeader]string token)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+                throw Oops.Oh("必要参数传入为空.");
+            //App.GetService
+            var userId = App.User?.FindFirstValue("Id");
+            SysUser user = await _sysUserRepository.FindAsync(userId) ?? new SysUser();
+            return user.Adapt<ResultSysUserDto>();
         }
 
         /// <summary>
@@ -171,7 +189,7 @@ namespace AdminBlog.Application
             string accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>()
             {
                 { "Id",userLogin.Id },
-                { "UserLoginName",userLogin.UserLoginName }
+                { "UserName",userLogin.UserLoginName },
             });
             return accessToken;
         }

@@ -51,6 +51,13 @@
             <param name="searchDto"></param>
             <returns></returns>
         </member>
+        <member name="M:AdminBlog.Application.SystemService.GetCurrentUserByToken(System.String)">
+            <summary>
+            根据token 获取用户信息
+            </summary>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
         <member name="M:AdminBlog.Application.SystemService.SaveSysUserAsync(AdminBlog.Dtos.SaveSysUserDto)">
             <summary>
             新增或更改系统用户
