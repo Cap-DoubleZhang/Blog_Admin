@@ -51,11 +51,16 @@
             <param name="searchDto"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.SystemService.GetCurrentUserByToken(System.String)">
+        <member name="M:AdminBlog.Application.SystemService.GetCurrentUserByToken">
             <summary>
             根据token 获取用户信息
             </summary>
-            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.SystemService.UserLogout">
+            <summary>
+            退出系统
+            </summary>
             <returns></returns>
         </member>
         <member name="M:AdminBlog.Application.SystemService.SaveSysUserAsync(AdminBlog.Dtos.SaveSysUserDto)">

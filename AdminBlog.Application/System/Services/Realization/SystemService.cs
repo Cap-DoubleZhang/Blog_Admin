@@ -10,6 +10,7 @@ using Furion.DynamicApiController;
 using Furion.FriendlyException;
 using Furion.LinqBuilder;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace AdminBlog.Application
         private readonly IRepository<SysRoleMenu> _sysRoleMenuRepository;
         private readonly IRepository<SysUserRole> _sysUserRoleRepository;
         private readonly IRepository<SysDictionary> _sysDictionaryRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public SystemService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, IRepository<SysRole> sysRoleRepository, IRepository<SysMenu> sysMenuRepository, IRepository<SysRoleMenu> sysRoleMenuRepository, IRepository<SysUserRole> sysUserRoleRepository,
             IRepository<SysDictionary> sysDictionaryRepository)
         {
@@ -42,6 +44,7 @@ namespace AdminBlog.Application
             _sysRoleMenuRepository = sysRoleMenuRepository;
             _sysUserRoleRepository = sysUserRoleRepository;
             _sysDictionaryRepository = sysDictionaryRepository;
+            _httpContextAccessor = App.GetService<IHttpContextAccessor>();
         }
         #endregion
 
@@ -83,17 +86,40 @@ namespace AdminBlog.Application
         /// <summary>
         /// 根据token 获取用户信息
         /// </summary>
-        /// <param name="token"></param>
         /// <returns></returns>
-        [HttpGet("/user/info")]
-        public async Task<ResultSysUserDto> GetCurrentUserByToken([FromHeader]string token)
+        [HttpGet("/api/system/user/info")]
+        public async Task<ResultLoginUserDto> GetCurrentUserByToken()
         {
-            if (string.IsNullOrWhiteSpace(token))
-                throw Oops.Oh("必要参数传入为空.");
-            //App.GetService
             var userId = App.User?.FindFirstValue("Id");
-            SysUser user = await _sysUserRepository.FindAsync(userId) ?? new SysUser();
-            return user.Adapt<ResultSysUserDto>();
+            if (string.IsNullOrWhiteSpace(userId))
+                throw Oops.Oh("必要参数传入为空.");
+            SysUser user = await _sysUserRepository.FindAsync(Convert.ToInt32(userId));
+
+            SysUserInfo sysUserInfo = await _sysUserInfoRepository.FindAsync(Convert.ToInt32(userId));
+
+            //去用户角色表中查询数据
+            List<string> roles = new List<string>()
+            {
+                new string("admin"),
+            };
+            ResultLoginUserDto resultLoginUserDto = new ResultLoginUserDto
+            {
+                name = string.IsNullOrWhiteSpace(sysUserInfo.UserShowName) ? "admin" : sysUserInfo.UserShowName,
+                avatar = string.IsNullOrWhiteSpace(sysUserInfo.HeadPortrait) ? "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024" : sysUserInfo.HeadPortrait,
+                introduction = "",
+                roles = roles,
+            };
+            return resultLoginUserDto;
+        }
+
+        /// <summary>
+        /// 退出系统
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("/api/system/user/logout")]
+        public Task<bool> UserLogout()
+        {
+            return Task.FromResult(true);
         }
 
         /// <summary>
@@ -177,7 +203,7 @@ namespace AdminBlog.Application
         /// <param name="loginDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<string> UserLoginAsync([FromBody]SysUserLoginDto loginDto)
+        public async Task<string> UserLoginAsync([FromBody] SysUserLoginDto loginDto)
         {
             string MD5Password = EncryptHelper.MD5Encode(loginDto.password);
             SysUser userLogin = await _sysUserRepository.SingleAsync(a => a.UserPassword == MD5Password && a.UserLoginName == loginDto.username);
@@ -191,6 +217,13 @@ namespace AdminBlog.Application
                 { "Id",userLogin.Id },
                 { "UserName",userLogin.UserLoginName },
             });
+
+            // 获取刷新 token
+            var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, 30); // 第二个参数是刷新 token 的有效期，默认三十天
+
+            // 设置请求报文头
+            _httpContextAccessor.HttpContext.Response.Headers["access-token"] = accessToken;
+            _httpContextAccessor.HttpContext.Response.Headers["x-access-token"] = refreshToken;
             return accessToken;
         }
 
