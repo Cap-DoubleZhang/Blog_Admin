@@ -92,7 +92,7 @@ namespace AdminBlog.Application
         {
             var userId = App.User?.FindFirstValue("Id");
             if (string.IsNullOrWhiteSpace(userId))
-                throw Oops.Oh("必要参数传入为空.");
+                throw Oops.Oh(" Token 过期,请重新登录.");
             //SysUser user = await _sysUserRepository.FindAsync(Convert.ToInt32(userId));
 
             SysUserInfo sysUserInfo = await _sysUserInfoRepository.FindAsync(Convert.ToInt32(userId));
