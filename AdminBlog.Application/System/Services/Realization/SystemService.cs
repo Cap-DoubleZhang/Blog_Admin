@@ -136,7 +136,7 @@ namespace AdminBlog.Application
                 //判断用户是否存在
                 bool IsExist = await _sysUserRepository.AnyAsync(a => a.UserLoginName == sysUserDto.UserLoginName);
                 if (IsExist)
-                    throw Oops.Oh("该用户名已存在.");
+                    throw Oops.Oh(UserErrorCodeEnum.UserNameExist);
                 //新增用户登录信息
                 SysUser sysUser = sysUserDto.Adapt<SysUser>();
                 sysUser.UserPassword = EncryptHelper.DefaultPassword();
@@ -170,7 +170,7 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh("该用户数据不存在或已被删除.");
+                    throw Oops.Oh(UserErrorCodeEnum.NonExist);
                 }
             }
             return true;
@@ -185,11 +185,12 @@ namespace AdminBlog.Application
         {
             SysUser user = await _sysUserRepository.FindAsync(saveSysUserPasswordDto.Id) ?? new SysUser();
             if (user.Id <= 0)
-                throw Oops.Oh("该用户数据不存在或已被删除.");
+                throw Oops.Oh(UserErrorCodeEnum.NonExist);
             if (string.Compare(user.UserPassword, EncryptHelper.MD5Encode(saveSysUserPasswordDto.oldPassword)) != 0)
-                throw Oops.Oh("原密码不正确.");
+                throw Oops.Oh(UserErrorCodeEnum.ErrorOldPassword);
             if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword)) != 0)
-                throw Oops.Oh("新密码与确认密码不一致.");
+                throw Oops.Oh(UserErrorCodeEnum.NewPasswordAndRePasswordDifferent);
+
             user.UpdatedTime = DateTime.UtcNow;
             user.UserPassword = EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword);
             await _sysUserRepository.UpdateIncludeExistsNowAsync(user, new[] { nameof(user.UserPassword) }, true
@@ -208,9 +209,9 @@ namespace AdminBlog.Application
             string MD5Password = EncryptHelper.MD5Encode(loginDto.password);
             SysUser userLogin = await _sysUserRepository.SingleAsync(a => a.UserPassword == MD5Password && a.UserLoginName == loginDto.username);
             if (userLogin == null || userLogin.Id <= 0)
-                throw Oops.Oh("用户名或密码不正确.");
+                throw Oops.Oh(UserErrorCodeEnum.ErrorUserNameOrPassword);
             if (userLogin.IsUse == UseTypeEnum.NonUse)
-                throw Oops.Oh("该用户已被禁用.");
+                throw Oops.Oh(UserErrorCodeEnum.NonUse);
 
             string accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>()
             {
@@ -304,7 +305,7 @@ namespace AdminBlog.Application
                 //判断角色是否存在
                 bool IsExist = await _sysRoleRepository.AnyAsync(a => a.RoleName == saveDto.RoleName);
                 if (IsExist)
-                    throw Oops.Oh("该角色名已存在.");
+                    throw Oops.Oh(RoleErrorCodeEnum.RoleNameExist);
                 //新增角色信息
                 SysRole sysRoleAdd = saveDto.Adapt<SysRole>();
                 sysRoleAdd.CreatedTime = DateTime.UtcNow;
@@ -324,7 +325,7 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh("该角色数据不存在或已被删除.");
+                    throw Oops.Oh(RoleErrorCodeEnum.NonExist);
                 }
             }
             return true;
@@ -600,7 +601,7 @@ namespace AdminBlog.Application
                 //判断字典是否存在
                 bool IsExist = await _sysDictionaryRepository.AnyAsync(a => a.Name == saveDto.Name && a.Code == saveDto.Code);
                 if (IsExist)
-                    throw Oops.Oh("该名称已存在.");
+                    throw Oops.Oh(DictionaryErrorCodeEnum.NameExist);
                 //新增字典信息
                 SysDictionary sysDictionaryAdd = saveDto.Adapt<SysDictionary>();
                 sysDictionaryAdd.CreatedTime = DateTime.UtcNow;
@@ -620,7 +621,7 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh("该字典数据不存在或已被删除.");
+                    throw Oops.Oh(DictionaryErrorCodeEnum.NonExist);
                 }
             }
             return true;

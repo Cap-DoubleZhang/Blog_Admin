@@ -27,5 +27,9 @@ namespace AdminBlog.Core
         /// 值
         /// </summary>
         public string Value { get; set; }
+        /// <summary>
+        /// 描述/备注
+        /// </summary>
+        public string Remark { get; set; }
     }
 }
