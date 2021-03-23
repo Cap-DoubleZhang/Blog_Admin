@@ -9,5 +9,12 @@
     "SubString": "20",
     //初始默认密码
     "DefaultPassword": "000000"
+  },
+  //当前登录用户标识常量
+  "CurrentUserInfo": {
+    //USER ID
+    "USERID": "USERID",
+    //USER NAME
+    "USERNAME": "USERNAME"
   }
 }

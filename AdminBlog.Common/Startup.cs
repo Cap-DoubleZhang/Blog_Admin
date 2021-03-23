@@ -14,6 +14,7 @@ namespace AdminBlog.Common
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddConfigurableOptions<PasswordSettingOptions>();
+            services.AddConfigurableOptions<CurrentUserInfoOptions>();
             //services.add<EncryptHelper>();
         }
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminBlog.Core.Enum.ErrorCode
+namespace AdminBlog.Core.Enum
 {
     /// <summary>
     /// 菜单错误码  提示用户操作反馈

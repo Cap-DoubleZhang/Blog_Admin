@@ -154,6 +154,11 @@
             值
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.SysDictionary.Remark">
+            <summary>
+            描述/备注
+            </summary>
+        </member>
         <member name="T:AdminBlog.Core.SysMenu">
             <summary>
             后台菜单表
