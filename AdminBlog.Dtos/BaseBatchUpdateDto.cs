@@ -14,6 +14,6 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 主键 集合
         /// </summary>
-        public int[] ids { get; set; }
+        public long[] ids { get; set; }
     }
 }

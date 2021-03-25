@@ -16,6 +16,6 @@ namespace AdminBlog.Dtos
         /// 菜单Id集合
         /// </summary>
         [Required(ErrorMessage = "请选择角色菜单.")]
-        public int[] menuIds { get; set; }
+        public long[] menuIds { get; set; }
     }
 }

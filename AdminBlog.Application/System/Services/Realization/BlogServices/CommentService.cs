@@ -105,7 +105,7 @@ namespace AdminBlog.Application
             }
             else
             {
-                throw Oops.Oh(CommentErrorCodeEnum.BlogNonExist);
+                throw Oops.Oh(CommentErrorCodeEnum.CommentBlogNonExist);
             }
             return true;
         }

@@ -21,7 +21,7 @@ namespace AdminBlog.Core.Enum
         /// 该用户不存在
         /// </summary>
         [ErrorCodeItemMetadata("该用户不存在或已被删除.")]
-        NonExist,
+        UserNonExist,
 
         /// <summary>
         /// 原密码不正确

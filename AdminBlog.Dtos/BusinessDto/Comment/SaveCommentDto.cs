@@ -11,7 +11,7 @@ namespace AdminBlog.Dtos
     /// </summary>
     public class SaveCommentDto
     {
-        public int blogId { get; set; }
+        public long blogId { get; set; }
         /// <summary>
         /// 展示昵称
         /// </summary>

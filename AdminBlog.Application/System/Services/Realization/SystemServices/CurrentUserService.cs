@@ -15,13 +15,13 @@ using Furion.LinqBuilder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
-namespace AdminBlog.Application.System.Services.Realization.System
+namespace AdminBlog.Application
 {
     /// <summary>
     /// 获取当前登录用户
     /// </summary>
     [SkipScan]
-    public class CurrentUserService
+    public class CurrentUserService : IScoped
     {
         private readonly IRepository<SysUser> _sysUserRepository; // 用户表仓储   
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -57,7 +57,7 @@ namespace AdminBlog.Application.System.Services.Realization.System
         public async Task<SysUser> GetCurrentUserAsync(long userId, bool tracking = true)
         {
             var user = await _sysUserRepository.FirstOrDefaultAsync(u => u.Id == userId, tracking);
-            return user ?? throw Oops.Oh(UserErrorCodeEnum.NonExist);
+            return user ?? throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
         }
     }
 }

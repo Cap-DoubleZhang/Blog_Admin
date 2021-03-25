@@ -4,42 +4,133 @@
         <name>AdminBlog.Application</name>
     </assembly>
     <members>
-        <member name="T:AdminBlog.Application.System.Services.Realization.BusinessService">
+        <member name="T:AdminBlog.Application.BlogService">
             <summary>
             博客 业务
             </summary>
         </member>
-        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.GetPagedBlogAsync(AdminBlog.Dtos.SearchBlogDto)">
+        <member name="M:AdminBlog.Application.BlogService.GetPagedBlogAsync(AdminBlog.Dtos.SearchBlogDto)">
             <summary>
             获取分页博客列表
             </summary>
             <param name="searchDto"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.SaveBlogAsync(AdminBlog.Dtos.SaveBlogDto)">
+        <member name="M:AdminBlog.Application.BlogService.SaveBlogAsync(AdminBlog.Dtos.SaveBlogDto)">
             <summary>
             保存博客详情
             </summary>
             <param name="saveDto"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.DeleteUserAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+        <member name="M:AdminBlog.Application.BlogService.DeleteUserAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
             <summary>
             单个/批量删除博客
             </summary>
             <param name="baseBatchUpdateDto"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.GetPagedCommentAsync(AdminBlog.Dtos.SearchCommentDto)">
+        <member name="T:AdminBlog.Application.CommentService">
+            <summary>
+            博客评论 业务
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.CommentService.GetPagedCommentAsync(AdminBlog.Dtos.SearchCommentDto)">
             <summary>
             获取分页评论列表
             </summary>
             <param name="searchDto"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.System.Services.Realization.BusinessService.DeleteCommentAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+        <member name="M:AdminBlog.Application.CommentService.SaveCommentAsync(AdminBlog.Dtos.SaveCommentDto)">
+            <summary>
+            新增/编辑 评论
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.CommentService.DeleteCommentAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
             <summary>
             单个/批量删除评论
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AdminBlog.Application.CurrentUserService">
+            <summary>
+            获取当前登录用户
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.CurrentUserService.GetCurrentUserAsync(System.Int64,System.Boolean)">
+            <summary>
+            获取用户信息
+            </summary>
+            <param name="userId"></param>
+            <param name="tracking"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AdminBlog.Application.DictionaryService">
+            <summary>
+            系统字典
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.DictionaryService.GetPagedDictionariesAsync(AdminBlog.Dtos.SearchDirctionaryDto)">
+            <summary>
+            获取系统字典分页列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.DictionaryService.SaveDictionaryAsync(AdminBlog.Dtos.SaveDictionaryDto)">
+            <summary>
+            编辑/新增 系统字典
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.DictionaryService.DeleteDictionaryAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除角色
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AdminBlog.Application.MenuService">
+            <summary>
+            系统菜单
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.MenuService.GetMenuAsync(System.Int64[])">
+            <summary>
+            获取级联菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.MenuService.GetChildMenu(System.Collections.Generic.List{AdminBlog.Core.SysMenu},System.Collections.Generic.List{AdminBlog.Core.SysMenu})">
+            <summary>
+            递归获取子菜单
+            </summary>
+            <param name="childrenMenus"></param>
+            <param name="allMenus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.MenuService.SaveSysMenuAsync(AdminBlog.Dtos.SaveSysMenuDto)">
+            <summary>
+            新增/编辑 菜单信息
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.MenuService.UpdateMenuIsUseAsync(AdminBlog.Dtos.UpdateSysMenuUseDto)">
+            <summary>
+            更新单个/批量菜单是否可用
+            </summary>
+            <param name="updateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.MenuService.DeleteMenuAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除菜单
             </summary>
             <param name="baseBatchUpdateDto"></param>
             <returns></returns>
@@ -78,72 +169,6 @@
             删除原用户下角色并保存新角色 列表
             </summary>
             <param name="userRoleDto"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AdminBlog.Application.DictionaryService">
-            <summary>
-            系统字典
-            </summary>
-        </member>
-        <member name="M:AdminBlog.Application.DictionaryService.GetPagedDictionariesAsync(AdminBlog.Dtos.SearchDirctionaryDto)">
-            <summary>
-            获取系统字典分页列表
-            </summary>
-            <param name="searchDto"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AdminBlog.Application.DictionaryService.SaveDictionaryAsync(AdminBlog.Dtos.SaveDictionaryDto)">
-            <summary>
-            编辑/新增 系统字典
-            </summary>
-            <param name="saveDto"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AdminBlog.Application.DictionaryService.DeleteDictionaryAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
-            <summary>
-            单个/批量删除角色
-            </summary>
-            <param name="baseBatchUpdateDto"></param>
-            <returns></returns>
-        </member>
-        <member name="T:AdminBlog.Application.MenuService">
-            <summary>
-            系统菜单
-            </summary>
-        </member>
-        <member name="M:AdminBlog.Application.MenuService.GetMenuAsync(System.Int32[])">
-            <summary>
-            获取级联菜单
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:AdminBlog.Application.MenuService.GetChildMenu(System.Collections.Generic.List{AdminBlog.Core.SysMenu},System.Collections.Generic.List{AdminBlog.Core.SysMenu})">
-            <summary>
-            递归获取子菜单
-            </summary>
-            <param name="childrenMenus"></param>
-            <param name="allMenus"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AdminBlog.Application.MenuService.SaveSysMenuAsync(AdminBlog.Dtos.SaveSysMenuDto)">
-            <summary>
-            新增/编辑 菜单信息
-            </summary>
-            <param name="saveDto"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AdminBlog.Application.MenuService.UpdateMenuIsUseAsync(AdminBlog.Dtos.UpdateSysMenuUseDto)">
-            <summary>
-            更新单个/批量菜单是否可用
-            </summary>
-            <param name="updateDto"></param>
-            <returns></returns>
-        </member>
-        <member name="M:AdminBlog.Application.MenuService.DeleteMenuAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
-            <summary>
-            单个/批量删除菜单
-            </summary>
-            <param name="baseBatchUpdateDto"></param>
             <returns></returns>
         </member>
         <member name="T:AdminBlog.Application.RoleService">

@@ -14,6 +14,6 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 主键ID
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
     }
 }

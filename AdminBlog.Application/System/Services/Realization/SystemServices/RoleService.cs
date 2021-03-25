@@ -103,7 +103,7 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh(RoleErrorCodeEnum.NonExist);
+                    throw Oops.Oh(RoleErrorCodeEnum.RoleNonExist);
                 }
             }
             return true;

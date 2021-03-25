@@ -46,6 +46,10 @@ namespace AdminBlog.Dtos
         /// 菜单类型（按钮/页面）
         /// </summary>
         public MenuTypeEnum menuType { get; set; }
+        
+        /// <summary>
+        /// 子级
+        /// </summary>
         public List<ResultSysMenuDto> childrenMens { get; set; }
     }
 }

@@ -12,12 +12,12 @@ namespace AdminBlog.Core.Enum
         /// 该字典数据不存在或已被删除
         /// </summary>
         [ErrorCodeItemMetadata("该字典数据不存在或已被删除.")]
-        NonExist,
+        DictionaryNonExist,
 
         /// <summary>
         /// 该字典名称已存在
         /// </summary>
         [ErrorCodeItemMetadata("该字典名称已存在.")]
-        NameExist,
+        DictionaryNameExist,
     }
 }

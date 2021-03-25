@@ -17,6 +17,6 @@ namespace AdminBlog.Core.Enum
         /// 该博客不存在,无法评论
         /// </summary>
         [ErrorCodeItemMetadata("该博客不存在,无法评论.")]
-        BlogNonExist,
+        CommentBlogNonExist,
     }
 }

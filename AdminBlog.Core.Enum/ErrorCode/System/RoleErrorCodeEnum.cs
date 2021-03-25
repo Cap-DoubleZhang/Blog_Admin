@@ -17,7 +17,7 @@ namespace AdminBlog.Core.Enum
         /// 该角色不存在
         /// </summary>
         [ErrorCodeItemMetadata("该角色不存在.")]
-        NonExist,
+        RoleNonExist,
 
         /// <summary>
         /// 该角色名已存在

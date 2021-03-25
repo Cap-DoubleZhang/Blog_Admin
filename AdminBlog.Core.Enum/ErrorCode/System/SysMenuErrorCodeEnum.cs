@@ -17,7 +17,7 @@ namespace AdminBlog.Core.Enum
         /// 该菜单数据不存在或已被删除
         /// </summary>
         [ErrorCodeItemMetadata("该菜单数据不存在或已被删除.")]
-        NonExist,
+        MenuNonExist,
 
         /// <summary>
         /// 该菜单名称已存在

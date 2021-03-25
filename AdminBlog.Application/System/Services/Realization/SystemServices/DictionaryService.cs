@@ -78,7 +78,7 @@ namespace AdminBlog.Application
                 //判断字典是否存在
                 bool IsExist = await _sysDictionaryRepository.AnyAsync(a => a.Name == saveDto.Name && a.Code == saveDto.Code);
                 if (IsExist)
-                    throw Oops.Oh(DictionaryErrorCodeEnum.NameExist);
+                    throw Oops.Oh(DictionaryErrorCodeEnum.DictionaryNameExist);
                 //新增字典信息
                 SysDictionary sysDictionaryAdd = saveDto.Adapt<SysDictionary>();
                 sysDictionaryAdd.CreatedTime = DateTime.UtcNow;
@@ -98,7 +98,7 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh(DictionaryErrorCodeEnum.NonExist);
+                    throw Oops.Oh(DictionaryErrorCodeEnum.DictionaryNonExist);
                 }
             }
             return true;

@@ -17,13 +17,13 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "5.0.4");
 
             modelBuilder.Entity("AdminBlog.Core.Blog", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
 
                     b.Property<string>("BlogType")
@@ -35,13 +35,16 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.Property<string>("Cover")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPublish")
                         .HasColumnType("bit");
 
                     b.Property<int>("Likes")
@@ -62,8 +65,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -75,16 +78,19 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             modelBuilder.Entity("AdminBlog.Core.Comment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
+
+                    b.Property<int>("BlogId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Browser")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
@@ -116,11 +122,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.Property<string>("SystemVersion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -136,16 +139,16 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             modelBuilder.Entity("AdminBlog.Core.SysDictionary", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
 
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
@@ -156,8 +159,11 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<string>("Remark")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -172,13 +178,13 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             modelBuilder.Entity("AdminBlog.Core.SysMenu", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
@@ -222,8 +228,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("int")
                         .HasColumnName("SortIndex");
 
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -235,17 +241,17 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             modelBuilder.Entity("AdminBlog.Core.SysRole", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
 
                     b.Property<int>("AdminFlag")
                         .HasColumnType("int")
                         .HasColumnName("AdminFlag");
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
@@ -265,8 +271,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("RoleName");
 
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -278,13 +284,13 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             modelBuilder.Entity("AdminBlog.Core.SysRoleMenu", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
@@ -300,8 +306,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("RoleID");
 
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -313,13 +319,13 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             modelBuilder.Entity("AdminBlog.Core.SysUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
@@ -352,8 +358,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("int")
                         .HasColumnName("LoginTimes");
 
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -375,17 +381,17 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             modelBuilder.Entity("AdminBlog.Core.SysUserInfo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("BirthDate");
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
@@ -413,8 +419,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("QQ");
 
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -438,13 +444,13 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             modelBuilder.Entity("AdminBlog.Core.SysUserRole", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .UseIdentityColumn();
 
-                    b.Property<int>("CreateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
@@ -456,8 +462,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("RoleID");
 
-                    b.Property<int>("UpdateBy")
-                        .HasColumnType("int");
+                    b.Property<long>("UpdateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
                         .HasColumnType("datetimeoffset");

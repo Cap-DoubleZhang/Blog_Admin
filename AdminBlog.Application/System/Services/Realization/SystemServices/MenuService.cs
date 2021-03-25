@@ -37,7 +37,7 @@ namespace AdminBlog.Application
         /// </summary>
         /// <returns></returns>
         [HttpGet("menus")]
-        public async Task<List<ResultSysMenuDto>> GetMenuAsync(int[] menuIds)
+        public async Task<List<ResultSysMenuDto>> GetMenuAsync(long[] menuIds)
         {
             #region 根据当前菜单组值
             Expression<Func<SysMenu, bool>> expression = t => true;
@@ -116,7 +116,7 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh(SysMenuErrorCodeEnum.NonExist);
+                    throw Oops.Oh(SysMenuErrorCodeEnum.MenuNonExist);
                 }
             }
             return true;

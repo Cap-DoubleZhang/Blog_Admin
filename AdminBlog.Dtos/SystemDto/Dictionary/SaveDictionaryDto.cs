@@ -27,5 +27,9 @@ namespace AdminBlog.Dtos
         /// </summary>
         [Required(ErrorMessage = "值不能为空.")]
         public string Value { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
+        public string Remark { get; set; }
     }
 }

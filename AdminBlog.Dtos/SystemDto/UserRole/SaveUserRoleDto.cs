@@ -16,6 +16,6 @@ namespace AdminBlog.Dtos
         /// 用户角色 Id集合
         /// </summary>
         [Required(ErrorMessage = "请选择用户角色.")]
-        public int[] roleIds { get; set; }
+        public long[] roleIds { get; set; }
     }
 }

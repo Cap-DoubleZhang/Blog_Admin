@@ -14,6 +14,6 @@ namespace AdminBlog.Core.Enum
     public enum BlogErrorCodeEnum
     {
         [ErrorCodeItemMetadata("该数据不存在或已被删除.")]
-        NonExist,
+        BlogNonExist,
     }
 }

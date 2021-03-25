@@ -33,11 +33,13 @@ namespace AdminBlog.Application
         private readonly IRepository<SysUser> _sysUserRepository;
         private readonly IRepository<SysUserInfo> _sysUserInfoRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository)
+        private readonly CurrentUserService _currentUserService;
+        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUserService currentUserService)
         {
             _sysUserRepository = sysUserRepository;
             _sysUserInfoRepository = sysUserInfoRepository;
             _httpContextAccessor = App.GetService<IHttpContextAccessor>();
+            _currentUserService = currentUserService;
         }
         #endregion
 
@@ -83,12 +85,12 @@ namespace AdminBlog.Application
         [HttpGet("info")]
         public async Task<ResultLoginUserDto> GetCurrentUserByToken()
         {
-            var userId = App.User?.FindFirstValue("Id");
-            if (string.IsNullOrWhiteSpace(userId))
+            var userId = _currentUserService.UserId;
+            if (userId <= 0)
                 throw Oops.Oh(UserErrorCodeEnum.TokenOverdue);
             //SysUser user = await _sysUserRepository.FindAsync(Convert.ToInt32(userId));
 
-            SysUserInfo sysUserInfo = await _sysUserInfoRepository.FindAsync(Convert.ToInt32(userId));
+            SysUserInfo sysUserInfo = await _sysUserInfoRepository.FindAsync(userId);
 
             //取用户角色表中查询数据
             List<string> roles = new List<string>()
@@ -163,7 +165,7 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh(UserErrorCodeEnum.NonExist);
+                    throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
                 }
             }
             return true;
@@ -178,7 +180,7 @@ namespace AdminBlog.Application
         {
             SysUser user = await _sysUserRepository.FindAsync(saveSysUserPasswordDto.Id) ?? new SysUser();
             if (user.Id <= 0)
-                throw Oops.Oh(UserErrorCodeEnum.NonExist);
+                throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
             if (string.Compare(user.UserPassword, EncryptHelper.MD5Encode(saveSysUserPasswordDto.oldPassword)) != 0)
                 throw Oops.Oh(UserErrorCodeEnum.ErrorOldPassword);
             if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword)) != 0)

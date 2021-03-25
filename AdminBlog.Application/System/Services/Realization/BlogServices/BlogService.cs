@@ -113,7 +113,7 @@ namespace AdminBlog.Application
                 }
                 else
                 {
-                    throw Oops.Oh(BlogErrorCodeEnum.NonExist);
+                    throw Oops.Oh(BlogErrorCodeEnum.BlogNonExist);
                 }
             }
             return true;
