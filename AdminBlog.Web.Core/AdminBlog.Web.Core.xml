@@ -4,5 +4,54 @@
         <name>AdminBlog.Web.Core</name>
     </assembly>
     <members>
+        <member name="T:AdminBlog.Web.Core.DateTimeJsonConverter">
+            <summary>
+            时间类型为 DateTime时，自动序列化
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Web.Core.DateTimeJsonConverter.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="format"></param>
+        </member>
+        <member name="P:AdminBlog.Web.Core.DateTimeJsonConverter.Format">
+            <summary>
+            时间格式化格式
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Web.Core.DateTimeJsonConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            反序列化
+            </summary>
+            <param name="reader"></param>
+            <param name="typeToConvert"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Web.Core.DateTimeJsonConverter.Write(System.Text.Json.Utf8JsonWriter,System.DateTime,System.Text.Json.JsonSerializerOptions)">
+            <summary>
+            序列化
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="options"></param>
+        </member>
+        <member name="T:AdminBlog.Web.Core.DateTimeOffsetJsonConverter">
+            <summary>
+            时间类型为 DateTimeOffset，自动序列化
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Web.Core.DateTimeOffsetJsonConverter.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="format">默认格式</param>
+        </member>
+        <member name="P:AdminBlog.Web.Core.DateTimeOffsetJsonConverter.Format">
+            <summary>
+            时间格式化格式
+            </summary>
+        </member>
     </members>
 </doc>

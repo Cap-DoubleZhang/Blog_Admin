@@ -15,5 +15,9 @@ namespace AdminBlog.Dtos
         /// 主键ID
         /// </summary>
         public long Id { get; set; }
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        public DateTimeOffset CreatedTime { get; set; }
     }
 }

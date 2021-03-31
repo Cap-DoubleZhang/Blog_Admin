@@ -20,7 +20,6 @@ namespace AdminBlog.Application
     /// <summary>
     /// 获取当前登录用户
     /// </summary>
-    [SkipScan]
     public class CurrentUserService : IScoped
     {
         private readonly IRepository<SysUser> _sysUserRepository; // 用户表仓储   

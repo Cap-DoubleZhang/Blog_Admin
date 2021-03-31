@@ -28,4 +28,8 @@
     <ProjectReference Include="..\AdminBlog.Dtos\AdminBlog.Dtos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="System\Services\Interface\ISystemServices\" />
+  </ItemGroup>
+
 </Project>

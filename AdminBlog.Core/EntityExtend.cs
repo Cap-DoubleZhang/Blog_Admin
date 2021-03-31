@@ -2,6 +2,7 @@
 using Furion.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,17 @@ namespace AdminBlog.Core
     public class EntityExtend : Entity<long>
     {
         /// <summary>
+        /// 主键ID
+        /// </summary>
+        [Key]
+        public override long Id { get; set; }
+        /// <summary>
         /// 创建者
         /// </summary>
-        public long CreateBy { get; set; }
+        public long? CreateBy { get; set; }
         /// <summary>
         /// 上个修改者
         /// </summary>
-        public long UpdateBy { get; set; }
+        public long? UpdateBy { get; set; }
     }
 }

@@ -12,6 +12,7 @@ using Furion.LinqBuilder;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,12 +35,14 @@ namespace AdminBlog.Application
         private readonly IRepository<SysUserInfo> _sysUserInfoRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly CurrentUserService _currentUserService;
-        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUserService currentUserService)
+        private readonly CurrentUserInfoOptions _currentUserInfoSetting;
+        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUserService currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting)
         {
             _sysUserRepository = sysUserRepository;
             _sysUserInfoRepository = sysUserInfoRepository;
             _httpContextAccessor = App.GetService<IHttpContextAccessor>();
             _currentUserService = currentUserService;
+            _currentUserInfoSetting = currentUserInfoSetting.Value;
         }
         #endregion
 
@@ -88,8 +91,8 @@ namespace AdminBlog.Application
             var userId = _currentUserService.UserId;
             if (userId <= 0)
                 throw Oops.Oh(UserErrorCodeEnum.TokenOverdue);
-            //SysUser user = await _sysUserRepository.FindAsync(Convert.ToInt32(userId));
 
+            //用户其他信息
             SysUserInfo sysUserInfo = await _sysUserInfoRepository.FindAsync(userId);
 
             //取用户角色表中查询数据
@@ -114,6 +117,9 @@ namespace AdminBlog.Application
         [HttpPost("logout")]
         public Task<bool> UserLogout()
         {
+            //清空请求报文头
+            _httpContextAccessor.HttpContext.Response.Headers["access-token"] = "";
+            _httpContextAccessor.HttpContext.Response.Headers["x-access-token"] = "";
             return Task.FromResult(true);
         }
 
@@ -135,12 +141,10 @@ namespace AdminBlog.Application
                 //新增用户登录信息
                 SysUser sysUser = sysUserDto.Adapt<SysUser>();
                 sysUser.UserPassword = EncryptHelper.DefaultPassword();
-                sysUser.CreatedTime = DateTime.UtcNow;
                 var userAdd = await _sysUserRepository.InsertNowAsync(sysUser);
                 //新增用户详情
                 SysUserInfo sysUserInfo = sysUserDto.Adapt<SysUserInfo>();
                 sysUserInfo.UserID = userAdd.Entity.Id;
-                sysUserInfo.CreatedTime = DateTime.UtcNow;
                 await _sysUserInfoRepository.InsertNowAsync(sysUserInfo);
             }
             else
@@ -149,9 +153,8 @@ namespace AdminBlog.Application
                 bool IsExist = await _sysUserRepository.AnyAsync(a => a.Id == sysUserDto.Id && a.UserLoginName == sysUserDto.UserLoginName);
                 if (IsExist)
                 {
-                    //更改用户登录信息
+                    //更改用户信息
                     SysUser sysUser = sysUserDto.Adapt<SysUser>();
-                    sysUser.UpdatedTime = DateTime.UtcNow;
                     await _sysUserRepository.UpdateIncludeExistsNowAsync(sysUser, new[] { nameof(sysUser.Descripts) }, true
                         );
                     //更改用户详情
@@ -186,7 +189,6 @@ namespace AdminBlog.Application
             if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword)) != 0)
                 throw Oops.Oh(UserErrorCodeEnum.NewPasswordAndRePasswordDifferent);
 
-            user.UpdatedTime = DateTime.UtcNow;
             user.UserPassword = EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword);
             await _sysUserRepository.UpdateIncludeExistsNowAsync(user, new[] { nameof(user.UserPassword) }, true
                 );
@@ -210,8 +212,8 @@ namespace AdminBlog.Application
 
             string accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>()
             {
-                { "Id",userLogin.Id },
-                { "UserName",userLogin.UserLoginName },
+                { _currentUserInfoSetting.USERID,userLogin.Id },
+                { _currentUserInfoSetting.USERNAME,userLogin.UserLoginName },
             });
 
             // 获取刷新 token
@@ -243,7 +245,7 @@ namespace AdminBlog.Application
         [HttpDelete]
         public async Task<bool> DeleteUserAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysUserRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysUser.IsDeleted), nameof(SysUser.UpdatedTime) });
+            await _sysUserRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsDeleted = true, UpdatedTime = DateTimeOffset.Now }, new List<string> { nameof(SysUser.IsDeleted), nameof(SysUser.UpdatedTime) });
 
             return true;
         }

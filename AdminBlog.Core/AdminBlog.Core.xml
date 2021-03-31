@@ -124,6 +124,11 @@
             框架基础实体扩展，增加创建者、修改者
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.EntityExtend.Id">
+            <summary>
+            主键ID
+            </summary>
+        </member>
         <member name="P:AdminBlog.Core.EntityExtend.CreateBy">
             <summary>
             创建者

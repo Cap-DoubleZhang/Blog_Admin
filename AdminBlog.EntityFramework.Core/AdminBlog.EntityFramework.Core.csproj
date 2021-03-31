@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AdminBlog.Application\AdminBlog.Application.csproj" />
     <ProjectReference Include="..\AdminBlog.Core\AdminBlog.Core.csproj" />
   </ItemGroup>
 

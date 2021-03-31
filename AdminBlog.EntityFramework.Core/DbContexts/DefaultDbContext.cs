@@ -1,13 +1,18 @@
-﻿using Furion.DatabaseAccessor;
+﻿using AdminBlog.Application;
+using AdminBlog.Core;
+using Furion;
+using Furion.DatabaseAccessor;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace AdminBlog.EntityFramework.Core
 {
     [AppDbContext("ConnectionStrings:DbConnectionString", DbProvider.SqlServer)]
-    public class DefaultDbContext : AppDbContext<DefaultDbContext>
+    public class DefaultDbContext : AppDbContext<DefaultDbContext>, IModelBuilderFilter
     {
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)
         {
@@ -15,7 +20,7 @@ namespace AdminBlog.EntityFramework.Core
 
         public void OnCreated(ModelBuilder modelBuilder, EntityTypeBuilder entityBuilder, DbContext dbContext, Type dbContextLocator)
         {
-            var expression = BuilderIsDeleteLambdaExpression(entityBuilder);
+            var expression = base.FakeDeleteQueryFilterExpression(entityBuilder, dbContext);
             if (expression == null) return;
 
             entityBuilder.HasQueryFilter(expression);
@@ -26,7 +31,7 @@ namespace AdminBlog.EntityFramework.Core
         }
 
         /// <summary>
-        /// 构建 u => EF.Property<bool>(u, "IsDeleted") == false 表达式
+        /// 构建 u => EF.Property<bool>(u, "IsDeleted") == false 表达式(不用，用来学习)
         /// </summary>
         /// <param name="entityBuilder"></param>
         /// <returns></returns>
@@ -45,6 +50,43 @@ namespace AdminBlog.EntityFramework.Core
             var expressionBody = Expression.Equal(Expression.Call(typeof(EF), nameof(EF.Property), new[] { typeof(bool) }, parameter, properyName), propertyValue);
             var expression = Expression.Lambda(expressionBody, parameter);
             return expression;
+        }
+
+        /// <summary>
+        /// 保存到数据库前拦截器
+        /// </summary>
+        /// <param name="eventData"></param>
+        /// <param name="result"></param>
+        protected override void SavingChangesEvent(DbContextEventData eventData, InterceptionResult<int> result)
+        {
+            // 获取当前事件对应上下文
+            var dbContext = eventData.Context;
+
+            // 获取所有新增和更新的实体
+            var entities = dbContext.ChangeTracker.Entries()
+                        .Where(u => u.State == EntityState.Added || u.State == EntityState.Modified);
+
+            var userManager = App.GetService<CurrentUserService>();
+            var userId = userManager?.UserId;
+
+            foreach (var entity in entities)
+            {
+                var obj = entity.Entity as EntityExtend;
+                switch (entity.State)
+                {
+                    // 自动设置新增属性
+                    case EntityState.Added:
+                        obj.Id = Furion.Snowflake.IDGenerator.NextId();
+                        obj.CreatedTime = DateTime.UtcNow;
+                        obj.CreateBy = userId;
+                        break;
+                    // 自动设置编辑属性
+                    case EntityState.Modified:
+                        obj.UpdatedTime = DateTimeOffset.Now;
+                        obj.UpdateBy = userId;
+                        break;
+                }
+            }
         }
     }
 }
