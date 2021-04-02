@@ -52,27 +52,30 @@ namespace AdminBlog.Application
         /// </summary>
         /// <param name="searchDto"></param>
         /// <returns></returns>
-        [HttpGet("lists")]
+        [HttpGet("users")]
         public async Task<PagedList<ResultSysUserDto>> GetPagedSysUsersAsync([FromQuery] SearchSysUserDto searchDto)
         {
             #region 关键词进行条件查询 多条件使用空格分开
-            string[] keys = searchDto.keyword.Trim().Split(' ');
             Expression<Func<SysUser, bool>> expression = t => true;
-            if (!string.IsNullOrWhiteSpace(keys[0]))
+            if (!string.IsNullOrWhiteSpace(searchDto.keyword))
             {
-                foreach (var item in keys)
+                string[] keys = searchDto.keyword.Trim().Split(' ');
+                if (!string.IsNullOrWhiteSpace(keys[0]))
                 {
-                    if (item == keys[0])
+                    foreach (var item in keys)
                     {
-                        expression = expression.And(x => x.UserLoginName.Contains(item)
-                                                      || x.Descripts.Contains(item)
-                                                      || x.LastLoginIP.Contains(item));
-                    }
-                    else
-                    {
-                        expression = expression.Or(x => x.UserLoginName.Contains(item)
-                                                      || x.Descripts.Contains(item)
-                                                      || x.LastLoginIP.Contains(item));
+                        if (item == keys[0])
+                        {
+                            expression = expression.And(x => x.UserLoginName.Contains(item)
+                                                          || x.Descripts.Contains(item)
+                                                          || x.LastLoginIP.Contains(item));
+                        }
+                        else
+                        {
+                            expression = expression.Or(x => x.UserLoginName.Contains(item)
+                                                          || x.Descripts.Contains(item)
+                                                          || x.LastLoginIP.Contains(item));
+                        }
                     }
                 }
             }
@@ -93,7 +96,7 @@ namespace AdminBlog.Application
                 throw Oops.Oh(UserErrorCodeEnum.TokenOverdue);
 
             //用户其他信息
-            SysUserInfo sysUserInfo = await _sysUserInfoRepository.FindAsync(userId);
+            SysUserInfo sysUserInfo = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == userId);
 
             //取用户角色表中查询数据
             List<string> roles = new List<string>()
