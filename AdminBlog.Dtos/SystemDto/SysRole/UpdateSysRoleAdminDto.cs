@@ -7,15 +7,11 @@ using System.Threading.Tasks;
 
 namespace AdminBlog.Dtos
 {
-    public class SearchSysRoleDto : BaseSearchDto
+    public class UpdateSysRoleAdminDto : BaseBatchUpdateDto
     {
         /// <summary>
         /// 是否为管理员
         /// </summary>
-        public int adminFlag { get; set; } = -1;
-        /// <summary>
-        /// 是否禁用
-        /// </summary>
-        public int isUse { get; set; } = -1;
+        public AdminTypeEnum adminFlag { get; set; }
     }
 }

@@ -40,5 +40,37 @@ namespace AdminBlog.Dtos
         /// 是否可用
         /// </summary>
         public UseTypeEnum IsUse { get; set; }
+        /// <summary>
+        /// 昵称
+        /// </summary>
+        public string userShowName { get; set; }
+        /// <summary>
+        /// 身份证号
+        /// </summary>
+        public string idCard { get; set; }
+        /// <summary>
+        /// 头像
+        /// </summary>
+        public string headPortrait { get; set; }
+        /// <summary>
+        /// 手机号码
+        /// </summary>
+        public string phone { get; set; }
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        public string eMail { get; set; }
+        /// <summary>
+        /// QQ
+        /// </summary>
+        public string qq { get; set; }
+        /// <summary>
+        /// 微信
+        /// </summary>
+        public string weChat { get; set; }
+        /// <summary>
+        /// 生日
+        /// </summary>
+        public DateTime? birthDate { get; set; }
     }
 }

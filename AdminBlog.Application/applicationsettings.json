@@ -9,5 +9,8 @@
         "Version": "1.0.0"
       }
     ]
+  },
+  "FriendlyExceptionSettings": {
+    "HideErrorCode": true
   }
 }

@@ -12,11 +12,11 @@ namespace AdminBlog.Dtos
     /// </summary>
     public class SaveSysUserPasswordDto : BaseSaveDto
     {
-        /// <summary>
-        /// 原密码
-        /// </summary>
-        [Required(ErrorMessage = "原密码不可为空."), MinLength(6, ErrorMessage = "原密码不可小于6个字符.")]
-        public string oldPassword { get; set; }
+        ///// <summary>
+        ///// 原密码
+        ///// </summary>
+        //[Required(ErrorMessage = "原密码不可为空."), MinLength(6, ErrorMessage = "原密码不可小于6个字符.")]
+        //public string oldPassword { get; set; }
         /// <summary>
         /// 新密码
         /// </summary>

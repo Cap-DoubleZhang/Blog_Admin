@@ -80,8 +80,34 @@ namespace AdminBlog.Application
                 }
             }
             #endregion
-            PagedList<SysUser> sysUsersPaged = await _sysUserRepository.Where(expression).OrderByDescending(a => a.CreatedTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
-            return sysUsersPaged.Adapt<PagedList<ResultSysUserDto>>();
+            var users = await _sysUserRepository.DetachedEntities.Where(expression).OrderByDescending(a => a.CreatedTime)
+                .GroupJoin(_sysUserInfoRepository.AsQueryable(), u => u.Id, ui => ui.UserID, (u, ui) => new
+                {
+                    u,
+                    ui
+                })
+                .SelectMany(uui => uui.ui.DefaultIfEmpty(), (uui, ui) => new { uui.u, ui })
+                .Select(a => new ResultSysUserDto
+                {
+                    Id = a.u.Id,
+                    UserLoginName = a.u.UserLoginName,
+                    Descripts = a.u.Descripts,
+                    IsOnline = a.u.IsOnline,
+                    LoginTimes = a.u.LoginTimes,
+                    LastLoginTime = a.u.LastLoginTime,
+                    LastLoginIP = a.u.LastLoginIP,
+                    IsUse = a.u.IsUse,
+                    userShowName = a.ui.UserShowName,
+                    idCard = a.ui.IDCard,
+                    headPortrait = a.ui.HeadPortrait,
+                    phone = a.ui.Phone,
+                    eMail = a.ui.EMail,
+                    qq = a.ui.QQ,
+                    weChat = a.ui.WeChat,
+                    birthDate = a.ui.BirthDate,
+                    CreatedTime = a.u.CreatedTime,
+                }).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
+            return users;
         }
 
         /// <summary>
@@ -161,12 +187,15 @@ namespace AdminBlog.Application
                     await _sysUserRepository.UpdateIncludeExistsNowAsync(sysUser, new[] { nameof(sysUser.Descripts) }, true
                         );
                     //更改用户详情
-                    SysUserInfo sysUserInfo = sysUserDto.Adapt<SysUserInfo>();
-                    await _sysUserInfoRepository.UpdateExcludeExistsNowAsync(sysUserInfo, new[] {
-                        nameof(sysUserInfo.UserID),
-                        nameof(sysUserInfo.CreateBy),
-                        nameof(sysUserInfo.CreatedTime),
-                        nameof(sysUserInfo.IsDeleted)}, true
+                    SysUserInfo sysUserInfoNow = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == sysUser.Id);
+                    SysUserInfo sysUserInfoSave = sysUserInfoNow.Adapt<SysUserInfo>();
+                    sysUserInfoSave = sysUserDto.Adapt<SysUserInfo>();
+                    sysUserInfoSave.Id = sysUserInfoNow.Id;
+                    await _sysUserInfoRepository.UpdateExcludeExistsNowAsync(sysUserInfoSave, new[] {
+                        nameof(sysUserInfoSave.UserID),
+                        nameof(sysUserInfoSave.CreateBy),
+                        nameof(sysUserInfoSave.CreatedTime),
+                        nameof(sysUserInfoSave.IsDeleted)}, true
                         );
                 }
                 else
@@ -187,9 +216,10 @@ namespace AdminBlog.Application
             SysUser user = await _sysUserRepository.FindAsync(saveSysUserPasswordDto.Id) ?? new SysUser();
             if (user.Id <= 0)
                 throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
-            if (string.Compare(user.UserPassword, EncryptHelper.MD5Encode(saveSysUserPasswordDto.oldPassword)) != 0)
-                throw Oops.Oh(UserErrorCodeEnum.ErrorOldPassword);
-            if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword)) != 0)
+            //暂时不用
+            //if (string.Compare(user.UserPassword, EncryptHelper.MD5Encode(saveSysUserPasswordDto.oldPassword)) != 0)
+            //    throw Oops.Oh(UserErrorCodeEnum.ErrorOldPassword);
+            if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword.Trim()), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword.Trim())) != 0)
                 throw Oops.Oh(UserErrorCodeEnum.NewPasswordAndRePasswordDifferent);
 
             user.UserPassword = EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword);
@@ -207,7 +237,7 @@ namespace AdminBlog.Application
         public async Task<string> UserLoginAsync([FromBody] SysUserLoginDto loginDto)
         {
             string MD5Password = EncryptHelper.MD5Encode(loginDto.password);
-            SysUser userLogin = await _sysUserRepository.SingleAsync(a => a.UserPassword == MD5Password && a.UserLoginName == loginDto.username);
+            SysUser userLogin = await _sysUserRepository.SingleOrDefaultAsync(a => a.UserPassword == MD5Password && a.UserLoginName == loginDto.username);
             if (userLogin == null || userLogin.Id <= 0)
                 throw Oops.Oh(UserErrorCodeEnum.ErrorUserNameOrPassword);
             if (userLogin.IsUse == UseTypeEnum.NonUse)
@@ -251,6 +281,28 @@ namespace AdminBlog.Application
             await _sysUserRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsDeleted = true, UpdatedTime = DateTimeOffset.Now }, new List<string> { nameof(SysUser.IsDeleted), nameof(SysUser.UpdatedTime) });
 
             return true;
+        }
+
+        /// <summary>
+        /// 获取当前用户信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("userinfo")]
+        public async Task<ResultSysUserInfoDto> GetUserInfoAync()
+        {
+            var userId = _currentUserService.UserId;
+            if (userId <= 0)
+                throw Oops.Oh(UserErrorCodeEnum.TokenOverdue);
+
+            //用户其他信息
+            SysUserInfo sysUserInfo = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == userId);
+            SysUser sysUser = await _sysUserRepository.SingleOrDefaultAsync(a => a.Id == userId);
+            ResultSysUserInfoDto resultSysUserInfoDto = sysUser.Adapt<ResultSysUserInfoDto>();
+            resultSysUserInfoDto.headPortrait = string.IsNullOrWhiteSpace(resultSysUserInfoDto.headPortrait) ? "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024" : resultSysUserInfoDto.headPortrait;
+            resultSysUserInfoDto.userShowName = string.IsNullOrWhiteSpace(resultSysUserInfoDto.userShowName) ? "admin" : resultSysUserInfoDto.userShowName;
+            resultSysUserInfoDto.introduction = string.IsNullOrWhiteSpace(resultSysUserInfoDto.introduction) ? "该用户什么都没有填写..." : resultSysUserInfoDto.introduction;
+            resultSysUserInfoDto.userShowName = string.IsNullOrWhiteSpace(resultSysUserInfoDto.userShowName) ? "admin" : resultSysUserInfoDto.userShowName;
+            return resultSysUserInfoDto;
         }
         #endregion
     }

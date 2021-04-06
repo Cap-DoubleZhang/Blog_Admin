@@ -1,4 +1,5 @@
-﻿using AdminBlog.Core;
+﻿using AdminBlog.Common;
+using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
 using EFCore.BulkExtensions;
@@ -26,9 +27,11 @@ namespace AdminBlog.Application
     {
         #region 依赖注入
         private readonly IRepository<SysRole> _sysRoleRepository;
-        public RoleService(IRepository<SysRole> sysRoleRepository)
+        private readonly CurrentUserService _currentUserService;
+        public RoleService(IRepository<SysRole> sysRoleRepository, CurrentUserService currentUserService)
         {
             _sysRoleRepository = sysRoleRepository;
+            _currentUserService = currentUserService;
         }
         #endregion
 
@@ -42,28 +45,31 @@ namespace AdminBlog.Application
         public async Task<PagedList<ResultSysRoleDto>> GetPagedSysRolesAsync([FromQuery] SearchSysRoleDto searchDto)
         {
             #region 关键词进行条件查询 多条件使用空格分开
-            string[] keys = searchDto.keyword.Trim().Split(' ');
             Expression<Func<SysRole, bool>> expression = t => true;
-            if (!string.IsNullOrWhiteSpace(keys[0]))
+            if (!string.IsNullOrWhiteSpace(searchDto.keyword))
             {
-                foreach (var item in keys)
+                string[] keys = searchDto.keyword.Trim().Split(' ');
+                if (!string.IsNullOrWhiteSpace(keys[0]))
                 {
-                    if (item == keys[0])
+                    foreach (var item in keys)
                     {
-                        expression = expression.And(x => x.RoleName.Contains(item)
-                                                      || x.RoleDesc.Contains(item));
-                    }
-                    else
-                    {
-                        expression = expression.Or(x => x.RoleName.Contains(item)
-                                                      || x.RoleDesc.Contains(item));
+                        if (item == keys[0])
+                        {
+                            expression = expression.And(x => x.RoleName.Contains(item)
+                                                          || x.RoleDesc.Contains(item));
+                        }
+                        else
+                        {
+                            expression = expression.Or(x => x.RoleName.Contains(item)
+                                                          || x.RoleDesc.Contains(item));
+                        }
                     }
                 }
             }
             #endregion
 
-            expression = expression.AndIf(searchDto.AdminFlag != -1, a => a.AdminFlag == (AdminTypeEnum)searchDto.AdminFlag);
-            expression = expression.AndIf(searchDto.IsUse != -1, a => a.IsUse == (UseTypeEnum)searchDto.IsUse);
+            expression = expression.AndIf(searchDto.adminFlag != -1, a => a.AdminFlag == (AdminTypeEnum)searchDto.adminFlag);
+            expression = expression.AndIf(searchDto.isUse != -1, a => a.IsUse == (UseTypeEnum)searchDto.isUse);
 
             PagedList<SysRole> sysRolesPaged = await _sysRoleRepository.Where(expression).OrderByDescending(a => a.CreatedTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
 
@@ -86,7 +92,6 @@ namespace AdminBlog.Application
                     throw Oops.Oh(RoleErrorCodeEnum.RoleNameExist);
                 //新增角色信息
                 SysRole sysRoleAdd = saveDto.Adapt<SysRole>();
-                sysRoleAdd.CreatedTime = DateTime.UtcNow;
                 await _sysRoleRepository.InsertNowAsync(sysRoleAdd);
             }
             else
@@ -97,7 +102,6 @@ namespace AdminBlog.Application
                 {
                     //更改角色信息
                     SysRole sysRoleUpdate = saveDto.Adapt<SysRole>();
-                    sysRoleUpdate.UpdatedTime = DateTime.UtcNow;
                     await _sysRoleRepository.UpdateIncludeExistsNowAsync(sysRoleUpdate, new[] { nameof(sysRoleUpdate.RoleDesc), nameof(sysRoleUpdate.AdminFlag) }, true
                         );
                 }
@@ -117,7 +121,19 @@ namespace AdminBlog.Application
         [HttpPut("roleIsUse")]
         public async Task<bool> UpdateRoleIsUseAsync(UpdateSysRoleUseDto updateDto)
         {
-            await _sysRoleRepository.Where(a => updateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { IsUse = updateDto.IsUse, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysRole.IsUse), nameof(SysRole.UpdatedTime) });
+            await _sysRoleRepository.Where(a => updateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { IsUse = updateDto.IsUse }, new List<string> { nameof(SysRole.IsUse) });
+            return true;
+        }
+
+        /// <summary>
+        /// 更新单个/批量角色是否为管理员
+        /// </summary>
+        /// <param name="updateDto"></param>
+        /// <returns></returns>
+        [HttpPut("roleAdminFlag")]
+        public async Task<bool> UpdateRoleIsAdminAsync(UpdateSysRoleAdminDto updateDto)
+        {
+            await _sysRoleRepository.Where(a => updateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { AdminFlag = updateDto.adminFlag }, new List<string> { nameof(SysRole.AdminFlag) });
             return true;
         }
 
@@ -129,7 +145,7 @@ namespace AdminBlog.Application
         [HttpDelete]
         public async Task<bool> DeleteRoleAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysRoleRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysRole.IsDeleted), nameof(SysRole.UpdatedTime) });
+            await _sysRoleRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { IsDeleted = true }, new List<string> { nameof(SysRole.IsDeleted) });
 
             return true;
         }

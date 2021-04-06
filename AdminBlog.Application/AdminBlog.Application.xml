@@ -197,6 +197,13 @@
             <param name="updateDto"></param>
             <returns></returns>
         </member>
+        <member name="M:AdminBlog.Application.RoleService.UpdateRoleIsAdminAsync(AdminBlog.Dtos.UpdateSysRoleAdminDto)">
+            <summary>
+            更新单个/批量角色是否为管理员
+            </summary>
+            <param name="updateDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:AdminBlog.Application.RoleService.DeleteRoleAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
             <summary>
             单个/批量删除角色
@@ -260,6 +267,12 @@
             单个/批量删除用户
             </summary>
             <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.UserService.GetUserInfoAync">
+            <summary>
+            获取当前用户信息
+            </summary>
             <returns></returns>
         </member>
     </members>
