@@ -16,5 +16,12 @@
     "USERID": "USERID",
     //USER NAME
     "USERNAME": "USERNAME"
+  },
+  //新增用户信息为空时，默认信息
+  "UserInfoConst": {
+    //头像
+    "HeadPortrait": "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
+    //简介
+    "Introduction": "这个家伙太懒了，什么都没留下..."
   }
 }

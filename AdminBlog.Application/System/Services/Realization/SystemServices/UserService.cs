@@ -36,13 +36,15 @@ namespace AdminBlog.Application
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly CurrentUserService _currentUserService;
         private readonly CurrentUserInfoOptions _currentUserInfoSetting;
-        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUserService currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting)
+        private readonly UserInfoConstOptions _userInfoConstOptions;
+        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUserService currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting, IOptions<UserInfoConstOptions> userInfoConstOptions)
         {
             _sysUserRepository = sysUserRepository;
             _sysUserInfoRepository = sysUserInfoRepository;
             _httpContextAccessor = App.GetService<IHttpContextAccessor>();
             _currentUserService = currentUserService;
             _currentUserInfoSetting = currentUserInfoSetting.Value;
+            _userInfoConstOptions = userInfoConstOptions.Value;
         }
         #endregion
 
@@ -123,7 +125,7 @@ namespace AdminBlog.Application
 
             //用户其他信息
             SysUserInfo sysUserInfo = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == userId);
-
+            SysUser sysUser = await _currentUserService.GetCurrentUserAsync();
             //取用户角色表中查询数据
             List<string> roles = new List<string>()
             {
@@ -131,9 +133,9 @@ namespace AdminBlog.Application
             };
             ResultLoginUserDto resultLoginUserDto = new ResultLoginUserDto
             {
-                name = string.IsNullOrWhiteSpace(sysUserInfo.UserShowName) ? "admin" : sysUserInfo.UserShowName,
-                avatar = string.IsNullOrWhiteSpace(sysUserInfo.HeadPortrait) ? "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024" : sysUserInfo.HeadPortrait,
-                introduction = "",
+                name = sysUserInfo.UserShowName,
+                avatar = sysUserInfo.HeadPortrait,
+                introduction = sysUser.Descripts,
                 roles = roles,
             };
             return resultLoginUserDto;
@@ -170,10 +172,12 @@ namespace AdminBlog.Application
                 //新增用户登录信息
                 SysUser sysUser = sysUserDto.Adapt<SysUser>();
                 sysUser.UserPassword = EncryptHelper.DefaultPassword();
+                sysUser.Descripts = string.IsNullOrWhiteSpace(sysUser.Descripts) ? _userInfoConstOptions.Introduction : sysUser.Descripts;
                 var userAdd = await _sysUserRepository.InsertNowAsync(sysUser);
                 //新增用户详情
                 SysUserInfo sysUserInfo = sysUserDto.Adapt<SysUserInfo>();
                 sysUserInfo.UserID = userAdd.Entity.Id;
+                sysUserInfo.HeadPortrait = string.IsNullOrWhiteSpace(sysUserInfo.HeadPortrait) ? _userInfoConstOptions.HeadPortrait : sysUserInfo.HeadPortrait;
                 await _sysUserInfoRepository.InsertNowAsync(sysUserInfo);
             }
             else
@@ -210,7 +214,7 @@ namespace AdminBlog.Application
         /// 更改用户密码
         /// </summary>
         /// <returns></returns>
-        [HttpPut("userpassword")]
+        [HttpPut("resetpassword")]
         public async Task<bool> UpdateUserPasswordAsync(SaveSysUserPasswordDto saveSysUserPasswordDto)
         {
             SysUser user = await _sysUserRepository.FindAsync(saveSysUserPasswordDto.Id) ?? new SysUser();
@@ -296,12 +300,10 @@ namespace AdminBlog.Application
 
             //用户其他信息
             SysUserInfo sysUserInfo = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == userId);
-            SysUser sysUser = await _sysUserRepository.SingleOrDefaultAsync(a => a.Id == userId);
-            ResultSysUserInfoDto resultSysUserInfoDto = sysUser.Adapt<ResultSysUserInfoDto>();
-            resultSysUserInfoDto.headPortrait = string.IsNullOrWhiteSpace(resultSysUserInfoDto.headPortrait) ? "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024" : resultSysUserInfoDto.headPortrait;
-            resultSysUserInfoDto.userShowName = string.IsNullOrWhiteSpace(resultSysUserInfoDto.userShowName) ? "admin" : resultSysUserInfoDto.userShowName;
-            resultSysUserInfoDto.introduction = string.IsNullOrWhiteSpace(resultSysUserInfoDto.introduction) ? "该用户什么都没有填写..." : resultSysUserInfoDto.introduction;
-            resultSysUserInfoDto.userShowName = string.IsNullOrWhiteSpace(resultSysUserInfoDto.userShowName) ? "admin" : resultSysUserInfoDto.userShowName;
+            SysUser sysUser = await _currentUserService.GetCurrentUserAsync();
+            ResultSysUserInfoDto resultSysUserInfoDto = sysUserInfo.Adapt<ResultSysUserInfoDto>();
+            resultSysUserInfoDto.userLoginName = sysUser.UserLoginName;
+            resultSysUserInfoDto.introduction = sysUser.Descripts;
             return resultSysUserInfoDto;
         }
         #endregion

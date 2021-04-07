@@ -48,14 +48,12 @@ namespace AdminBlog.Application
         }
 
         /// <summary>
-        /// 获取用户信息
+        /// 获取当前登录用户信息
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="tracking"></param>
         /// <returns></returns>
-        public async Task<SysUser> GetCurrentUserAsync(long userId, bool tracking = true)
+        public async Task<SysUser> GetCurrentUserAsync()
         {
-            var user = await _sysUserRepository.FirstOrDefaultAsync(u => u.Id == userId, tracking);
+            var user = await _sysUserRepository.FirstOrDefaultAsync(u => u.Id == UserId, true);
             return user ?? throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
         }
     }

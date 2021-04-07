@@ -61,12 +61,10 @@
             获取当前登录用户
             </summary>
         </member>
-        <member name="M:AdminBlog.Application.CurrentUserService.GetCurrentUserAsync(System.Int64,System.Boolean)">
+        <member name="M:AdminBlog.Application.CurrentUserService.GetCurrentUserAsync">
             <summary>
-            获取用户信息
+            获取当前登录用户信息
             </summary>
-            <param name="userId"></param>
-            <param name="tracking"></param>
             <returns></returns>
         </member>
         <member name="T:AdminBlog.Application.DictionaryService">
