@@ -37,22 +37,53 @@ namespace AdminBlog.Application
         /// </summary>
         /// <returns></returns>
         [HttpGet("menus")]
-        public async Task<List<ResultSysMenuDto>> GetMenuAsync(long[] menuIds)
+        public async Task<PagedList<ResultSysMenuDto>> GetMenuAsync([FromQuery] SearchSysMenuDto searchDto)
         {
             #region 根据当前菜单组值
             Expression<Func<SysMenu, bool>> expression = t => true;
-            if (menuIds.Length > 0)
-                expression = expression.And(a => menuIds.Contains(a.Id));
+            if (searchDto.menuIds != null && searchDto.menuIds.Length > 0)
+                expression = expression.And(a => searchDto.menuIds.Contains(a.Id));
             #endregion
+            #region 关键词进行条件查询 多条件使用空格分开
+            if (!string.IsNullOrWhiteSpace(searchDto.keyword))
+            {
+                string[] keys = searchDto.keyword.Trim().Split(' ');
+                if (!string.IsNullOrWhiteSpace(keys[0]))
+                {
+                    foreach (var item in keys)
+                    {
+                        if (item == keys[0])
+                        {
+                            expression = expression.And(x => x.MenuName.Contains(item)
+                                                          || x.MenuTitle.Contains(item));
+                        }
+                        else
+                        {
+                            expression = expression.Or(x => x.MenuName.Contains(item)
+                                                          || x.MenuTitle.Contains(item));
+                        }
+                    }
+                }
+            }
+            #endregion
+
             List<SysMenu> menus = _sysMenuRepository.Where(expression).ToList();
-            List<SysMenu> firstMenus = menus.Where(a => a.ParentModuleID == 0).ToList();
+            List<SysMenu> firstMenus = menus.Where(a => a.ParentModuleID == 0).OrderByDescending(a => a.SortIndex).ToList();
             List<ResultSysMenuDto> resultSysMenuDtos = firstMenus.Adapt<List<ResultSysMenuDto>>();
             foreach (var item in resultSysMenuDtos)
             {
                 item.childrenMens = await GetChildMenu(firstMenus, menus);
             }
-
-            return resultSysMenuDtos;
+            int totalCount = firstMenus.Count();
+            PagedList<ResultSysMenuDto> pagedList = new PagedList<ResultSysMenuDto>
+            {
+                TotalCount = totalCount,
+                TotalPages = totalCount % searchDto.pageSize == 0 ? totalCount / searchDto.pageSize : (totalCount / searchDto.pageSize) + 1,
+                Items = resultSysMenuDtos,
+                PageIndex = searchDto.pageIndex,
+                PageSize = searchDto.pageSize,
+            };
+            return pagedList;
         }
 
         /// <summary>
@@ -138,7 +169,7 @@ namespace AdminBlog.Application
         /// </summary>
         /// <param name="baseBatchUpdateDto"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("menu")]
         public async Task<bool> DeleteMenuAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
             await _sysMenuRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysMenu { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysMenu.IsDeleted), nameof(SysMenu.UpdatedTime) });

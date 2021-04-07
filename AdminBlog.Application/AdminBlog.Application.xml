@@ -98,7 +98,7 @@
             系统菜单
             </summary>
         </member>
-        <member name="M:AdminBlog.Application.MenuService.GetMenuAsync(System.Int64[])">
+        <member name="M:AdminBlog.Application.MenuService.GetMenuAsync(AdminBlog.Dtos.SearchSysMenuDto)">
             <summary>
             获取级联菜单
             </summary>
@@ -240,9 +240,15 @@
             <param name="sysUserDto"></param>
             <returns></returns>
         </member>
+        <member name="M:AdminBlog.Application.UserService.ResetUserPasswordAsync(AdminBlog.Dtos.SaveSysUserPasswordDto)">
+            <summary>
+            重置用户密码
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:AdminBlog.Application.UserService.UpdateUserPasswordAsync(AdminBlog.Dtos.SaveSysUserPasswordDto)">
             <summary>
-            更改用户密码
+            修改当前登录用户密码
             </summary>
             <returns></returns>
         </member>

@@ -211,11 +211,11 @@ namespace AdminBlog.Application
         }
 
         /// <summary>
-        /// 更改用户密码
+        /// 重置用户密码
         /// </summary>
         /// <returns></returns>
         [HttpPut("resetpassword")]
-        public async Task<bool> UpdateUserPasswordAsync(SaveSysUserPasswordDto saveSysUserPasswordDto)
+        public async Task<bool> ResetUserPasswordAsync(SaveSysUserPasswordDto saveSysUserPasswordDto)
         {
             SysUser user = await _sysUserRepository.FindAsync(saveSysUserPasswordDto.Id) ?? new SysUser();
             if (user.Id <= 0)
@@ -223,6 +223,29 @@ namespace AdminBlog.Application
             //暂时不用
             //if (string.Compare(user.UserPassword, EncryptHelper.MD5Encode(saveSysUserPasswordDto.oldPassword)) != 0)
             //    throw Oops.Oh(UserErrorCodeEnum.ErrorOldPassword);
+            if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword.Trim()), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword.Trim())) != 0)
+                throw Oops.Oh(UserErrorCodeEnum.NewPasswordAndRePasswordDifferent);
+
+            user.UserPassword = EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword);
+            await _sysUserRepository.UpdateIncludeExistsNowAsync(user, new[] { nameof(user.UserPassword) }, true
+                );
+            return true;
+        }
+
+        /// <summary>
+        /// 修改当前登录用户密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("updatepassword")]
+        public async Task<bool> UpdateUserPasswordAsync(SaveSysUserPasswordDto saveSysUserPasswordDto)
+        {
+            SysUser user = await _currentUserService.GetCurrentUserAsync();
+            if (user == null || user.Id <= 0)
+                throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
+            if (string.IsNullOrWhiteSpace(saveSysUserPasswordDto.oldPassword) || saveSysUserPasswordDto.oldPassword.Length < 6)
+                throw Oops.Oh("原密码不能为空，且必须大于6位.");
+            if (string.Compare(user.UserPassword, EncryptHelper.MD5Encode(saveSysUserPasswordDto.oldPassword)) != 0)
+                throw Oops.Oh(UserErrorCodeEnum.ErrorOldPassword);
             if (string.Compare(EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword.Trim()), EncryptHelper.MD5Encode(saveSysUserPasswordDto.reNewPassword.Trim())) != 0)
                 throw Oops.Oh(UserErrorCodeEnum.NewPasswordAndRePasswordDifferent);
 
