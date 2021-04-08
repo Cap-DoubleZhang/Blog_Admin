@@ -69,11 +69,7 @@ namespace AdminBlog.Application
 
             List<SysMenu> menus = _sysMenuRepository.Where(expression).ToList();
             List<SysMenu> firstMenus = menus.Where(a => a.ParentModuleID == 0).OrderByDescending(a => a.SortIndex).ToList();
-            List<ResultSysMenuDto> resultSysMenuDtos = firstMenus.Adapt<List<ResultSysMenuDto>>();
-            foreach (var item in resultSysMenuDtos)
-            {
-                item.childrenMens = await GetChildMenu(firstMenus, menus);
-            }
+            List<ResultSysMenuDto> resultSysMenuDtos = await GetChildMenu(firstMenus, menus);
             int totalCount = firstMenus.Count();
             PagedList<ResultSysMenuDto> pagedList = new PagedList<ResultSysMenuDto>
             {
@@ -103,10 +99,50 @@ namespace AdminBlog.Application
                     await GetChildMenu(children, allMenus);
                 }
                 ResultSysMenuDto sysMenuDto = item.Adapt<ResultSysMenuDto>();
-                sysMenuDto.childrenMens = children.Adapt<List<ResultSysMenuDto>>();
+                sysMenuDto.children = children.Adapt<List<ResultSysMenuDto>>();
                 resultDtos.Add(sysMenuDto);
             }
             return resultDtos;
+        }
+
+        /// <summary>
+        /// 获取所有的菜单
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
+        [HttpGet("allMenus")]
+        public Task<List<ResultSysMenuDto>> GetAllMenuAsync([FromQuery] string keyword)
+        {
+            Expression<Func<SysMenu, bool>> expression = t => true;
+            #region 关键词进行条件查询 多条件使用空格分开
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                string[] keys = keyword.Trim().Split(' ');
+                foreach (var item in keys)
+                {
+                    if (item == keys[0])
+                    {
+                        expression = expression.And(x => x.MenuName.Contains(item)
+                                                      || x.MenuTitle.Contains(item));
+                    }
+                    else
+                    {
+                        expression = expression.Or(x => x.MenuName.Contains(item)
+                                                      || x.MenuTitle.Contains(item));
+                    }
+                }
+
+            }
+            #endregion
+            List<ResultSysMenuDto> menus = _sysMenuRepository.Where(expression).Adapt<List<ResultSysMenuDto>>();
+            menus.Add(new ResultSysMenuDto()
+            {
+                Id = 0,
+                menuName = "顶级",
+                sortIndex = -1,
+            });
+            menus = menus.OrderBy(a => a.sortIndex).ToList();
+            return Task.FromResult(menus);
         }
 
         /// <summary>
@@ -131,13 +167,18 @@ namespace AdminBlog.Application
             else
             {
                 //判断菜单 是否存在
-                bool IsExist = await _sysMenuRepository.AnyAsync(a => a.Id == saveDto.Id && a.MenuName == saveDto.MenuName && a.MenuCode == saveDto.MenuCode);
+                bool IsExist = await _sysMenuRepository.AnyAsync(a => a.Id == saveDto.Id && a.MenuCode == saveDto.MenuCode);
                 if (IsExist)
                 {
+                    if (saveDto.Id == saveDto.ParentModuleID)
+                        throw Oops.Oh("该菜单的上级菜单不可选择该菜单.");
                     //更改菜单信息
                     SysMenu sysMenuUpdate = saveDto.Adapt<SysMenu>();
                     sysMenuUpdate.UpdatedTime = DateTime.UtcNow;
                     await _sysMenuRepository.UpdateIncludeExistsNowAsync(sysMenuUpdate, new[] {
+                        nameof(sysMenuUpdate.MenuName),
+                        nameof(sysMenuUpdate.IsUse),
+                        nameof(sysMenuUpdate.MenuType),
                         nameof(sysMenuUpdate.MenuIcon),
                         nameof(sysMenuUpdate.MenuTitle),
                         nameof(sysMenuUpdate.ParentModuleID),

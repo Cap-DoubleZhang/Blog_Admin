@@ -43,13 +43,23 @@ namespace AdminBlog.Dtos
         public UseTypeEnum isUse { get; set; }
 
         /// <summary>
+        /// 排序
+        /// </summary>
+        public int sortIndex { get; set; }
+
+        /// <summary>
         /// 菜单类型（按钮/页面）
         /// </summary>
         public MenuTypeEnum menuType { get; set; }
-        
+
+        /// <summary>
+        /// 上级菜单
+        /// </summary>
+        public long parentModuleID { get; set; }
+
         /// <summary>
         /// 子级
         /// </summary>
-        public List<ResultSysMenuDto> childrenMens { get; set; }
+        public List<ResultSysMenuDto> children { get; set; }
     }
 }
