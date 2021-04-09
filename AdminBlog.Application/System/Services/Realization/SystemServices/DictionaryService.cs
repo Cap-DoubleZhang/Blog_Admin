@@ -38,24 +38,27 @@ namespace AdminBlog.Application
         /// <param name="searchDto"></param>
         /// <returns></returns>
         [HttpGet("dictionaries")]
-        public async Task<PagedList<ResultDictionaryDto>> GetPagedDictionariesAsync(SearchDirctionaryDto searchDto)
+        public async Task<PagedList<ResultDictionaryDto>> GetPagedDictionariesAsync([FromQuery]SearchDirctionaryDto searchDto)
         {
             #region 关键词进行条件查询 多条件使用空格分开
-            string[] keys = searchDto.keyword.Trim().Split(' ');
             Expression<Func<SysDictionary, bool>> expression = t => true;
-            if (!string.IsNullOrWhiteSpace(keys[0]))
+            if (!string.IsNullOrWhiteSpace(searchDto.keyword))
             {
-                foreach (var item in keys)
+                string[] keys = searchDto.keyword.Trim().Split(' ');
+                if (!string.IsNullOrWhiteSpace(keys[0]))
                 {
-                    if (item == keys[0])
+                    foreach (var item in keys)
                     {
-                        expression = expression.And(x => x.Name.Contains(item)
-                                                      || x.Code.Contains(item));
-                    }
-                    else
-                    {
-                        expression = expression.Or(x => x.Name.Contains(item)
-                                                      || x.Code.Contains(item));
+                        if (item == keys[0])
+                        {
+                            expression = expression.And(x => x.Name.Contains(item)
+                                                          || x.Code.Contains(item));
+                        }
+                        else
+                        {
+                            expression = expression.Or(x => x.Name.Contains(item)
+                                                          || x.Code.Contains(item));
+                        }
                     }
                 }
             }
@@ -109,7 +112,7 @@ namespace AdminBlog.Application
         /// </summary>
         /// <param name="baseBatchUpdateDto"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpDelete("dictionary")]
         public async Task<bool> DeleteDictionaryAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
             await _sysDictionaryRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysDictionary { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysDictionary.IsDeleted), nameof(SysDictionary.UpdatedTime) });
