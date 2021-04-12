@@ -23,11 +23,6 @@ namespace AdminBlog.Dtos
         [Required(ErrorMessage = "编码不能为空.")]
         public string Code { get; set; }
         /// <summary>
-        /// 值
-        /// </summary>
-        [Required(ErrorMessage = "值不能为空.")]
-        public string Value { get; set; }
-        /// <summary>
         /// 备注
         /// </summary>
         public string Remark { get; set; }

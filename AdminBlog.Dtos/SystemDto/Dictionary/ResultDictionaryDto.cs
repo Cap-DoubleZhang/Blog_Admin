@@ -14,14 +14,14 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name { get; set; }
+        public string name { get; set; }
         /// <summary>
         /// 编码
         /// </summary>
-        public string Code { get; set; }
+        public string code { get; set; }
         /// <summary>
         /// 值
         /// </summary>
-        public string Value { get; set; }
+        public string remark { get; set; }
     }
 }

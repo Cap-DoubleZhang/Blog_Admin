@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace AdminBlog.Dtos
 {
     /// <summary>
-    /// 搜索字典表Dto
+    /// 搜索字典明细 Dto
     /// </summary>
-    public class SearchDirctionaryDto : BaseSearchDto
+    public class SearchDictionaryDetailDto : BaseSearchDto
     {
         /// <summary>
-        /// 编码
+        /// 字典组编码
         /// </summary>
         public string Code { get; set; }
     }

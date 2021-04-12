@@ -24,10 +24,6 @@ namespace AdminBlog.Core
         /// </summary>
         public string Code { get; set; }
         /// <summary>
-        /// 值
-        /// </summary>
-        public string Value { get; set; }
-        /// <summary>
         /// 描述/备注
         /// </summary>
         public string Remark { get; set; }

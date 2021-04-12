@@ -154,14 +154,39 @@
             编码
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SysDictionary.Value">
+        <member name="P:AdminBlog.Core.SysDictionary.Remark">
+            <summary>
+            描述/备注
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.SysDictionaryDetail">
+            <summary>
+            字典明细值
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysDictionaryDetail.Code">
+            <summary>
+            字典组编码
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysDictionaryDetail.DetailCode">
+            <summary>
+            字典值编码
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysDictionaryDetail.SortIndex">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysDictionaryDetail.Value">
             <summary>
             值
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.SysDictionary.Remark">
+        <member name="P:AdminBlog.Core.SysDictionaryDetail.Remark">
             <summary>
-            描述/备注
+            备注
             </summary>
         </member>
         <member name="T:AdminBlog.Core.SysMenu">

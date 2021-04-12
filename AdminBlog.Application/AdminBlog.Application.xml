@@ -72,7 +72,7 @@
             系统字典
             </summary>
         </member>
-        <member name="M:AdminBlog.Application.DictionaryService.GetPagedDictionariesAsync(AdminBlog.Dtos.SearchDirctionaryDto)">
+        <member name="M:AdminBlog.Application.DictionaryService.GetPagedDictionariesAsync(AdminBlog.Dtos.SearchDictionaryDto)">
             <summary>
             获取系统字典分页列表
             </summary>
@@ -89,6 +89,27 @@
         <member name="M:AdminBlog.Application.DictionaryService.DeleteDictionaryAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
             <summary>
             单个/批量删除角色
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.DictionaryService.GetPagedDictionariesDetailAsync(AdminBlog.Dtos.SearchDictionaryDetailDto)">
+            <summary>
+            获取系统字典分页列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.DictionaryService.SaveDictionaryDetailAsync(AdminBlog.Dtos.SaveDictionaryDetailDto)">
+            <summary>
+            编辑/新增 系统字典明细
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.DictionaryService.DeleteDictionaryDetailAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除字典明细
             </summary>
             <param name="baseBatchUpdateDto"></param>
             <returns></returns>
