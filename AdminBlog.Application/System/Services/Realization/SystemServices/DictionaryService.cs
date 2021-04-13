@@ -114,9 +114,14 @@ namespace AdminBlog.Application
         /// <param name="baseBatchUpdateDto"></param>
         /// <returns></returns>
         [HttpDelete("dictionary")]
+        [UnitOfWork]
         public async Task<bool> DeleteDictionaryAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysDictionaryRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysDictionary { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysDictionary.IsDeleted), nameof(SysDictionary.UpdatedTime) });
+            //删除字典明细
+            string[] dictionaries = _sysDictionaryRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).Select(a => a.Code).ToArray();
+            await _sysDictionaryDetailRepository.Where(a => dictionaries.Contains(a.Code)).BatchUpdateAsync(new SysDictionaryDetail { IsDeleted = true }, new List<string> { nameof(SysDictionaryDetail.IsDeleted) });
+
+            await _sysDictionaryRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysDictionary { IsDeleted = true }, new List<string> { nameof(SysDictionary.IsDeleted) });
 
             return true;
         }
@@ -210,7 +215,7 @@ namespace AdminBlog.Application
         [HttpDelete("dictionaryDetail")]
         public async Task<bool> DeleteDictionaryDetailAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysDictionaryDetailRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysDictionaryDetail { IsDeleted = true }, new List<string> { nameof(SysDictionary.IsDeleted) });
+            await _sysDictionaryDetailRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysDictionaryDetail { IsDeleted = true }, new List<string> { nameof(SysDictionaryDetail.IsDeleted) });
 
             return true;
         }

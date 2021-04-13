@@ -1,4 +1,5 @@
-﻿using Furion.DatabaseAccessor;
+﻿using AdminBlog.Core.Enum;
+using Furion.DatabaseAccessor;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,13 +26,9 @@ namespace AdminBlog.Core
         /// </summary>
         public string BlogType { get; set; }
         /// <summary>
-        /// 是否发布
-        /// </summary>
-        public bool IsPublish { get; set; }
-        /// <summary>
         /// 发布时间
         /// </summary>
-        public DateTime PublishTime { get; set; }
+        public DateTimeOffset PublishTime { get; set; }
         /// <summary>
         /// 封面
         /// </summary>
@@ -52,6 +49,10 @@ namespace AdminBlog.Core
         /// 点赞数
         /// </summary>
         public int Likes { get; set; }
+        /// <summary>
+        /// 发布类型
+        /// </summary>
+        public BlogPublishTypeEnum PublishType { get; set; }
         /// <summary>
         /// 内容
         /// </summary>

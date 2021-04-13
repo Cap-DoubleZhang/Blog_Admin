@@ -95,7 +95,7 @@ namespace AdminBlog.Application
         public async Task<bool> SaveCommentAsync(SaveCommentDto saveDto)
         {
             //判断博客是否存在
-            bool IsExist = await _blogRepository.AnyAsync(a => a.Id == saveDto.blogId && a.IsPublish == true);
+            bool IsExist = await _blogRepository.AnyAsync(a => a.Id == saveDto.blogId && a.PublishType == BlogPublishTypeEnum.Publish);
             if (IsExist)
             {
                 //新增评论信息

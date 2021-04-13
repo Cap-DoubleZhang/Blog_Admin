@@ -23,11 +23,18 @@
             <param name="saveDto"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.BlogService.DeleteUserAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+        <member name="M:AdminBlog.Application.BlogService.DeleteBlogAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
             <summary>
             单个/批量删除博客
             </summary>
             <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.BlogService.UpdateBlogPublishTypeAsync(AdminBlog.Dtos.UpdateBlogPublishTypeDto)">
+            <summary>
+            单个/批量更改博客发布类型
+            </summary>
+            <param name="baseBatchUpdatePublishTypeDto"></param>
             <returns></returns>
         </member>
         <member name="T:AdminBlog.Application.CommentService">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdminBlog.Core.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,34 +15,34 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title { get; set; }
+        public string title { get; set; }
         /// <summary>
         /// 文章类型
         /// </summary>
-        public string BlogType { get; set; }
-        /// <summary>
-        /// 是否发布
-        /// </summary>
-        public bool IsPublish { get; set; }
+        public string blogType { get; set; }
         /// <summary>
         /// 发布时间
         /// </summary>
-        public DateTime PublishTime { get; set; }
+        public DateTimeOffset publishTime { get; set; }
         /// <summary>
         /// 封面
         /// </summary>
-        public string Cover { get; set; }
+        public string cover { get; set; }
         /// <summary>
         /// 简介
         /// </summary>
-        public string Synopsis { get; set; }
+        public string synopsis { get; set; }
         /// <summary>
         /// 标签
         /// </summary>
-        public string Tags { get; set; }
+        public string tags { get; set; }
+        /// <summary>
+        /// 发布类型
+        /// </summary>
+        public BlogPublishTypeEnum publishType { get; set; }
         /// <summary>
         /// 内容
         /// </summary>
-        public string Content { get; set; }
+        public string content { get; set; }
     }
 }

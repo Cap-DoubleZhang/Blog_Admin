@@ -19,11 +19,6 @@
             文章类型
             </summary>
         </member>
-        <member name="P:AdminBlog.Core.Blog.IsPublish">
-            <summary>
-            是否发布
-            </summary>
-        </member>
         <member name="P:AdminBlog.Core.Blog.PublishTime">
             <summary>
             发布时间
@@ -52,6 +47,11 @@
         <member name="P:AdminBlog.Core.Blog.Likes">
             <summary>
             点赞数
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.PublishType">
+            <summary>
+            发布类型
             </summary>
         </member>
         <member name="P:AdminBlog.Core.Blog.Content">
