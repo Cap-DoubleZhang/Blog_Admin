@@ -67,7 +67,7 @@ namespace AdminBlog.EntityFramework.Core
                         .Where(u => u.State == EntityState.Added || u.State == EntityState.Modified);
 
             var userManager = App.GetService<CurrentUserService>();
-            var userId = userManager?.UserId;
+            var userId = string.IsNullOrWhiteSpace(userManager.UserName) ? 0 : userManager?.UserId;
 
             foreach (var entity in entities)
             {

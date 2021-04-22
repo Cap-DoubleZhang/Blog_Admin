@@ -19,7 +19,7 @@ namespace AdminBlog.Core
         /// <summary>
         /// 所属博客ID
         /// </summary>
-        public int BlogId { get; set; }
+        public long BlogId { get; set; }
         /// <summary>
         /// 展示昵称
         /// </summary>

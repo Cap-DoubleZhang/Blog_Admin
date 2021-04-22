@@ -51,11 +51,11 @@ namespace AdminBlog.Web.Core
         {
             if (string.IsNullOrEmpty(Format))
             {
-                writer.WriteStringValue(value.ToLocalTime());
+                writer.WriteStringValue(value.ToString());
             }
             else
             {
-                writer.WriteStringValue(value.ToLocalTime().ToString(Format));
+                writer.WriteStringValue(value.ToString(Format));
             }
         }
     }

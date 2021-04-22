@@ -16,6 +16,7 @@ namespace AdminBlog.Common
             services.AddConfigurableOptions<PasswordSettingOptions>();
             services.AddConfigurableOptions<CurrentUserInfoOptions>();
             services.AddConfigurableOptions<UserInfoConstOptions>();
+            services.AddConfigurableOptions<FilePathOptions>();
             //services.add<EncryptHelper>();
         }
     }

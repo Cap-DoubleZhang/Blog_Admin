@@ -189,6 +189,26 @@
             备注
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.SysFile.FileName">
+            <summary>
+            文件路径
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysFile.RealPath">
+            <summary>
+            真实文件路径
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysFile.FileSize">
+            <summary>
+            文件大小
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysFile.DownTimes">
+            <summary>
+            文件下载次数
+            </summary>
+        </member>
         <member name="T:AdminBlog.Core.SysMenu">
             <summary>
             后台菜单表

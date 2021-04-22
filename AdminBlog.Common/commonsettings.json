@@ -23,5 +23,9 @@
     "HeadPortrait": "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
     //简介
     "Introduction": "这个家伙太懒了，什么都没留下..."
+  },
+  //上传的文件路径
+  "FilePath": {
+    "RealFilePath": "E:\\Gitee\\FurionAdminBlog\\AdminBlog.Web.Entry"
   }
 }

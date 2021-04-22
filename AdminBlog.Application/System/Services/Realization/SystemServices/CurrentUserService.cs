@@ -42,11 +42,6 @@ namespace AdminBlog.Application
             get => _httpContextAccessor.HttpContext.User.FindFirst(_currentUserInfoSetting.USERNAME)?.Value;
         }
 
-        public SysUser User
-        {
-            get => _sysUserRepository.Find(UserId);
-        }
-
         /// <summary>
         /// 获取当前登录用户信息
         /// </summary>

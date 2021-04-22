@@ -119,6 +119,8 @@ namespace AdminBlog.Application
         [HttpGet("info")]
         public async Task<ResultLoginUserDto> GetCurrentUserByToken()
         {
+            if (_currentUserService == null)
+                throw Oops.Oh(UserErrorCodeEnum.TokenOverdue);
             var userId = _currentUserService.UserId;
             if (userId <= 0)
                 throw Oops.Oh(UserErrorCodeEnum.TokenOverdue);
@@ -270,6 +272,12 @@ namespace AdminBlog.Application
             if (userLogin.IsUse == UseTypeEnum.NonUse)
                 throw Oops.Oh(UserErrorCodeEnum.NonUse);
 
+            userLogin.LoginTimes += 1;
+            userLogin.LastLoginIP = App.HttpContext.GetLocalIpAddressToIPv4();
+            userLogin.LastLoginTime = DateTime.Now;
+            await _sysUserRepository.UpdateAsync(userLogin);
+
+
             string accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>()
             {
                 { _currentUserInfoSetting.USERID,userLogin.Id },
@@ -282,6 +290,7 @@ namespace AdminBlog.Application
             // 设置请求报文头
             _httpContextAccessor.HttpContext.Response.Headers["access-token"] = accessToken;
             _httpContextAccessor.HttpContext.Response.Headers["x-access-token"] = refreshToken;
+
             return accessToken;
         }
 

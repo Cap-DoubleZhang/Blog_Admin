@@ -3,6 +3,7 @@ using Furion.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace AdminBlog.Core
         /// 主键ID
         /// </summary>
         [Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
         public override long Id { get; set; }
         /// <summary>
         /// 创建者

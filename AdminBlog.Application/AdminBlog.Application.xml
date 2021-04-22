@@ -42,9 +42,16 @@
             博客评论 业务
             </summary>
         </member>
-        <member name="M:AdminBlog.Application.CommentService.GetPagedCommentAsync(AdminBlog.Dtos.SearchCommentDto)">
+        <member name="M:AdminBlog.Application.CommentService.GetPagedCommentByBlogAsync(AdminBlog.Dtos.SearchBlogCommonentDto)">
             <summary>
-            获取分页评论列表
+            根据博客获取分页评论列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.CommentService.GetPagedCommentsAsync(AdminBlog.Dtos.SearchCommentDto)">
+            <summary>
+            根据博客获取分页评论列表
             </summary>
             <param name="searchDto"></param>
             <returns></returns>
@@ -121,6 +128,19 @@
             <param name="baseBatchUpdateDto"></param>
             <returns></returns>
         </member>
+        <member name="T:AdminBlog.Application.FileService">
+            <summary>
+            系统文件
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.FileService.UploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String)">
+            <summary>
+            上传文件
+            </summary>
+            <param name="files"></param>
+            <param name="filePathName"></param>
+            <returns></returns>
+        </member>
         <member name="T:AdminBlog.Application.MenuService">
             <summary>
             系统菜单
@@ -191,9 +211,15 @@
             用户角色 
             </summary>
         </member>
-        <member name="M:AdminBlog.Application.System.Services.Realization.System.UserRolesService.GetUserRole">
+        <member name="M:AdminBlog.Application.System.Services.Realization.System.UserRolesService.GetUserRole(AdminBlog.Dtos.SearchUserRoleDto)">
             <summary>
             获取用户角色列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.System.Services.Realization.System.UserRolesService.GetCurrentUserRole">
+            <summary>
+            获取当前用户角色列表
             </summary>
             <returns></returns>
         </member>

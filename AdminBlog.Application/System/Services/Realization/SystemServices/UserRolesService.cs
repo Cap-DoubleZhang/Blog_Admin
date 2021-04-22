@@ -11,6 +11,7 @@ using Furion.LinqBuilder;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,14 +25,16 @@ namespace AdminBlog.Application.System.Services.Realization.System
     /// 用户角色 
     /// </summary>
     [DynamicApiController]
-    [Route("api/userroles")]
+    [Route("api/userRoles")]
     public class UserRolesService
     {
         #region 依赖注入
         private readonly IRepository<SysUserRole> _sysUserRoleRepository;
-        public UserRolesService(IRepository<SysUserRole> sysUserRoleRepository)
+        private readonly IRepository<SysRole> _sysRoleRepository;
+        public UserRolesService(IRepository<SysUserRole> sysUserRoleRepository, IRepository<SysRole> sysRoleRepository)
         {
             _sysUserRoleRepository = sysUserRoleRepository;
+            _sysRoleRepository = sysRoleRepository;
         }
         #endregion
 
@@ -40,10 +43,39 @@ namespace AdminBlog.Application.System.Services.Realization.System
         /// 获取用户角色列表
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<bool> GetUserRole()
+        [HttpGet("userRoles")]
+        public async Task<List<ResultUserRoleDto>> GetUserRole([FromQuery] SearchUserRoleDto saerchDto)
         {
-            return true;
+            List<SysRole> roles = await _sysRoleRepository.AsQueryable().ToListAsync();
+
+            List<ResultUserRoleDto> resultUserRoleDtos = roles.GroupJoin(_sysUserRoleRepository.AsQueryable(), r => r.Id, ur => ur.RoleID, (r, ur) => new { r, ur })
+                .SelectMany(rur => rur.ur.DefaultIfEmpty(), (rur, ur) => new ResultUserRoleDto
+                {
+                    Id = rur.r.Id,
+                    roleName = rur.r.RoleName,
+                    promiss = rur.ur.FirstOrDefault() == null ? false : true,
+                    roleDesc = rur.r.RoleDesc,
+                }).ToList();
+
+            return resultUserRoleDtos;
+        }
+
+        /// <summary>
+        /// 获取当前用户角色列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("currentUserRoles")]
+        public async Task<List<ResultUserRoleDto>> GetCurrentUserRole()
+        {
+            List<ResultUserRoleDto> userRoleDtos = await _sysUserRoleRepository.AsQueryable().GroupJoin(_sysRoleRepository.AsQueryable(), ur => ur.RoleID, r => r.Id, (ur, r) => new { r, ur })
+                .SelectMany(urr => urr.r.DefaultIfEmpty(), (urr, r) => new ResultUserRoleDto
+                {
+                    Id = urr.r.FirstOrDefault().Id,
+                    roleName = urr.r.FirstOrDefault().RoleName,
+                    promiss = true,
+                }).ToListAsync();
+
+            return userRoleDtos;
         }
 
         /// <summary>
@@ -51,16 +83,12 @@ namespace AdminBlog.Application.System.Services.Realization.System
         /// </summary>
         /// <param name="userRoleDto"></param>
         /// <returns></returns>
-        [HttpPost("userrole")]
+        [HttpPost("userRole")]
         [UnitOfWork]
         public async Task<bool> SaveUserRole(SaveUserRoleDto userRoleDto)
         {
-            List<SysUserRole> userRolesDelete = _sysUserRoleRepository.Where(a => a.RoleID == userRoleDto.Id).ToList();
-            userRolesDelete.ForEach(a =>
-            {
-                a.IsDeleted = true;
-            });
-            await _sysUserRoleRepository.Context.BulkUpdateAsync(userRolesDelete);
+            await _sysUserRoleRepository.Where(a => a.UserID == userRoleDto.Id).BatchDeleteAsync();
+
             List<SysUserRole> userRolesAddList = new List<SysUserRole>();
             foreach (var item in userRoleDto.roleIds)
             {

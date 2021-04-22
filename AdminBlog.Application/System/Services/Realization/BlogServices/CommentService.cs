@@ -35,27 +35,65 @@ namespace AdminBlog.Application
 
         #region 评论
         /// <summary>
-        /// 获取分页评论列表
+        /// 根据博客获取分页评论列表
+        /// </summary>
+        /// <param name="searchDto"></param>
+        /// <returns></returns>
+        [HttpGet("blogComments")]
+        public async Task<PagedList<ResultBlogCommentDto>> GetPagedCommentByBlogAsync([FromQuery] SearchBlogCommonentDto searchDto)
+        {
+            #region 关键词进行条件查询 多条件使用空格分开
+            Expression<Func<Comment, bool>> expression = t => true;
+            if (!string.IsNullOrWhiteSpace(searchDto.keyword))
+            {
+                string[] keys = searchDto.keyword.Trim().Split(' ');
+                if (!string.IsNullOrWhiteSpace(keys[0]))
+                {
+                    foreach (var item in keys)
+                    {
+                        if (item == keys[0])
+                        {
+                            expression = expression.And(x => x.Value.Contains(item));
+                        }
+                        else
+                        {
+                            expression = expression.Or(x => x.Value.Contains(item));
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            PagedList<Comment> commentDto = await _commentRepository.Where(expression).OrderByDescending(a => a.CreatedTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
+
+            return commentDto.Adapt<PagedList<ResultBlogCommentDto>>();
+        }
+
+        /// <summary>
+        /// 根据博客获取分页评论列表
         /// </summary>
         /// <param name="searchDto"></param>
         /// <returns></returns>
         [HttpGet("comments")]
-        public async Task<PagedList<ResultCommentDto>> GetPagedCommentAsync(SearchCommentDto searchDto)
+        public async Task<PagedList<ResultCommentDto>> GetPagedCommentsAsync([FromQuery] SearchCommentDto searchDto)
         {
             #region 关键词进行条件查询 多条件使用空格分开
-            string[] keys = searchDto.keyword.Trim().Split(' ');
             Expression<Func<Comment, bool>> expression = t => true;
-            if (!string.IsNullOrWhiteSpace(keys[0]))
+            if (!string.IsNullOrWhiteSpace(searchDto.keyword))
             {
-                foreach (var item in keys)
+                string[] keys = searchDto.keyword.Trim().Split(' ');
+                if (!string.IsNullOrWhiteSpace(keys[0]))
                 {
-                    if (item == keys[0])
+                    foreach (var item in keys)
                     {
-                        expression = expression.And(x => x.Value.Contains(item));
-                    }
-                    else
-                    {
-                        expression = expression.Or(x => x.Value.Contains(item));
+                        if (item == keys[0])
+                        {
+                            expression = expression.And(x => x.Value.Contains(item));
+                        }
+                        else
+                        {
+                            expression = expression.Or(x => x.Value.Contains(item));
+                        }
                     }
                 }
             }
