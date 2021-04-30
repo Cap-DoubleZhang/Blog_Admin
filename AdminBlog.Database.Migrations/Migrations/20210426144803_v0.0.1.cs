@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AdminBlog.Database.Migrations.Migrations
 {
-    public partial class v100 : Migration
+    public partial class v001 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,19 +15,19 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BlogType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsPublish = table.Column<bool>(type: "bit", nullable: false),
-                    PublishTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PublishTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     Cover = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Synopsis = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReadingVolume = table.Column<int>(type: "int", nullable: false),
                     Likes = table.Column<int>(type: "int", nullable: false),
+                    PublishType = table.Column<int>(type: "int", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,7 +40,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BlogId = table.Column<int>(type: "int", nullable: false),
+                    BlogId = table.Column<long>(type: "bigint", nullable: false),
                     ShowName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HeadPortrait = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EMail = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -54,8 +54,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -70,17 +70,59 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Remark = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sys_Dictionary", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sys_Dictionary_Detail",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DetailCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SortIndex = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Remark = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sys_Dictionary", x => x.Id);
+                    table.PrimaryKey("PK_Sys_Dictionary_Detail", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Sys_File",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RealPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileSize = table.Column<long>(type: "bigint", nullable: false),
+                    DownTimes = table.Column<int>(type: "int", nullable: false),
+                    CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sys_File", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,8 +143,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,8 +164,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -141,8 +183,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -166,8 +208,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -192,8 +234,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -211,8 +253,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     UpdatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreateBy = table.Column<long>(type: "bigint", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: false)
+                    CreateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -230,6 +272,12 @@ namespace AdminBlog.Database.Migrations.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sys_Dictionary");
+
+            migrationBuilder.DropTable(
+                name: "Sys_Dictionary_Detail");
+
+            migrationBuilder.DropTable(
+                name: "Sys_File");
 
             migrationBuilder.DropTable(
                 name: "Sys_Menu");

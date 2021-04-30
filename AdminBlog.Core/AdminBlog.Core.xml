@@ -191,7 +191,7 @@
         </member>
         <member name="P:AdminBlog.Core.SysFile.FileName">
             <summary>
-            文件路径
+            文件名称
             </summary>
         </member>
         <member name="P:AdminBlog.Core.SysFile.RealPath">

@@ -1,9 +1,11 @@
 ﻿using AdminBlog.Common;
 using AdminBlog.Core;
+using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
 using Furion;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
+using Furion.FriendlyException;
 using Furion.LinqBuilder;
 using Furion.Snowflake;
 using Mapster;
@@ -17,6 +19,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace AdminBlog.Application
 {
@@ -47,7 +50,7 @@ namespace AdminBlog.Application
         public async Task<string> UploadFile(IFormFile files, string filePathName)
         {
             //要保存到哪个路径(本地的真实路径)
-            var filePath = Path.Combine(_filePathOptions.RealFilePath + "\\" + filePathName + "\\");
+            var filePath = Path.Combine($"{_filePathOptions.RealFilePath}\\wwwroot\\Uploads\\{filePathName}\\");
             //上传的文件大小  KB
             long fileSize = files.Length / 1024;
 
@@ -66,7 +69,7 @@ namespace AdminBlog.Application
 
             SysFile file = new SysFile
             {
-                FileName = finalName,
+                FileName = files.FileName,
                 RealPath = filePath + finalName,
                 FileSize = fileSize,
             };
@@ -75,10 +78,24 @@ namespace AdminBlog.Application
             return App.WebHostEnvironment.WebRootPath + file.Id;
         }
 
-        [HttpGet]
-        public async Task<string> DownFile()
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("download/{id}")]
+        public async Task<IActionResult> DownFile(long id)
         {
-            return null;
+            if (id <= 0)
+                throw Oops.Oh("必要参数为空.");
+            SysFile sysFile = await _sysFileRepository.FindOrDefaultAsync(id);
+            if (sysFile == null || sysFile.Id <= 0)
+                throw Oops.Oh(FileEnum.FileNonExist);
+            //更新下载次数
+            sysFile.DownTimes += 1;
+            await _sysFileRepository.UpdateAsync(sysFile);
+
+            return new FileStreamResult(new FileStream(sysFile.RealPath, FileMode.Open), "application/octet-stream") { FileDownloadName = sysFile.FileName };
         }
     }
 }

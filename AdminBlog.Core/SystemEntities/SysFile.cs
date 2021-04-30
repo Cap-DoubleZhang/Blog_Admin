@@ -12,7 +12,7 @@ namespace AdminBlog.Core
     public class SysFile : EntityExtend
     {
         /// <summary>
-        /// 文件路径
+        /// 文件名称
         /// </summary>
         public string FileName { get; set; }
         /// <summary>

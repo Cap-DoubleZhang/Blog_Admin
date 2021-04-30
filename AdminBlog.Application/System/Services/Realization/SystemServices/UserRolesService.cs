@@ -98,7 +98,7 @@ namespace AdminBlog.Application.System.Services.Realization.System
                     RoleID = item,
                 });
             }
-            await _sysUserRoleRepository.Context.BulkInsertAsync(userRolesAddList);
+            await _sysUserRoleRepository.InsertNowAsync(userRolesAddList);
             return true;
         }
         #endregion
