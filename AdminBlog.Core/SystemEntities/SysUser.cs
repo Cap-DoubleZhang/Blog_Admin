@@ -1,4 +1,6 @@
 ﻿using AdminBlog.Core.Enum;
+using Furion.DatabaseAccessor;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +17,7 @@ namespace AdminBlog.Core
     /// </summary>
     [Table("Sys_User")]
     [Description("账号")]
-    public class SysUser : EntityExtend
+    public class SysUser : EntityExtend, IEntitySeedData<SysUser>
     {
         /// <summary>
         /// 用户登录名
@@ -60,5 +62,19 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("IsUse")]
         public UseTypeEnum IsUse { get; set; }
+
+        /// <summary>
+        /// 增加种子数据
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <param name="dbContextLocator"></param>
+        /// <returns></returns>
+        public IEnumerable<SysUser> HasData(DbContext dbContext, Type dbContextLocator)
+        {
+            return new List<SysUser>
+            {
+                new SysUser { Id = 1111, UserLoginName = "Admin", UserPassword = "728AD9902AECBA32E22F",CreatedTime=DateTimeOffset.UtcNow },
+            };
+        }
     }
 }

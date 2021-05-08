@@ -7,7 +7,6 @@ using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
 using Furion.LinqBuilder;
-using Furion.Snowflake;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +19,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Yitter.IdGenerator;
 
 namespace AdminBlog.Application
 {
@@ -55,7 +55,7 @@ namespace AdminBlog.Application
             long fileSize = files.Length / 1024;
 
             var fileSuffix = Path.GetExtension(files.FileName).ToLower(); // 文件后缀
-            var finalName = IDGenerator.NextId() + fileSuffix; // 生成文件的最终名称
+            var finalName = YitIdHelper.NextId() + fileSuffix; // 生成文件的最终名称
 
             //创建本地文件夹
             if (!Directory.Exists(filePath))

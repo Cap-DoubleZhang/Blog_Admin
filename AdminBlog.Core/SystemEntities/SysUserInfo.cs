@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Furion.DatabaseAccessor;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +15,7 @@ namespace AdminBlog.Core
     /// </summary>
     [Table("Sys_UserInfo")]
     [Description("用户信息详情表")]
-    public class SysUserInfo : EntityExtend
+    public class SysUserInfo : EntityExtend, IEntitySeedData<SysUserInfo>
     {
         /// <summary>
         /// 用户ID
@@ -68,5 +70,20 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("WeChat")]
         public string WeChat { get; set; }
+
+        public IEnumerable<SysUserInfo> HasData(DbContext dbContext, Type dbContextLocator)
+        {
+            return new List<SysUserInfo>
+            {
+                new SysUserInfo
+                {
+                    Id = 111111,
+                    UserID=1111,
+                    UserShowName = "Admin",
+                    HeadPortrait = "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
+                    CreatedTime=DateTimeOffset.UtcNow
+                },
+            };
+        }
     }
 }

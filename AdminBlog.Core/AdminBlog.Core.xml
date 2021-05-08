@@ -344,6 +344,14 @@
             是否可用
             </summary>
         </member>
+        <member name="M:AdminBlog.Core.SysUser.HasData(Microsoft.EntityFrameworkCore.DbContext,System.Type)">
+            <summary>
+            增加种子数据
+            </summary>
+            <param name="dbContext"></param>
+            <param name="dbContextLocator"></param>
+            <returns></returns>
+        </member>
         <member name="T:AdminBlog.Core.SysUserInfo">
             <summary>
             用户信息详情表

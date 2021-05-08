@@ -277,7 +277,6 @@ namespace AdminBlog.Application
             userLogin.LastLoginTime = DateTime.Now;
             await _sysUserRepository.UpdateAsync(userLogin);
 
-
             string accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>()
             {
                 { _currentUserInfoSetting.USERID,userLogin.Id },

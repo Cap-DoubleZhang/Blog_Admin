@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Yitter.IdGenerator;
 
 namespace AdminBlog.EntityFramework.Core
 {
@@ -76,7 +77,7 @@ namespace AdminBlog.EntityFramework.Core
                 {
                     // 自动设置新增属性
                     case EntityState.Added:
-                        obj.Id = Furion.Snowflake.IDGenerator.NextId();
+                        obj.Id = YitIdHelper.NextId();
                         obj.CreatedTime = DateTime.UtcNow;
                         obj.CreateBy = userId;
                         break;
