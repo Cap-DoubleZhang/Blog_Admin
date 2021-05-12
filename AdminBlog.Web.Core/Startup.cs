@@ -38,6 +38,8 @@ namespace AdminBlog.Web.Core
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseCorsAccessor();

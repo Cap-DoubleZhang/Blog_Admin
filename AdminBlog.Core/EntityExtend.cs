@@ -20,7 +20,7 @@ namespace AdminBlog.Core
         /// 主键ID
         /// </summary>
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
         public override long Id { get; set; }
         /// <summary>
         /// 创建者

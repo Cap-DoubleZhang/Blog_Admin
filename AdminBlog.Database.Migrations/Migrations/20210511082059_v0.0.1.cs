@@ -11,8 +11,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Blog",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BlogType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PublishTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -38,8 +37,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Comment",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     BlogId = table.Column<long>(type: "bigint", nullable: false),
                     ShowName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HeadPortrait = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -66,8 +64,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_Dictionary",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Remark = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -86,8 +83,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_Dictionary_Detail",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DetailCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SortIndex = table.Column<int>(type: "int", nullable: false),
@@ -108,8 +104,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_File",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RealPath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FileSize = table.Column<long>(type: "bigint", nullable: false),
@@ -129,8 +124,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_Menu",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     MenuName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MenuCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MenuIcon = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -155,8 +149,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_Role",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     RoleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleDesc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AdminFlag = table.Column<int>(type: "int", nullable: false),
@@ -176,8 +169,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_RoleMenu",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     RoleID = table.Column<long>(type: "bigint", nullable: false),
                     MenuID = table.Column<long>(type: "bigint", nullable: false),
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -195,8 +187,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_User",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     UserLoginName = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
                     UserPassword = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Descripts = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
@@ -220,8 +211,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_UserInfo",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     UserID = table.Column<long>(type: "bigint", nullable: false),
                     UserShowName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HeadPortrait = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -246,8 +236,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                 name: "Sys_UserRole",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(type: "bigint", nullable: false),
                     UserID = table.Column<long>(type: "bigint", nullable: false),
                     RoleID = table.Column<long>(type: "bigint", nullable: false),
                     CreatedTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -260,6 +249,16 @@ namespace AdminBlog.Database.Migrations.Migrations
                 {
                     table.PrimaryKey("PK_Sys_UserRole", x => x.Id);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Sys_User",
+                columns: new[] { "Id", "CreateBy", "CreatedTime", "Descripts", "IsDeleted", "IsOnline", "IsUse", "LastLoginIP", "LastLoginTime", "LoginTimes", "UpdateBy", "UpdatedTime", "UserLoginName", "UserPassword" },
+                values: new object[] { 15695167420013412L, null, new DateTimeOffset(new DateTime(2021, 5, 11, 8, 20, 58, 544, DateTimeKind.Unspecified).AddTicks(6553), new TimeSpan(0, 0, 0, 0, 0)), null, false, 0, 0, null, null, 0, null, null, "Admin", "728AD9902AECBA32E22F" });
+
+            migrationBuilder.InsertData(
+                table: "Sys_UserInfo",
+                columns: new[] { "Id", "BirthDate", "CreateBy", "CreatedTime", "EMail", "HeadPortrait", "IDCard", "IsDeleted", "Phone", "QQ", "UpdateBy", "UpdatedTime", "UserID", "UserShowName", "WeChat" },
+                values: new object[] { 111111L, null, null, new DateTimeOffset(new DateTime(2021, 5, 11, 8, 20, 58, 547, DateTimeKind.Unspecified).AddTicks(8069), new TimeSpan(0, 0, 0, 0, 0)), null, "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024", null, false, null, null, null, null, 15695167420013412L, "Admin", null });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

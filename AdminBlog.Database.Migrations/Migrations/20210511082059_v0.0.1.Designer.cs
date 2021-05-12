@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminBlog.Database.Migrations.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210508040441_v0.0.2")]
-    partial class v002
+    [Migration("20210511082059_v0.0.1")]
+    partial class v001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.Blog", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<string>("BlogType")
                         .HasColumnType("nvarchar(max)");
@@ -81,9 +79,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.Comment", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long>("BlogId")
                         .HasColumnType("bigint");
@@ -142,9 +138,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.SysDictionary", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
@@ -178,9 +172,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.SysDictionaryDetail", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
@@ -220,9 +212,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.SysFile", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
@@ -259,9 +249,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.SysMenu", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
@@ -322,9 +310,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.SysRole", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<int>("AdminFlag")
                         .HasColumnType("int")
@@ -365,9 +351,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.SysRoleMenu", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
@@ -400,9 +384,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.SysUser", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
@@ -461,23 +443,21 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1111L,
-                            CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            Id = 15695167420013412L,
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 5, 11, 8, 20, 58, 544, DateTimeKind.Unspecified).AddTicks(6553), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsOnline = 0,
                             IsUse = 0,
                             LoginTimes = 0,
                             UserLoginName = "Admin",
-                            UserPassword = "广东省中山市"
+                            UserPassword = "728AD9902AECBA32E22F"
                         });
                 });
 
             modelBuilder.Entity("AdminBlog.Core.SysUserInfo", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
@@ -538,10 +518,10 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 111111L,
-                            CreatedTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 5, 11, 8, 20, 58, 547, DateTimeKind.Unspecified).AddTicks(8069), new TimeSpan(0, 0, 0, 0, 0)),
                             HeadPortrait = "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
                             IsDeleted = false,
-                            UserID = 1111L,
+                            UserID = 15695167420013412L,
                             UserShowName = "Admin"
                         });
                 });
@@ -549,9 +529,7 @@ namespace AdminBlog.Database.Migrations.Migrations
             modelBuilder.Entity("AdminBlog.Core.SysUserRole", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");

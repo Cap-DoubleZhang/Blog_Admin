@@ -18,5 +18,11 @@ namespace AdminBlog.Core.Enum
         /// </summary>
         [ErrorCodeItemMetadata("该文件不存在或已被删除.")]
         FileNonExist,
+
+        /// <summary>
+        /// 请选择要上传完的文件
+        /// </summary>
+        [ErrorCodeItemMetadata("请选择要上传完的文件.")]
+        InputFileNonExist,
     }
 }

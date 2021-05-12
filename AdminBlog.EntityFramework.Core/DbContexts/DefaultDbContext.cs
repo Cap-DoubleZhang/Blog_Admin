@@ -78,12 +78,12 @@ namespace AdminBlog.EntityFramework.Core
                     // 自动设置新增属性
                     case EntityState.Added:
                         obj.Id = YitIdHelper.NextId();
-                        obj.CreatedTime = DateTime.UtcNow;
+                        obj.CreatedTime = DateTimeOffset.UtcNow;
                         obj.CreateBy = userId;
                         break;
                     // 自动设置编辑属性
                     case EntityState.Modified:
-                        obj.UpdatedTime = DateTimeOffset.Now;
+                        obj.UpdatedTime = DateTimeOffset.UtcNow;
                         obj.UpdateBy = userId;
                         break;
                 }

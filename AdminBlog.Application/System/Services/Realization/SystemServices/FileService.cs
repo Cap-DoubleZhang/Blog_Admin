@@ -49,6 +49,8 @@ namespace AdminBlog.Application
         [HttpPost("file")]
         public async Task<string> UploadFile(IFormFile files, string filePathName)
         {
+            if (files == null || files.Length <= 0)
+                throw Oops.Oh(FileEnum.InputFileNonExist);
             //要保存到哪个路径(本地的真实路径)
             var filePath = Path.Combine($"{_filePathOptions.RealFilePath}\\wwwroot\\Uploads\\{filePathName}\\");
             //上传的文件大小  KB
@@ -65,6 +67,7 @@ namespace AdminBlog.Application
             using (var stream = File.Create(filePath + finalName))
             {
                 await files.CopyToAsync(stream);
+                await stream.FlushAsync();
             }
 
             SysFile file = new SysFile

@@ -119,7 +119,7 @@ namespace AdminBlog.Application
         [HttpGet("info")]
         public async Task<ResultLoginUserDto> GetCurrentUserByToken()
         {
-            if (_currentUserService == null)
+            if (_currentUserService == null || _currentUserService.UserId <= 0)
                 throw Oops.Oh(UserErrorCodeEnum.TokenOverdue);
             var userId = _currentUserService.UserId;
             if (userId <= 0)
