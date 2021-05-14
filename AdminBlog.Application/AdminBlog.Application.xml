@@ -137,7 +137,7 @@
             <summary>
             上传文件
             </summary>
-            <param name="files"></param>
+            <param name="file"></param>
             <param name="filePathName"></param>
             <returns></returns>
         </member>

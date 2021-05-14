@@ -43,20 +43,20 @@ namespace AdminBlog.Application
         /// <summary>
         /// 上传文件
         /// </summary>
-        /// <param name="files"></param>
+        /// <param name="file"></param>
         /// <param name="filePathName"></param>
         /// <returns></returns>
         [HttpPost("file")]
-        public async Task<string> UploadFile(IFormFile files, string filePathName)
+        public async Task<string> UploadFile(IFormFile file, string filePathName)
         {
-            if (files == null || files.Length <= 0)
+            if (file == null || file.Length <= 0)
                 throw Oops.Oh(FileEnum.InputFileNonExist);
             //要保存到哪个路径(本地的真实路径)
-            var filePath = Path.Combine($"{_filePathOptions.RealFilePath}\\wwwroot\\Uploads\\{filePathName}\\");
+            var filePath = Path.Combine($"{App.WebHostEnvironment.WebRootPath}\\Uploads\\{filePathName}\\");
             //上传的文件大小  KB
-            long fileSize = files.Length / 1024;
+            long fileSize = file.Length / 1024;
 
-            var fileSuffix = Path.GetExtension(files.FileName).ToLower(); // 文件后缀
+            var fileSuffix = Path.GetExtension(file.FileName).ToLower(); // 文件后缀
             var finalName = YitIdHelper.NextId() + fileSuffix; // 生成文件的最终名称
 
             //创建本地文件夹
@@ -66,19 +66,19 @@ namespace AdminBlog.Application
             //将上传的文件保存到本地
             using (var stream = File.Create(filePath + finalName))
             {
-                await files.CopyToAsync(stream);
+                await file.CopyToAsync(stream);
                 await stream.FlushAsync();
             }
 
-            SysFile file = new SysFile
+            SysFile sysFile = new SysFile
             {
-                FileName = files.FileName,
+                FileName = file.FileName,
                 RealPath = filePath + finalName,
                 FileSize = fileSize,
             };
-            await _sysFileRepository.InsertNowAsync(file);
-            //返回文件的网络路径
-            return App.WebHostEnvironment.WebRootPath + file.Id;
+            await _sysFileRepository.InsertNowAsync(sysFile);
+            //返回文件的网络路径(应写在配置文件中或自动获取)
+            return $"https://localhost:5001/Uploads/" + filePathName + "/"+ finalName;
         }
 
         /// <summary>
