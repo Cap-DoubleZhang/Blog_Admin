@@ -334,6 +334,13 @@
             <param name="updateSysUserUseDto"></param>
             <returns></returns>
         </member>
+        <member name="M:AdminBlog.Application.UserService.UpdateUserHeadPortraitAsync(AdminBlog.Dtos.UpdateSysUserHeadPortraitDto)">
+            <summary>
+            更新单个用户的头像
+            </summary>
+            <param name="updateDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:AdminBlog.Application.UserService.DeleteUserAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
             <summary>
             单个/批量删除用户

@@ -15,25 +15,25 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 用户登录名
         /// </summary>
-        [Required(ErrorMessage = "登录名不能为空."), MinLength(5, ErrorMessage = "登录名长度不可小于5个字符.")
-            , MaxLength(32, ErrorMessage = "登录名长度不可大于32个字符.")]
-        [DataValidation(ValidationTypes.EnglishName, ErrorMessage = "不可使用中文.")]
+        [Required(ErrorMessage = "登录名不能为空."), MinLength(5, ErrorMessage = "登录名长度不可小于5位字符.")
+            , MaxLength(32, ErrorMessage = "登录名长度不可大于32位字符.")]
+        [DataValidation(ValidationTypes.WordWithNumber, ErrorMessage = "登录名只能由字母或数字组成.")]
         public string UserLoginName { get; set; }
         /// <summary>
         /// 用户描述
         /// </summary>
-        [MaxLength(200, ErrorMessage = "描述长度不可大于200个字符.")]
+        [MaxLength(200, ErrorMessage = "描述长度不可大于200位字符.")]
         public string Descripts { get; set; }
         /// <summary>
         /// 用户展示名称（昵称）
         /// </summary>
-        [MaxLength(15, ErrorMessage = "昵称长度不可大于15个字符.")]
+        [MaxLength(15, ErrorMessage = "昵称长度不可大于15位字符.")]
         public string UserShowName { get; set; }
 
         /// <summary>
         /// 头像
         /// </summary>
-        [DataValidation(ValidationTypes.Url)]
+        [DataValidation(ValidationTypes.Url, ErrorMessage = "请输入有效的头像地址.")]
         public string HeadPortrait { get; set; }
 
         /// <summary>

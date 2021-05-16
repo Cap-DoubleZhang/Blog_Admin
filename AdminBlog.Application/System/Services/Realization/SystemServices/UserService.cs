@@ -301,7 +301,31 @@ namespace AdminBlog.Application
         [HttpPut("userIsUse")]
         public async Task<bool> UpdateUserIsUseAsync(UpdateSysUserUseDto updateSysUserUseDto)
         {
-            await _sysUserRepository.Where(a => updateSysUserUseDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsUse = updateSysUserUseDto.IsUse, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysUser.IsUse), nameof(SysUser.UpdatedTime) });
+            await _sysUserRepository.Where(a => updateSysUserUseDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsUse = updateSysUserUseDto.IsUse, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysUser.IsUse), nameof(SysUser.UpdatedTime), nameof(SysUser.UpdateBy) });
+            return true;
+        }
+
+        /// <summary>
+        /// 更新单个用户的头像
+        /// </summary>
+        /// <param name="updateDto"></param>
+        /// <returns></returns>
+        [HttpPut("userHeadPortrait")]
+        public async Task<bool> UpdateUserHeadPortraitAsync(UpdateSysUserHeadPortraitDto updateDto)
+        {
+            var userId = _currentUserService.UserId;
+            if (userId <= 0)
+                throw Oops.Oh(UserErrorCodeEnum.TokenOverdue);
+            //更改用户详情
+            SysUserInfo sysUserInfoNow = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == userId);
+            if (sysUserInfoNow == null || sysUserInfoNow.Id <= 0)
+                throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
+            sysUserInfoNow.HeadPortrait = updateDto.headPortrait;
+            await _sysUserInfoRepository.UpdateExcludeExistsAsync(sysUserInfoNow, new[] {
+                        nameof(sysUserInfoNow.HeadPortrait),
+                        nameof(sysUserInfoNow.UpdateBy),
+                        nameof(sysUserInfoNow.UpdatedTime)}, true
+                );
             return true;
         }
 
@@ -313,7 +337,7 @@ namespace AdminBlog.Application
         [HttpDelete]
         public async Task<bool> DeleteUserAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysUserRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsDeleted = true, UpdatedTime = DateTimeOffset.Now }, new List<string> { nameof(SysUser.IsDeleted), nameof(SysUser.UpdatedTime) });
+            await _sysUserRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsDeleted = true, UpdatedTime = DateTimeOffset.Now }, new List<string> { nameof(SysUser.IsDeleted), nameof(SysUser.UpdatedTime), nameof(SysUser.UpdateBy) });
 
             return true;
         }
@@ -323,7 +347,7 @@ namespace AdminBlog.Application
         /// </summary>
         /// <returns></returns>
         [HttpGet("userinfo")]
-        public async Task<ResultSysUserInfoDto> GetUserInfoAync()
+        public async Task<ResultCurrentUserInfoDto> GetUserInfoAync()
         {
             var userId = _currentUserService.UserId;
             if (userId <= 0)
@@ -332,7 +356,7 @@ namespace AdminBlog.Application
             //用户其他信息
             SysUserInfo sysUserInfo = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == userId);
             SysUser sysUser = await _currentUserService.GetCurrentUserAsync();
-            ResultSysUserInfoDto resultSysUserInfoDto = sysUserInfo.Adapt<ResultSysUserInfoDto>();
+            ResultCurrentUserInfoDto resultSysUserInfoDto = sysUserInfo.Adapt<ResultCurrentUserInfoDto>();
             resultSysUserInfoDto.userLoginName = sysUser.UserLoginName;
             resultSysUserInfoDto.introduction = sysUser.Descripts;
             return resultSysUserInfoDto;
