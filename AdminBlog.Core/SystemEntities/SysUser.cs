@@ -73,7 +73,7 @@ namespace AdminBlog.Core
         {
             return new List<SysUser>
             {
-                new SysUser { Id = 15695167420013412, UserLoginName = "Admin", UserPassword = "728AD9902AECBA32E22F",CreatedTime=DateTimeOffset.UtcNow },
+                new SysUser { Id = 156951674213412, UserLoginName = "Admin", UserPassword = "728AD9902AECBA32E22F",CreatedTime=DateTimeOffset.UtcNow },
             };
         }
     }

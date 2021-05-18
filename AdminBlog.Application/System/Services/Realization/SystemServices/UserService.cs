@@ -174,7 +174,6 @@ namespace AdminBlog.Application
                 //新增用户登录信息
                 SysUser sysUser = sysUserDto.Adapt<SysUser>();
                 sysUser.UserPassword = EncryptHelper.DefaultPassword();
-                sysUser.Descripts = string.IsNullOrWhiteSpace(sysUser.Descripts) ? _userInfoConstOptions.Introduction : sysUser.Descripts;
                 var userAdd = await _sysUserRepository.InsertNowAsync(sysUser);
                 //新增用户详情
                 SysUserInfo sysUserInfo = sysUserDto.Adapt<SysUserInfo>();
@@ -321,7 +320,7 @@ namespace AdminBlog.Application
             if (sysUserInfoNow == null || sysUserInfoNow.Id <= 0)
                 throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
             sysUserInfoNow.HeadPortrait = updateDto.headPortrait;
-            await _sysUserInfoRepository.UpdateExcludeExistsAsync(sysUserInfoNow, new[] {
+            await _sysUserInfoRepository.UpdateIncludeExistsNowAsync(sysUserInfoNow, new[] {
                         nameof(sysUserInfoNow.HeadPortrait),
                         nameof(sysUserInfoNow.UpdateBy),
                         nameof(sysUserInfoNow.UpdatedTime)}, true

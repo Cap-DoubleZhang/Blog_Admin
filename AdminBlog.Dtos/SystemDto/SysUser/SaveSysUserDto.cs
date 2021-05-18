@@ -33,7 +33,7 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 头像
         /// </summary>
-        [DataValidation(ValidationTypes.Url, ErrorMessage = "请输入有效的头像地址.")]
+        [DataValidation(ValidationTypes.Image, ErrorMessage = "请输入有效的头像地址.")]
         public string HeadPortrait { get; set; }
 
         /// <summary>
