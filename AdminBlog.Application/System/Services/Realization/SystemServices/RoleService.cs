@@ -102,7 +102,7 @@ namespace AdminBlog.Application
                 {
                     //更改角色信息
                     SysRole sysRoleUpdate = saveDto.Adapt<SysRole>();
-                    await _sysRoleRepository.UpdateIncludeExistsNowAsync(sysRoleUpdate, new[] { nameof(sysRoleUpdate.RoleDesc), nameof(sysRoleUpdate.AdminFlag) }, true
+                    await _sysRoleRepository.UpdateIncludeNowAsync(sysRoleUpdate, new[] { nameof(sysRoleUpdate.RoleDesc), nameof(sysRoleUpdate.AdminFlag) }, true
                         );
                 }
                 else

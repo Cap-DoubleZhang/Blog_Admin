@@ -10,7 +10,9 @@
       }
     ]
   },
+  // 错误提示配置
   "FriendlyExceptionSettings": {
+    // 是否隐藏错误码
     "HideErrorCode": true
   }
 }

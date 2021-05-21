@@ -97,7 +97,7 @@ namespace AdminBlog.Application
                 {
                     //更改字典信息
                     SysDictionary sysDictionaryUpdate = saveDto.Adapt<SysDictionary>();
-                    await _sysDictionaryRepository.UpdateIncludeExistsNowAsync(sysDictionaryUpdate, new[] { nameof(sysDictionaryUpdate.Name), nameof(sysDictionaryUpdate.Remark) }, true
+                    await _sysDictionaryRepository.UpdateIncludeNowAsync(sysDictionaryUpdate, new[] { nameof(sysDictionaryUpdate.Name), nameof(sysDictionaryUpdate.Remark) }, true
                         );
                 }
                 else
@@ -196,7 +196,7 @@ namespace AdminBlog.Application
                 {
                     //更改字典信息
                     SysDictionaryDetail sysDictionaryDetailUpdate = saveDto.Adapt<SysDictionaryDetail>();
-                    await _sysDictionaryDetailRepository.UpdateIncludeExistsNowAsync(sysDictionaryDetailUpdate, new[] { nameof(sysDictionaryDetailUpdate.SortIndex), nameof(sysDictionaryDetailUpdate.Value), nameof(sysDictionaryDetailUpdate.DetailCode), nameof(sysDictionaryDetailUpdate.Remark) }, true
+                    await _sysDictionaryDetailRepository.UpdateIncludeNowAsync(sysDictionaryDetailUpdate, new[] { nameof(sysDictionaryDetailUpdate.SortIndex), nameof(sysDictionaryDetailUpdate.Value), nameof(sysDictionaryDetailUpdate.DetailCode), nameof(sysDictionaryDetailUpdate.Remark) }, true
                         );
                 }
                 else

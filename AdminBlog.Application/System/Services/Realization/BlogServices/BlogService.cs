@@ -101,7 +101,7 @@ namespace AdminBlog.Application
                     //更改博客信息
                     Blog blog = saveDto.Adapt<Blog>();
                     blog.UpdatedTime = DateTime.UtcNow;
-                    await _blogRepository.UpdateIncludeExistsNowAsync(blog, new[] {
+                    await _blogRepository.UpdateIncludeNowAsync(blog, new[] {
                         nameof(blog.Title),
                         nameof(blog.BlogType),
                         nameof(blog.PublishType),

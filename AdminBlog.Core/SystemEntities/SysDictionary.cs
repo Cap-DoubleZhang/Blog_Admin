@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Furion.DatabaseAccessor;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +15,7 @@ namespace AdminBlog.Core
     /// </summary>
     [Table("Sys_Dictionary")]
     [Description("词典")]
-    public class SysDictionary : EntityExtend
+    public class SysDictionary : EntityExtend, IEntitySeedData<SysDictionary>
     {
         /// <summary>
         /// 名称
@@ -27,5 +29,20 @@ namespace AdminBlog.Core
         /// 描述/备注
         /// </summary>
         public string Remark { get; set; }
+
+        /// <summary>
+        /// 增加种子数据
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <param name="dbContextLocator"></param>
+        /// <returns></returns>
+        public IEnumerable<SysDictionary> HasData(DbContext dbContext, Type dbContextLocator)
+        {
+            return new List<SysDictionary>
+            {
+                new SysDictionary { Id = 160774000443461, Code = "BlogType", Name = "博客类型",CreatedTime=DateTimeOffset.UtcNow },
+                new SysDictionary { Id = 160776633155653, Code = "EmailType", Name = "邮箱类型",CreatedTime=DateTimeOffset.UtcNow },
+            };
+        }
     }
 }

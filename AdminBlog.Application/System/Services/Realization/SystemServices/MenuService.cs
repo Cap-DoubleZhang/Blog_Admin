@@ -175,7 +175,7 @@ namespace AdminBlog.Application
                     //更改菜单信息
                     SysMenu sysMenuUpdate = saveDto.Adapt<SysMenu>();
                     sysMenuUpdate.UpdatedTime = DateTime.UtcNow;
-                    await _sysMenuRepository.UpdateIncludeExistsNowAsync(sysMenuUpdate, new[] {
+                    await _sysMenuRepository.UpdateIncludeNowAsync(sysMenuUpdate, new[] {
                         nameof(sysMenuUpdate.MenuName),
                         nameof(sysMenuUpdate.IsUse),
                         nameof(sysMenuUpdate.MenuType),

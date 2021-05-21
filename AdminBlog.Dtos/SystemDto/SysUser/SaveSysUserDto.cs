@@ -27,37 +27,37 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 用户展示名称（昵称）
         /// </summary>
-        [MaxLength(15, ErrorMessage = "昵称长度不可大于15位字符.")]
+        [Required(ErrorMessage = "昵称不能为空."), MaxLength(15, ErrorMessage = "昵称长度不可大于15位字符.")]
         public string UserShowName { get; set; }
 
         /// <summary>
         /// 头像
         /// </summary>
-        [DataValidation(ValidationTypes.Image, ErrorMessage = "请输入有效的头像地址.")]
+        [DataValidation(ValidationTypes.Image, ErrorMessage = "请输入有效的头像地址.", AllowNullValue = true, AllowEmptyStrings = true)]
         public string HeadPortrait { get; set; }
 
         /// <summary>
         /// 手机
         /// </summary>
-        [DataValidation(ValidationTypes.PhoneOrTelNumber, ErrorMessage = "请输入有效的手机号码.")]
+        [DataValidation(ValidationTypes.PhoneOrTelNumber, ErrorMessage = "请输入有效的手机号码.", AllowNullValue = true, AllowEmptyStrings = true)]
         public string Phone { get; set; }
 
         /// <summary>
         /// 邮箱
         /// </summary>
-        [DataValidation(ValidationTypes.EmailAddress, ErrorMessage = "请输入有效的邮件地址.")]
+        [DataValidation(ValidationTypes.EmailAddress, ErrorMessage = "请输入有效的邮件地址.", AllowNullValue = true, AllowEmptyStrings = true)]
         public string EMail { get; set; }
 
         /// <summary>
         /// 出生日期
         /// </summary>
-        [DataValidation(ValidationTypes.Date, ErrorMessage = "请输入有效的出生日期.")]
+        [DataValidation(ValidationTypes.Date, ErrorMessage = "请输入有效的出生日期.", AllowNullValue = true, AllowEmptyStrings = true)]
         public DateTime? BirthDate { get; set; }
 
         /// <summary>
         /// 身份证号
         /// </summary>
-        [DataValidation(ValidationTypes.IDCard, ErrorMessage = "请输入有效的身份证号.")]
+        [DataValidation(ValidationTypes.IDCard, ErrorMessage = "请输入有效的身份证号.", AllowNullValue = true, AllowEmptyStrings = true)]
         public string IDCard { get; set; }
 
         /// <summary>

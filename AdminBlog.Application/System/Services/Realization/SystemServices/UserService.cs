@@ -189,14 +189,14 @@ namespace AdminBlog.Application
                 {
                     //更改用户信息
                     SysUser sysUser = sysUserDto.Adapt<SysUser>();
-                    await _sysUserRepository.UpdateIncludeExistsNowAsync(sysUser, new[] { nameof(sysUser.Descripts) }, true
+                    await _sysUserRepository.UpdateIncludeNowAsync(sysUser, new[] { nameof(sysUser.Descripts) }, true
                         );
                     //更改用户详情
                     SysUserInfo sysUserInfoNow = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == sysUser.Id);
                     SysUserInfo sysUserInfoSave = sysUserInfoNow.Adapt<SysUserInfo>();
                     sysUserInfoSave = sysUserDto.Adapt<SysUserInfo>();
                     sysUserInfoSave.Id = sysUserInfoNow.Id;
-                    await _sysUserInfoRepository.UpdateExcludeExistsNowAsync(sysUserInfoSave, new[] {
+                    await _sysUserInfoRepository.UpdateExcludeNowAsync(sysUserInfoSave, new[] {
                         nameof(sysUserInfoSave.UserID),
                         nameof(sysUserInfoSave.CreateBy),
                         nameof(sysUserInfoSave.CreatedTime),
@@ -228,7 +228,7 @@ namespace AdminBlog.Application
                 throw Oops.Oh(UserErrorCodeEnum.NewPasswordAndRePasswordDifferent);
 
             user.UserPassword = EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword);
-            await _sysUserRepository.UpdateIncludeExistsNowAsync(user, new[] { nameof(user.UserPassword) }, true
+            await _sysUserRepository.UpdateIncludeNowAsync(user, new[] { nameof(user.UserPassword) }, true
                 );
             return true;
         }
@@ -251,7 +251,7 @@ namespace AdminBlog.Application
                 throw Oops.Oh(UserErrorCodeEnum.NewPasswordAndRePasswordDifferent);
 
             user.UserPassword = EncryptHelper.MD5Encode(saveSysUserPasswordDto.newPassword);
-            await _sysUserRepository.UpdateIncludeExistsNowAsync(user, new[] { nameof(user.UserPassword) }, true
+            await _sysUserRepository.UpdateIncludeNowAsync(user, new[] { nameof(user.UserPassword) }, true
                 );
             return true;
         }
@@ -320,7 +320,7 @@ namespace AdminBlog.Application
             if (sysUserInfoNow == null || sysUserInfoNow.Id <= 0)
                 throw Oops.Oh(UserErrorCodeEnum.UserNonExist);
             sysUserInfoNow.HeadPortrait = updateDto.headPortrait;
-            await _sysUserInfoRepository.UpdateIncludeExistsNowAsync(sysUserInfoNow, new[] {
+            await _sysUserInfoRepository.UpdateIncludeNowAsync(sysUserInfoNow, new[] {
                         nameof(sysUserInfoNow.HeadPortrait),
                         nameof(sysUserInfoNow.UpdateBy),
                         nameof(sysUserInfoNow.UpdatedTime)}, true
