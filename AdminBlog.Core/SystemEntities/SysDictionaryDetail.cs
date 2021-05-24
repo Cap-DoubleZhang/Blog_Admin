@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Furion.DatabaseAccessor;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdminBlog.Core
 {
@@ -11,7 +10,7 @@ namespace AdminBlog.Core
     /// 字典明细值
     /// </summary>
     [Table("Sys_Dictionary_Detail")]
-    public class SysDictionaryDetail : EntityExtend
+    public class SysDictionaryDetail : EntityExtend, IEntitySeedData<SysDictionaryDetail>
     {
         /// <summary>
         /// 字典组编码
@@ -33,5 +32,22 @@ namespace AdminBlog.Core
         /// 备注
         /// </summary>
         public string Remark { get; set; }
+
+        /// <summary>
+        /// 增加种子数据
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <param name="dbContextLocator"></param>
+        /// <returns></returns>
+        public IEnumerable<SysDictionaryDetail> HasData(DbContext dbContext, Type dbContextLocator)
+        {
+            return new List<SysDictionaryDetail>
+            {
+                new SysDictionaryDetail { Id = 160774000443461, Code = "BlogType", DetailCode = "InformalEssay", Value = "随笔",SortIndex = 0,CreatedTime = DateTimeOffset.UtcNow },
+                new SysDictionaryDetail { Id = 160776633155653, Code = "BlogType", DetailCode = "Article", Value = "文章", SortIndex = 1, CreatedTime = DateTimeOffset.UtcNow },
+                new SysDictionaryDetail { Id = 161765323022405, Code = "EmailType", DetailCode = "TencentCompanyEmail", Value = "腾讯企业邮箱", SortIndex = 0, CreatedTime = DateTimeOffset.UtcNow },
+                new SysDictionaryDetail { Id = 161765323022406, Code = "EmailType", DetailCode = "163FreeEmail", Value = "163免费邮箱", SortIndex = 1, CreatedTime = DateTimeOffset.UtcNow },
+            };
+        }
     }
 }
