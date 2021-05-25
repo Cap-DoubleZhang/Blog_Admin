@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="毕业论文须知\**" />
+    <EmbeddedResource Remove="毕业论文须知\**" />
+    <None Remove="毕业论文须知\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="applicationsettings.json" />
     <None Remove="AdminBlog.Application.xml" />
   </ItemGroup>
