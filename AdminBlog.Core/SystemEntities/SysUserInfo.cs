@@ -78,7 +78,7 @@ namespace AdminBlog.Core
                 new SysUserInfo
                 {
                     Id = 111111,
-                    UserID=15695167420013412,
+                    UserID=156951674213412,
                     UserShowName = "Admin",
                     HeadPortrait = "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
                     CreatedTime=DateTimeOffset.UtcNow

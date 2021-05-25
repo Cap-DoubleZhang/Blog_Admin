@@ -205,6 +205,36 @@
             <param name="dbContextLocator"></param>
             <returns></returns>
         </member>
+        <member name="T:AdminBlog.Core.SysEmailConfig">
+            <summary>
+            个人邮件配置
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysEmailConfig.UserId">
+            <summary>
+            所属用户ID
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysEmailConfig.EmailType">
+            <summary>
+            邮箱类型 选取字典中的邮箱类型
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysEmailConfig.SmtpUrl">
+            <summary>
+            SMTP地址
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysEmailConfig.EmailUserName">
+            <summary>
+            发送的邮箱名（邮箱地址）
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysEmailConfig.EmailPassword">
+            <summary>
+            发送的邮箱密码（或独立密码）
+            </summary>
+        </member>
         <member name="P:AdminBlog.Core.SysFile.FileName">
             <summary>
             文件名称
