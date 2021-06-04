@@ -20,6 +20,7 @@ namespace AdminBlog.Dtos
         /// 菜单Code
         /// </summary>
         [Required(ErrorMessage = "菜单标识不能为空.")]
+        [DataValidation(RegularValidationEnum.CodeType)]
         public string MenuCode { get; set; }
 
         /// <summary>

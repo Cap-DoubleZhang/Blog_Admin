@@ -1,4 +1,5 @@
-﻿using Furion.DataValidation;
+﻿using AdminBlog.Core.Enum;
+using Furion.DataValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,7 +23,7 @@ namespace AdminBlog.Dtos
         /// 编码
         /// </summary>
         [Required(ErrorMessage = "编码不能为空.")]
-        [DataValidation(ValidationTypes.Age, ErrorMessage = "登录名只能由字母或数字组成.")]
+        [DataValidation(RegularValidationEnum.CodeType)]
         public string Code { get; set; }
         /// <summary>
         /// 备注

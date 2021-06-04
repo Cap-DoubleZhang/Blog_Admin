@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdminBlog.Core.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace AdminBlog.Dtos
         /// 字典明细编码
         /// </summary>
         [Required(ErrorMessage = "编码不能为空.")]
+        [DataValidation(RegularValidationEnum.CodeType)]
         public string detailCode { get; set; }
         /// <summary>
         /// 排序

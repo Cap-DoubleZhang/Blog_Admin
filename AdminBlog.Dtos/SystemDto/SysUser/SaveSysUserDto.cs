@@ -17,7 +17,7 @@ namespace AdminBlog.Dtos
         /// </summary>
         [Required(ErrorMessage = "登录名不能为空."), MinLength(5, ErrorMessage = "登录名长度不可小于5位字符.")
             , MaxLength(32, ErrorMessage = "登录名长度不可大于32位字符.")]
-        [DataValidation(ValidationTypes.WordWithNumber, ErrorMessage = "登录名只能由字母或数字组成.")]
+        [DataValidation(RegularValidationEnum.CodeType)]
         public string UserLoginName { get; set; }
         /// <summary>
         /// 用户描述

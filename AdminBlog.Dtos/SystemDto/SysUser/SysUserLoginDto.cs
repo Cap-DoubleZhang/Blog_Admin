@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdminBlog.Core.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace AdminBlog.Dtos
         /// 登录名
         /// </summary>
         [Required(ErrorMessage = "登录名不能为空.")]
+        [DataValidation(RegularValidationEnum.CodeType)]
         public string username { get; set; }
         /// <summary>
         /// 密码
