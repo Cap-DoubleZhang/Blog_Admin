@@ -16,7 +16,7 @@ namespace AdminBlog.Core.Enum
         /// <summary>
         /// 验证所有的编码
         /// </summary>
-        [ValidationItemMetadata(@"^\w$","编码只可由字母、数字、下划线组成.")]
+        [ValidationItemMetadata(@"^[A-Za-z0-9_]+$", "编码只可由字母、数字、下划线组成.")]
         CodeType,
     }
 }

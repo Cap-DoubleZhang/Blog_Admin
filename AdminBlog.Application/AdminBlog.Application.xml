@@ -37,6 +37,13 @@
             <param name="baseBatchUpdatePublishTypeDto"></param>
             <returns></returns>
         </member>
+        <member name="M:AdminBlog.Application.BlogService.GetBlogDetailAsync(System.Int64)">
+            <summary>
+            根据ID获取博客详情
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
         <member name="T:AdminBlog.Application.CommentService">
             <summary>
             博客评论 业务

@@ -10,6 +10,7 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -144,6 +145,18 @@ namespace AdminBlog.Application
             await _blogRepository.Where(a => baseBatchUpdatePublishTypeDto.ids.Contains(a.Id)).BatchUpdateAsync(new Blog { PublishType = baseBatchUpdatePublishTypeDto.publishType }, new List<string> { nameof(Blog.IsDeleted), nameof(Blog.UpdatedTime) });
 
             return true;
+        }
+
+        /// <summary>
+        /// 根据ID获取博客详情
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpGet("detail/{Id}")]
+        public async Task<SaveBlogDto> GetBlogDetailAsync([Required(ErrorMessage = "必要参数传入错误.")] long Id)
+        {
+            Blog blog = await _blogRepository.FindOrDefaultAsync(Id);
+            return blog.Adapt<SaveBlogDto>();
         }
         #endregion
     }
