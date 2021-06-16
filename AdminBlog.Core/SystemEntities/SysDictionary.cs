@@ -26,6 +26,11 @@ namespace AdminBlog.Core
         /// </summary>
         public string Code { get; set; }
         /// <summary>
+        /// 该字典明细下
+        /// 是否可多选
+        /// </summary>
+        public bool IsCanMultiple { get; set; }
+        /// <summary>
         /// 描述/备注
         /// </summary>
         public string Remark { get; set; }

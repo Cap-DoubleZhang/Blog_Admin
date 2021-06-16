@@ -20,6 +20,10 @@ namespace AdminBlog.Dtos
         /// </summary>
         public string code { get; set; }
         /// <summary>
+        /// 该明细下是否可多选
+        /// </summary>
+        public bool isCanMultiple { get; set; }
+        /// <summary>
         /// 值
         /// </summary>
         public string remark { get; set; }

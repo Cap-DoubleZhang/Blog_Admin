@@ -47,6 +47,11 @@ namespace AdminBlog.Core
                 new SysDictionaryDetail { Id = 160776633155653, Code = "BlogType", DetailCode = "Article", Value = "文章", SortIndex = 1, CreatedTime = DateTimeOffset.UtcNow },
                 new SysDictionaryDetail { Id = 161765323022405, Code = "EmailType", DetailCode = "TencentCompanyEmail", Value = "腾讯企业邮箱", SortIndex = 0, CreatedTime = DateTimeOffset.UtcNow },
                 new SysDictionaryDetail { Id = 161765323022406, Code = "EmailType", DetailCode = "163FreeEmail", Value = "163免费邮箱", SortIndex = 1, CreatedTime = DateTimeOffset.UtcNow },
+                new SysDictionaryDetail { Id = 161765323022407, Code = "BlogLabel", DetailCode = "Java", Value = "Java", SortIndex = 0, CreatedTime = DateTimeOffset.UtcNow },
+                new SysDictionaryDetail { Id = 161765323022408, Code = "BlogLabel", DetailCode = "C#", Value = "C#", SortIndex = 1, CreatedTime = DateTimeOffset.UtcNow },
+                new SysDictionaryDetail { Id = 161765323022409, Code = "BlogLabel", DetailCode = "NET Core", Value = "NET Core", SortIndex = 1, CreatedTime = DateTimeOffset.UtcNow },
+                new SysDictionaryDetail { Id = 161765323022410, Code = "BlogLabel", DetailCode = "JS", Value = "JS", SortIndex = 1, CreatedTime = DateTimeOffset.UtcNow },
+                new SysDictionaryDetail { Id = 161765323022411, Code = "BlogLabel", DetailCode = "Vue", Value = "Vue", SortIndex = 1, CreatedTime = DateTimeOffset.UtcNow },
             };
         }
     }

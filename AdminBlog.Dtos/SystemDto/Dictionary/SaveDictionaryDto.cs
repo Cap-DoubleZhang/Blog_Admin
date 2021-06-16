@@ -26,6 +26,10 @@ namespace AdminBlog.Dtos
         [DataValidation(RegularValidationEnum.CodeType)]
         public string Code { get; set; }
         /// <summary>
+        /// 明细下是否可多选
+        /// </summary>
+        public bool IsCanMultiple { get; set; }
+        /// <summary>
         /// 备注
         /// </summary>
         public string Remark { get; set; }

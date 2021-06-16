@@ -154,6 +154,12 @@
             编码
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.SysDictionary.IsCanMultiple">
+            <summary>
+            该字典明细下
+            是否可多选
+            </summary>
+        </member>
         <member name="P:AdminBlog.Core.SysDictionary.Remark">
             <summary>
             描述/备注

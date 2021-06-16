@@ -155,7 +155,7 @@ namespace AdminBlog.Application
         [HttpGet("detail/{Id}")]
         public async Task<SaveBlogDto> GetBlogDetailAsync([Required(ErrorMessage = "必要参数传入错误.")] long Id)
         {
-            Blog blog = await _blogRepository.FindOrDefaultAsync(Id);
+            Blog blog = await _blogRepository.FindOrDefaultAsync(Id) ?? new Blog();
             return blog.Adapt<SaveBlogDto>();
         }
         #endregion

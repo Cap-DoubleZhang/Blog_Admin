@@ -11,5 +11,9 @@ namespace AdminBlog.Dtos
     /// </summary>
     public class SearchDictionaryDto : BaseSearchDto
     {
+        /// <summary>
+        /// 字典编码
+        /// </summary>
+        public string code { get; set; }
     }
 }

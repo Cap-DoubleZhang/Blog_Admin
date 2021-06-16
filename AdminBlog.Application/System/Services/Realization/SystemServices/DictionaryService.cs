@@ -64,6 +64,8 @@ namespace AdminBlog.Application
                     }
                 }
             }
+            if (!string.IsNullOrWhiteSpace(searchDto.code))
+                expression = expression.And(x => x.Code.Contains(searchDto.code));
             #endregion
 
             PagedList<SysDictionary> dictionaries = await _sysDictionaryRepository.Where(expression).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
@@ -97,7 +99,7 @@ namespace AdminBlog.Application
                 {
                     //更改字典信息
                     SysDictionary sysDictionaryUpdate = saveDto.Adapt<SysDictionary>();
-                    await _sysDictionaryRepository.UpdateIncludeNowAsync(sysDictionaryUpdate, new[] { nameof(sysDictionaryUpdate.Name), nameof(sysDictionaryUpdate.Remark) }, true
+                    await _sysDictionaryRepository.UpdateIncludeNowAsync(sysDictionaryUpdate, new[] { nameof(sysDictionaryUpdate.Name), nameof(sysDictionaryUpdate.IsCanMultiple), nameof(sysDictionaryUpdate.Remark) }, true
                         );
                 }
                 else
@@ -167,6 +169,7 @@ namespace AdminBlog.Application
             #endregion
 
             PagedList<SysDictionaryDetail> dictionariesDetail = await _sysDictionaryDetailRepository.Where(expression).OrderBy(a => a.SortIndex).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
+
             return dictionariesDetail.Adapt<PagedList<ResultDictionaryDetailDto>>();
         }
 
