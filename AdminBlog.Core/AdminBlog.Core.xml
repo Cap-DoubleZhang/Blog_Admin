@@ -241,6 +241,11 @@
             发送的邮箱密码（或独立密码）
             </summary>
         </member>
+        <member name="T:AdminBlog.Core.SysFile">
+            <summary>
+            系统上传文件表
+            </summary>
+        </member>
         <member name="P:AdminBlog.Core.SysFile.FileName">
             <summary>
             文件名称

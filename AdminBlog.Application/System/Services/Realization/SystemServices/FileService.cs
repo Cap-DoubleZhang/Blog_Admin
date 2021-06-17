@@ -40,6 +40,7 @@ namespace AdminBlog.Application
         }
         #endregion
 
+        #region 文件操作
         /// <summary>
         /// 上传文件
         /// </summary>
@@ -78,7 +79,7 @@ namespace AdminBlog.Application
             };
             await _sysFileRepository.InsertNowAsync(sysFile);
             //返回文件的网络路径(应写在配置文件中或自动获取)
-            return $"https://localhost:5001/Uploads/" + filePathName + "/"+ finalName;
+            return $"https://localhost:5001/Uploads/" + filePathName + "/" + finalName;
         }
 
         /// <summary>
@@ -100,5 +101,23 @@ namespace AdminBlog.Application
 
             return new FileStreamResult(new FileStream(sysFile.RealPath, FileMode.Open), "application/octet-stream") { FileDownloadName = sysFile.FileName };
         }
+
+        /// <summary>
+        /// 获取所有图片文件集合
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("imgs")]
+        public async Task<PagedList<ResultSysFileDto>> GetImgListAsync()
+        {
+            Expression<Func<SysFile, bool>> expression = t => true;
+            string[] imgTypes = { ".jpg", ".png", ".bmp", ".tif", ".gif", ".pcx", ".psd" };
+            foreach (var item in imgTypes)
+            {
+                expression = expression.Or(x => x.RealPath.Contains(item));
+            }
+            PagedList<SysFile> files = await _sysFileRepository.Where(expression).OrderByDescending(a => a.CreatedTime).ToPagedListAsync(1, 30);
+            return files.Adapt<PagedList<ResultSysFileDto>>();
+        }
+        #endregion
     }
 }

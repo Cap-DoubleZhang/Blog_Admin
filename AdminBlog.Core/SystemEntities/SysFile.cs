@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace AdminBlog.Core
 {
-
+    /// <summary>
+    /// 系统上传文件表
+    /// </summary>
     [Table("Sys_File")]
     public class SysFile : EntityExtend
     {
