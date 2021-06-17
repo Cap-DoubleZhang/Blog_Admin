@@ -68,7 +68,7 @@ namespace AdminBlog.EntityFramework.Core
                         .Where(u => u.State == EntityState.Added || u.State == EntityState.Modified);
 
             var userManager = App.GetService<CurrentUserService>();
-            var userId = string.IsNullOrWhiteSpace(userManager.UserName) ? 0 : userManager?.UserId;
+            var userId = string.IsNullOrWhiteSpace(userManager.UserName) ? 0 : userManager?.UserId;//登录时没有用户，操作人则不进行记录
 
             foreach (var entity in entities)
             {
