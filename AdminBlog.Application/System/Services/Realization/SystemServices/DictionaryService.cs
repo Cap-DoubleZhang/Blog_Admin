@@ -140,10 +140,10 @@ namespace AdminBlog.Application
         {
             #region 关键词进行条件查询 多条件使用空格分开
             Expression<Func<SysDictionaryDetail, bool>> expression = t => true;
-            if (string.IsNullOrWhiteSpace(searchDto.Code))
+            if (string.IsNullOrWhiteSpace(searchDto.code))
                 throw Oops.Oh(DictionaryDetailErrorCodeEnum.DictionaryCodeNonExist);
             //搜索同组值
-            expression = expression.And(x => x.Code == searchDto.Code);
+            expression = expression.And(x => x.Code == searchDto.code);
             if (!string.IsNullOrWhiteSpace(searchDto.keyword))
             {
                 string[] keys = searchDto.keyword.Trim().Split(' ');

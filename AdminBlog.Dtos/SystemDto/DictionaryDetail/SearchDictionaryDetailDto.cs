@@ -14,6 +14,6 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 字典组编码
         /// </summary>
-        public string Code { get; set; }
+        public string code { get; set; }
     }
 }

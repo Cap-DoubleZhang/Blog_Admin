@@ -113,7 +113,14 @@ namespace AdminBlog.Application
             string[] imgTypes = { ".jpg", ".png", ".bmp", ".tif", ".gif", ".pcx", ".psd" };
             foreach (var item in imgTypes)
             {
-                expression = expression.Or(x => x.RealPath.Contains(item));
+                if (item == imgTypes[0])
+                {
+                    expression = expression.And(x => x.RealPath.Contains(item));
+                }
+                else
+                {
+                    expression = expression.Or(x => x.RealPath.Contains(item));
+                }
             }
             PagedList<SysFile> files = await _sysFileRepository.Where(expression).OrderByDescending(a => a.CreatedTime).ToPagedListAsync(1, 30);
             return files.Adapt<PagedList<ResultSysFileDto>>();
