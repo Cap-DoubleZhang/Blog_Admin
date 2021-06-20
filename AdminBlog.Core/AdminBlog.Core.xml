@@ -469,5 +469,20 @@
             角色ID
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.SysWaterfallImages.Name">
+            <summary>
+            图片名称
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysWaterfallImages.Remark">
+            <summary>
+            图片描述
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysWaterfallImages.Src">
+            <summary>
+            文件路径
+            </summary>
+        </member>
     </members>
 </doc>

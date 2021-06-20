@@ -155,12 +155,6 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.FileService.GetImgListAsync">
-            <summary>
-            获取所有图片文件集合
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:AdminBlog.Application.MenuService">
             <summary>
             系统菜单
@@ -364,6 +358,25 @@
         <member name="M:AdminBlog.Application.UserService.GetUserInfoAync">
             <summary>
             获取当前用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AdminBlog.Application.WaterfallImageService">
+            <summary>
+            瀑布流图片
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.WaterfallImageService.SaveImage(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
+            <summary>
+            上传图片
+            </summary>
+            <param name="dto"></param>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.WaterfallImageService.GetWaterfallImages(AdminBlog.Dtos.SearchWaterfallImageDto)">
+            <summary>
+             获取所有瀑布流图片
             </summary>
             <returns></returns>
         </member>
