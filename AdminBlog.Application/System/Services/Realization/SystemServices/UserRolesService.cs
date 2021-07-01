@@ -46,9 +46,9 @@ namespace AdminBlog.Application.System.Services.Realization.System
         [HttpGet("userRoles")]
         public async Task<List<ResultUserRoleDto>> GetUserRole([FromQuery] SearchUserRoleDto saerchDto)
         {
-            List<SysRole> roles = await _sysRoleRepository.AsQueryable().ToListAsync();
+            List<SysRole> roles = await _sysRoleRepository.Entities.ToListAsync();
 
-            List<ResultUserRoleDto> resultUserRoleDtos = roles.GroupJoin(_sysUserRoleRepository.AsQueryable(), r => r.Id, ur => ur.RoleID, (r, ur) => new { r, ur })
+            List<ResultUserRoleDto> resultUserRoleDtos = roles.GroupJoin(_sysUserRoleRepository.Entities.Where(a => a.UserID == saerchDto.id), r => r.Id, ur => ur.RoleID, (r, ur) => new { r, ur })
                 .SelectMany(rur => rur.ur.DefaultIfEmpty(), (rur, ur) => new ResultUserRoleDto
                 {
                     Id = rur.r.Id,
@@ -85,7 +85,7 @@ namespace AdminBlog.Application.System.Services.Realization.System
         /// <returns></returns>
         [HttpPost("userRole")]
         [UnitOfWork]
-        public async Task<bool> SaveUserRole(SaveUserRoleDto userRoleDto)
+        public async Task<bool> SaveUserRole([FromBody] SaveUserRoleDto userRoleDto)
         {
             await _sysUserRoleRepository.Where(a => a.UserID == userRoleDto.Id).BatchDeleteAsync();
 
@@ -98,7 +98,7 @@ namespace AdminBlog.Application.System.Services.Realization.System
                     RoleID = item,
                 });
             }
-            await _sysUserRoleRepository.InsertNowAsync(userRolesAddList);
+            await _sysUserRoleRepository.InsertNowAsync(userRolesAddList, false);
             return true;
         }
         #endregion
