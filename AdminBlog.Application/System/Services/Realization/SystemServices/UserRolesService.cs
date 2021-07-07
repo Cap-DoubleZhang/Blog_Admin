@@ -87,18 +87,26 @@ namespace AdminBlog.Application.System.Services.Realization.System
         [UnitOfWork]
         public async Task<bool> SaveUserRole([FromBody] SaveUserRoleDto userRoleDto)
         {
-            await _sysUserRoleRepository.Where(a => a.UserID == userRoleDto.Id).BatchDeleteAsync();
+            var userDeleted = await _sysUserRoleRepository.Where(a => a.UserID == userRoleDto.Id).ToListAsync()
+             userDeleted.ForEach(u =>
+             {
+                 u.
+             });
 
-            List<SysUserRole> userRolesAddList = new List<SysUserRole>();
+            //List<SysUserRole> userRolesAddList = new List<SysUserRole>();
             foreach (var item in userRoleDto.roleIds)
             {
-                userRolesAddList.Add(new SysUserRole
+                //userRolesAddList.Add(new SysUserRole
+                //{
+                //    UserID = userRoleDto.Id,
+                //    RoleID = item,
+                //});
+                await _sysUserRoleRepository.InsertAsync(new SysUserRole
                 {
                     UserID = userRoleDto.Id,
                     RoleID = item,
                 });
             }
-            await _sysUserRoleRepository.InsertNowAsync(userRolesAddList, false);
             return true;
         }
         #endregion

@@ -129,6 +129,11 @@
             主键ID
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.EntityExtend.IsDeleted">
+            <summary>
+            是否可用
+            </summary>
+        </member>
         <member name="P:AdminBlog.Core.EntityExtend.CreateBy">
             <summary>
             创建者

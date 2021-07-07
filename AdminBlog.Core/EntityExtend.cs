@@ -13,7 +13,7 @@ namespace AdminBlog.Core
     /// <summary>
     /// 框架基础实体扩展，增加创建者、修改者
     /// </summary>
-    [SkipScan]
+    [SuppressSniffer]
     public class EntityExtend : Entity<long>
     {
         /// <summary>
@@ -22,6 +22,10 @@ namespace AdminBlog.Core
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
         public override long Id { get; set; }
+        /// <summary>
+        /// 是否可用
+        /// </summary>
+        public bool IsDeleted { get; set; }
         /// <summary>
         /// 创建者
         /// </summary>

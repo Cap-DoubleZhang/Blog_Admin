@@ -21,7 +21,8 @@ namespace AdminBlog.EntityFramework.Core
 
         public void OnCreated(ModelBuilder modelBuilder, EntityTypeBuilder entityBuilder, DbContext dbContext, Type dbContextLocator)
         {
-            var expression = base.FakeDeleteQueryFilterExpression(entityBuilder, dbContext);
+            // 设置软删除表达式
+            var expression = BuilderIsDeleteLambdaExpression(entityBuilder);
             if (expression == null) return;
 
             entityBuilder.HasQueryFilter(expression);
@@ -40,11 +41,11 @@ namespace AdminBlog.EntityFramework.Core
         {
             // 获取实体构建器元数据
             var metadata = entityBuilder.Metadata;
-            if (metadata.FindProperty(nameof(Entity.IsDeleted)) == null) return default;
+            if (metadata.FindProperty(nameof(EntityExtend.IsDeleted)) == null) return default;
 
             // 创建表达式元素
             var parameter = Expression.Parameter(metadata.ClrType, "u");
-            var properyName = Expression.Constant(nameof(Entity.IsDeleted));
+            var properyName = Expression.Constant(nameof(EntityExtend.IsDeleted));
             var propertyValue = Expression.Constant(false);
 
             // 构建表达式 u => EF.Property<bool>(u, "IsDeleted") == false

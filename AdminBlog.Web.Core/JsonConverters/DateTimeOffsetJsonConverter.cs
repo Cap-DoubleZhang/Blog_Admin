@@ -12,7 +12,7 @@ namespace AdminBlog.Web.Core
     /// <summary>
     /// 时间类型为 DateTimeOffset，自动序列化
     /// </summary>
-    [SkipScan]
+    [SuppressSniffer]
     public class DateTimeOffsetJsonConverter : JsonConverter<DateTimeOffset>
     {
         /// <summary>

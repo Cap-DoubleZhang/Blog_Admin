@@ -44,7 +44,6 @@ namespace AdminBlog.Application
         /// <summary>
         /// 上传图片
         /// </summary>
-        /// <param name="dto"></param>
         /// <param name="file"></param>
         /// <returns></returns>
         [HttpPost("image")]
