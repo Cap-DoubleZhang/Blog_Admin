@@ -4,6 +4,7 @@ using AdminBlog.Dtos;
 using EFCore.BulkExtensions;
 using Furion;
 using Furion.DatabaseAccessor;
+using Furion.DatabaseAccessor.Extensions;
 using Furion.DataEncryption;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
@@ -87,25 +88,21 @@ namespace AdminBlog.Application.System.Services.Realization.System
         [UnitOfWork]
         public async Task<bool> SaveUserRole([FromBody] SaveUserRoleDto userRoleDto)
         {
-            var userDeleted = await _sysUserRoleRepository.Where(a => a.UserID == userRoleDto.Id).ToListAsync()
-             userDeleted.ForEach(u =>
-             {
-                 u.
-             });
+            var userDeleted = await _sysUserRoleRepository.Where(a => a.UserID == userRoleDto.Id).ToListAsync();
+            userDeleted.ForEach(u =>
+            {
+                u.DeleteNowAsync();
+            });
 
             //List<SysUserRole> userRolesAddList = new List<SysUserRole>();
+
             foreach (var item in userRoleDto.roleIds)
             {
-                //userRolesAddList.Add(new SysUserRole
-                //{
-                //    UserID = userRoleDto.Id,
-                //    RoleID = item,
-                //});
-                await _sysUserRoleRepository.InsertAsync(new SysUserRole
+                await new SysUserRole
                 {
                     UserID = userRoleDto.Id,
                     RoleID = item,
-                });
+                }.InsertNowAsync();
             }
             return true;
         }
