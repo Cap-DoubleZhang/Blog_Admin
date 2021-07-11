@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
     //数据库连接字符串
-    "DbConnectionString": "Server=.;Database=AdminBlog;User=sa;Password=000000;MultipleActiveResultSets=True;"
+    "DbConnectionString": "Server=.;Database=AdminBlog;User=sa;Password=1234567890;MultipleActiveResultSets=True;"
   }
 }

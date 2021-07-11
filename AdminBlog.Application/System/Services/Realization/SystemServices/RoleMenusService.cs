@@ -11,12 +11,14 @@ using Furion.LinqBuilder;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Yitter.IdGenerator;
 
 namespace AdminBlog.Application.System.Services.Realization.System
 {
@@ -29,9 +31,11 @@ namespace AdminBlog.Application.System.Services.Realization.System
     {
         #region 依赖注入
         private readonly IRepository<SysRoleMenu> _sysRoleMenuRepository;
-        public RoleMenusService(IRepository<SysRoleMenu> sysRoleMenuRepository)
+        private readonly IRepository<SysMenu> _sysMenuRepository;
+        public RoleMenusService(IRepository<SysRoleMenu> sysRoleMenuRepository, IRepository<SysMenu> sysMenuRepository)
         {
             _sysRoleMenuRepository = sysRoleMenuRepository;
+            _sysMenuRepository = sysMenuRepository;
         }
         #endregion
 
@@ -41,10 +45,31 @@ namespace AdminBlog.Application.System.Services.Realization.System
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<bool> GetRoleMenu()
+        public async Task<List<ResultRoleMenuDto>> GetRoleMenu(SearchRoleMenuDto searchDto)
         {
-            return true;
+            List<SysMenu> menus = await _sysMenuRepository.Entities.OrderBy(a => a.SortIndex).ToListAsync();
+            List<ResultRoleMenuDto> resultLst = new List<ResultRoleMenuDto>();
+            foreach (var item in menus.Where(a => a.ParentModuleID == 0))
+            {
+                resultLst.AddRange(await GetRoleMenusChildren(menus, item));
+            }
+            return resultLst;
         }
+
+        public async Task<List<ResultRoleMenuDto>> GetRoleMenusChildren(List<SysMenu> menus, SysMenu parent)
+        {
+            List<SysMenu> childrens = menus.Where(a => a.ParentModuleID == parent.Id).ToList();
+            List<ResultRoleMenuDto> resultLst = new List<ResultRoleMenuDto>();
+            if (childrens.Count() > 0)
+            {
+                foreach (var item in childrens)
+                {
+                    resultLst.AddRange(await GetRoleMenusChildren(menus, item));
+                }
+            }
+            return resultLst;
+        }
+
 
         /// <summary>
         /// 删除原角色下菜单并保存新菜单列表
@@ -55,22 +80,16 @@ namespace AdminBlog.Application.System.Services.Realization.System
         [UnitOfWork]
         public async Task<bool> SaveRoleMenu(SaveRoleMenuDto roleMenuDto)
         {
-            List<SysRoleMenu> roleMenusDelete = _sysRoleMenuRepository.Where(a => a.RoleID == roleMenuDto.Id).ToList();
-            roleMenusDelete.ForEach(a =>
+            var roleMenusDelete = await _sysRoleMenuRepository.Where(a => a.RoleID == roleMenuDto.Id).ToListAsync();
+            await _sysRoleMenuRepository.DeleteAsync(roleMenusDelete);
+
+            var roles = roleMenuDto.menuIds.Select(a => new SysRoleMenu
             {
-                a.IsDeleted = true;
+                Id = YitIdHelper.NextId(),
+                RoleID = roleMenuDto.Id,
+                MenuID = a,
             });
-            await _sysRoleMenuRepository.Context.BulkUpdateAsync(roleMenusDelete);
-            List<SysRoleMenu> roleMenusAddList = new List<SysRoleMenu>();
-            foreach (var item in roleMenuDto.menuIds)
-            {
-                roleMenusAddList.Add(new SysRoleMenu
-                {
-                    RoleID = roleMenuDto.Id,
-                    MenuID = item,
-                });
-            }
-            await _sysRoleMenuRepository.Context.BulkInsertAsync(roleMenusAddList);
+            await _sysRoleMenuRepository.InsertAsync(roles);
             return true;
         }
         #endregion

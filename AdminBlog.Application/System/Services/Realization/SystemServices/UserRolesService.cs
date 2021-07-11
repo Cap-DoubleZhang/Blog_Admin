@@ -19,6 +19,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Yitter.IdGenerator;
 
 namespace AdminBlog.Application.System.Services.Realization.System
 {
@@ -68,7 +69,7 @@ namespace AdminBlog.Application.System.Services.Realization.System
         [HttpGet("currentUserRoles")]
         public async Task<List<ResultUserRoleDto>> GetCurrentUserRole()
         {
-            List<ResultUserRoleDto> userRoleDtos = await _sysUserRoleRepository.AsQueryable().GroupJoin(_sysRoleRepository.AsQueryable(), ur => ur.RoleID, r => r.Id, (ur, r) => new { r, ur })
+            List<ResultUserRoleDto> userRoleDtos = await _sysUserRoleRepository.Entities.GroupJoin(_sysRoleRepository.Entities, ur => ur.RoleID, r => r.Id, (ur, r) => new { r, ur })
                 .SelectMany(urr => urr.r.DefaultIfEmpty(), (urr, r) => new ResultUserRoleDto
                 {
                     Id = urr.r.FirstOrDefault().Id,
@@ -89,21 +90,17 @@ namespace AdminBlog.Application.System.Services.Realization.System
         public async Task<bool> SaveUserRole([FromBody] SaveUserRoleDto userRoleDto)
         {
             var userDeleted = await _sysUserRoleRepository.Where(a => a.UserID == userRoleDto.Id).ToListAsync();
-            userDeleted.ForEach(u =>
-            {
-                u.DeleteNowAsync();
-            });
+            await _sysUserRoleRepository.DeleteAsync(userDeleted);
 
             //List<SysUserRole> userRolesAddList = new List<SysUserRole>();
 
-            foreach (var item in userRoleDto.roleIds)
+            var roles = userRoleDto.roleIds.Select(a => new SysUserRole
             {
-                await new SysUserRole
-                {
-                    UserID = userRoleDto.Id,
-                    RoleID = item,
-                }.InsertNowAsync();
-            }
+                Id = YitIdHelper.NextId(),
+                UserID = userRoleDto.Id,
+                RoleID = a,
+            });
+            await _sysUserRoleRepository.InsertAsync(roles);
             return true;
         }
         #endregion
