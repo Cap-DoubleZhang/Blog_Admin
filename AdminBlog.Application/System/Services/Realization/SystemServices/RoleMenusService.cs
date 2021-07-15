@@ -44,8 +44,8 @@ namespace AdminBlog.Application.System.Services.Realization.System
         /// 获取角色菜单列表
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<List<ResultRoleMenuDto>> GetRoleMenu(SearchRoleMenuDto searchDto)
+        [HttpGet("roleMenus")]
+        public async Task<List<ResultRoleMenuDto>> GetRoleMenu([FromQuery] SearchRoleMenuDto searchDto)
         {
             List<SysMenu> menus = await _sysMenuRepository.Entities.OrderBy(a => a.SortIndex).ToListAsync();
             List<ResultRoleMenuDto> resultLst = new List<ResultRoleMenuDto>();
@@ -56,7 +56,13 @@ namespace AdminBlog.Application.System.Services.Realization.System
             return resultLst;
         }
 
-        public async Task<List<ResultRoleMenuDto>> GetRoleMenusChildren(List<SysMenu> menus, SysMenu parent)
+        /// <summary>
+        /// 递归获取子列表
+        /// </summary>
+        /// <param name="menus"></param>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        private async Task<List<ResultRoleMenuDto>> GetRoleMenusChildren(List<SysMenu> menus, SysMenu parent)
         {
             List<SysMenu> childrens = menus.Where(a => a.ParentModuleID == parent.Id).ToList();
             List<ResultRoleMenuDto> resultLst = new List<ResultRoleMenuDto>();
@@ -67,6 +73,7 @@ namespace AdminBlog.Application.System.Services.Realization.System
                     resultLst.AddRange(await GetRoleMenusChildren(menus, item));
                 }
             }
+            resultLst.Add(parent.Adapt<ResultRoleMenuDto>());
             return resultLst;
         }
 
@@ -78,7 +85,7 @@ namespace AdminBlog.Application.System.Services.Realization.System
         /// <returns></returns>
         [HttpPost("rolemenu")]
         [UnitOfWork]
-        public async Task<bool> SaveRoleMenu(SaveRoleMenuDto roleMenuDto)
+        public async Task<bool> SaveRoleMenu([FromBody] SaveRoleMenuDto roleMenuDto)
         {
             var roleMenusDelete = await _sysRoleMenuRepository.Where(a => a.RoleID == roleMenuDto.Id).ToListAsync();
             await _sysRoleMenuRepository.DeleteAsync(roleMenusDelete);

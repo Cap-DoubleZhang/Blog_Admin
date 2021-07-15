@@ -213,6 +213,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AdminBlog.Application.System.Services.Realization.System.RoleMenusService.GetRoleMenusChildren(System.Collections.Generic.List{AdminBlog.Core.SysMenu},AdminBlog.Core.SysMenu)">
+            <summary>
+            递归获取子列表
+            </summary>
+            <param name="menus"></param>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
         <member name="M:AdminBlog.Application.System.Services.Realization.System.RoleMenusService.SaveRoleMenu(AdminBlog.Dtos.SaveRoleMenuDto)">
             <summary>
             删除原角色下菜单并保存新菜单列表
