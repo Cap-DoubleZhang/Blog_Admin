@@ -213,12 +213,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.System.Services.Realization.System.RoleMenusService.GetRoleMenusChildren(System.Collections.Generic.List{AdminBlog.Core.SysMenu},AdminBlog.Core.SysMenu)">
+        <member name="M:AdminBlog.Application.System.Services.Realization.System.RoleMenusService.GetRoleMenusChildren(System.Collections.Generic.List{AdminBlog.Core.SysMenu},System.Collections.Generic.List{AdminBlog.Core.SysMenu})">
             <summary>
             递归获取子列表
             </summary>
-            <param name="menus"></param>
-            <param name="parent"></param>
+            <param name="menus">所有菜单</param>
+            <param name="parentMenus">父级菜单集合</param>
             <returns></returns>
         </member>
         <member name="M:AdminBlog.Application.System.Services.Realization.System.RoleMenusService.SaveRoleMenu(AdminBlog.Dtos.SaveRoleMenuDto)">

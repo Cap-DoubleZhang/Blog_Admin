@@ -48,32 +48,30 @@ namespace AdminBlog.Application.System.Services.Realization.System
         public async Task<List<ResultRoleMenuDto>> GetRoleMenu([FromQuery] SearchRoleMenuDto searchDto)
         {
             List<SysMenu> menus = await _sysMenuRepository.Entities.OrderBy(a => a.SortIndex).ToListAsync();
-            List<ResultRoleMenuDto> resultLst = new List<ResultRoleMenuDto>();
-            foreach (var item in menus.Where(a => a.ParentModuleID == 0))
-            {
-                resultLst.AddRange(await GetRoleMenusChildren(menus, item));
-            }
+            List<ResultRoleMenuDto> resultLst = await GetRoleMenusChildren(menus, menus.Where(a => a.ParentModuleID == 0).ToList());
             return resultLst;
         }
 
         /// <summary>
         /// 递归获取子列表
         /// </summary>
-        /// <param name="menus"></param>
-        /// <param name="parent"></param>
+        /// <param name="menus">所有菜单</param>
+        /// <param name="parentMenus">父级菜单集合</param>
         /// <returns></returns>
-        private async Task<List<ResultRoleMenuDto>> GetRoleMenusChildren(List<SysMenu> menus, SysMenu parent)
+        private async Task<List<ResultRoleMenuDto>> GetRoleMenusChildren(List<SysMenu> menus, List<SysMenu> parentMenus)
         {
-            List<SysMenu> childrens = menus.Where(a => a.ParentModuleID == parent.Id).ToList();
             List<ResultRoleMenuDto> resultLst = new List<ResultRoleMenuDto>();
-            if (childrens.Count() > 0)
+            foreach (var item in parentMenus)
             {
-                foreach (var item in childrens)
+                List<SysMenu> childrens = menus.Where(a => a.ParentModuleID == item.Id).OrderBy(a => a.SortIndex).ToList();
+                if (childrens.Count() > 0)
                 {
-                    resultLst.AddRange(await GetRoleMenusChildren(menus, item));
+                    await GetRoleMenusChildren(menus, childrens);
                 }
+                ResultRoleMenuDto sysMenuDto = item.Adapt<ResultRoleMenuDto>();
+                sysMenuDto.children = childrens.Adapt<List<ResultRoleMenuDto>>();
+                resultLst.Add(sysMenuDto);
             }
-            resultLst.Add(parent.Adapt<ResultRoleMenuDto>());
             return resultLst;
         }
 

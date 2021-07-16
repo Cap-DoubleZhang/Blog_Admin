@@ -68,7 +68,7 @@ namespace AdminBlog.Application
             #endregion
 
             List<SysMenu> menus = _sysMenuRepository.Where(expression).ToList();
-            List<SysMenu> firstMenus = menus.Where(a => a.ParentModuleID == 0).OrderByDescending(a => a.SortIndex).ToList();
+            List<SysMenu> firstMenus = menus.Where(a => a.ParentModuleID == 0).OrderBy(a => a.SortIndex).ToList();
             List<ResultSysMenuDto> resultSysMenuDtos = await GetChildMenu(firstMenus, menus);
             int totalCount = firstMenus.Count();
             PagedList<ResultSysMenuDto> pagedList = new PagedList<ResultSysMenuDto>
@@ -93,7 +93,7 @@ namespace AdminBlog.Application
             List<ResultSysMenuDto> resultDtos = new List<ResultSysMenuDto>();
             foreach (var item in childrenMenus)
             {
-                List<SysMenu> children = allMenus.Where(a => a.ParentModuleID == item.Id).ToList();
+                List<SysMenu> children = allMenus.Where(a => a.ParentModuleID == item.Id).OrderBy(a => a.SortIndex).ToList();
                 if (children.Count() > 0)
                 {
                     await GetChildMenu(children, allMenus);
