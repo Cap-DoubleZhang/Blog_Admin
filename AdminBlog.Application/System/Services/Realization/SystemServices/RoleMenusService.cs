@@ -45,11 +45,17 @@ namespace AdminBlog.Application.System.Services.Realization.System
         /// </summary>
         /// <returns></returns>
         [HttpGet("roleMenus")]
-        public async Task<List<ResultRoleMenuDto>> GetRoleMenu([FromQuery] SearchRoleMenuDto searchDto)
+        public async Task<ResultRoleMenuIdsDto> GetRoleMenu([FromQuery] SearchRoleMenuDto searchDto)
         {
             List<SysMenu> menus = await _sysMenuRepository.Entities.OrderBy(a => a.SortIndex).ToListAsync();
             List<ResultRoleMenuDto> resultLst = await GetRoleMenusChildren(menus, menus.Where(a => a.ParentModuleID == 0).ToList());
-            return resultLst;
+            long[] menuIds = await _sysRoleMenuRepository.Entities.Where(a => a.RoleID == searchDto.roleId).Select(a => a.MenuID).ToArrayAsync();
+            ResultRoleMenuIdsDto dto = new ResultRoleMenuIdsDto
+            {
+                menuIds = menuIds,
+                ResultRoleMenuDtos = resultLst,
+            };
+            return dto;
         }
 
         /// <summary>
@@ -74,7 +80,6 @@ namespace AdminBlog.Application.System.Services.Realization.System
             }
             return resultLst;
         }
-
 
         /// <summary>
         /// 删除原角色下菜单并保存新菜单列表

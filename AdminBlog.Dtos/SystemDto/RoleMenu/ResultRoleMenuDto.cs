@@ -7,6 +7,21 @@ using System.Threading.Tasks;
 namespace AdminBlog.Dtos
 {
     /// <summary>
+    /// 角色菜单菜单ID结果集Dto
+    /// </summary>
+    public class ResultRoleMenuIdsDto : BaseResultDto
+    {
+        /// <summary>
+        /// 拥有权限的菜单ID
+        /// </summary>
+        public long[] menuIds { get; set; }
+        /// <summary>
+        /// 所有的菜单权限
+        /// </summary>
+        public List<ResultRoleMenuDto> ResultRoleMenuDtos { get; set; }
+    }
+
+    /// <summary>
     /// 角色菜单结果集Dto
     /// </summary>
     public class ResultRoleMenuDto : BaseResultDto
