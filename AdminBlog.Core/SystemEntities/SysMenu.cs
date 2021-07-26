@@ -69,5 +69,17 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("MenuType")]
         public MenuTypeEnum MenuType { get; set; }
+
+        /// <summary>
+        /// 路由 侧边栏是否显示
+        /// </summary>
+        [Column("Hidden")]
+        public bool Hidden { get; set; }
+
+        /// <summary>
+        /// 如果设置为true，它则会固定在tags-view中(默认 false)
+        /// </summary>
+        [Column("Affix")]
+        public bool Affix { get; set; }
     }
 }
