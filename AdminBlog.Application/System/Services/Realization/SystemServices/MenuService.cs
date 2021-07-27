@@ -94,12 +94,11 @@ namespace AdminBlog.Application
             foreach (var item in childrenMenus)
             {
                 List<SysMenu> children = allMenus.Where(a => a.ParentModuleID == item.Id).OrderBy(a => a.SortIndex).ToList();
+                ResultSysMenuDto sysMenuDto = item.Adapt<ResultSysMenuDto>();
                 if (children.Count() > 0)
                 {
-                    await GetChildMenu(children, allMenus);
+                    sysMenuDto.children = await GetChildMenu(children, allMenus);
                 }
-                ResultSysMenuDto sysMenuDto = item.Adapt<ResultSysMenuDto>();
-                sysMenuDto.children = children.Adapt<List<ResultSysMenuDto>>();
                 resultDtos.Add(sysMenuDto);
             }
             return resultDtos;

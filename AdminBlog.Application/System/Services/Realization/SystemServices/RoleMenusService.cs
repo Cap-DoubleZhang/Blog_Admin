@@ -70,12 +70,11 @@ namespace AdminBlog.Application.System.Services.Realization.System
             foreach (var item in parentMenus)
             {
                 List<SysMenu> childrens = menus.Where(a => a.ParentModuleID == item.Id).OrderBy(a => a.SortIndex).ToList();
+                ResultRoleMenuDto sysMenuDto = item.Adapt<ResultRoleMenuDto>();
                 if (childrens.Count() > 0)
                 {
-                    await GetRoleMenusChildren(menus, childrens);
+                    sysMenuDto.children = await GetRoleMenusChildren(menus, childrens);
                 }
-                ResultRoleMenuDto sysMenuDto = item.Adapt<ResultRoleMenuDto>();
-                sysMenuDto.children = childrens.Adapt<List<ResultRoleMenuDto>>();
                 resultLst.Add(sysMenuDto);
             }
             return resultLst;
