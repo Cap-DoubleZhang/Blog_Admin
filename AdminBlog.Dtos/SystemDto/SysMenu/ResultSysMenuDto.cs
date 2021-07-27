@@ -50,12 +50,12 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 路由 侧边栏是否显示
         /// </summary>
-        public bool Hidden { get; set; }
+        public bool hidden { get; set; }
 
         /// <summary>
         /// 如果设置为true，它则会固定在tags-view中(默认 false)
         /// </summary>
-        public bool Affix { get; set; }
+        public bool affix { get; set; }
 
         /// <summary>
         /// 菜单类型（按钮/页面）

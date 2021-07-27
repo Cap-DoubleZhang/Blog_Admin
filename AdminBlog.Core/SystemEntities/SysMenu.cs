@@ -81,5 +81,11 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("Affix")]
         public bool Affix { get; set; }
+
+        /// <summary>
+        /// 菜单来源（前台菜单、后台菜单）
+        /// </summary>
+        [Column("MenuSource")]
+        public MenuSourceEnum MenuSource { get; set; }
     }
 }

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace AdminBlog.Dtos
 {
+    /// <summary>
+    /// 保存系统菜单 Dto
+    /// </summary>
     public class SaveSysMenuDto : BaseSaveDto
     {
         /// <summary>
@@ -69,5 +72,10 @@ namespace AdminBlog.Dtos
         /// 如果设置为true，它则会固定在tags-view中(默认 false)
         /// </summary>
         public bool Affix { get; set; }
+
+        /// <summary>
+        /// 菜单来源（前台菜单、后台菜单）
+        /// </summary>
+        public MenuSourceEnum MenuSource { get; set; }
     }
 }

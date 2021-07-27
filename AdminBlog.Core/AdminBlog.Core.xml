@@ -321,6 +321,21 @@
             菜单类型（按钮/页面）
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.SysMenu.Hidden">
+            <summary>
+            路由 侧边栏是否显示
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.Affix">
+            <summary>
+            如果设置为true，它则会固定在tags-view中(默认 false)
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SysMenu.MenuSource">
+            <summary>
+            菜单来源（前台菜单、后台菜单）
+            </summary>
+        </member>
         <member name="T:AdminBlog.Core.SysRole">
             <summary>
             系统角色表
