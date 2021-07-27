@@ -59,5 +59,15 @@ namespace AdminBlog.Dtos
         /// 菜单类型（按钮/页面）
         /// </summary>
         public MenuTypeEnum MenuType { get; set; }
+
+        /// <summary>
+        /// 路由 侧边栏是否显示(默认 false)
+        /// </summary>
+        public bool Hidden { get; set; }
+
+        /// <summary>
+        /// 如果设置为true，它则会固定在tags-view中(默认 false)
+        /// </summary>
+        public bool Affix { get; set; }
     }
 }
