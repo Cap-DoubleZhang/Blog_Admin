@@ -8,6 +8,7 @@ using Furion.FriendlyException;
 using Furion.LinqBuilder;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,16 @@ namespace AdminBlog.Application
     {
         #region 依赖注入
         private readonly IRepository<SysMenu> _sysMenuRepository;
-        public MenuService(IRepository<SysMenu> sysMenuRepository)
+        private readonly CurrentUserService _currentUserService;
+        private readonly IRepository<SysUserRole> _sysUserRoleRepository;
+        private readonly IRepository<SysRoleMenu> _sysRoleMenuRepository;
+
+        public MenuService(IRepository<SysMenu> sysMenuRepository, CurrentUserService currentUserService, IRepository<SysUserRole> sysUserRoleRepository, IRepository<SysRoleMenu> sysRoleMenuRepository)
         {
+            _sysRoleMenuRepository = sysRoleMenuRepository;
             _sysMenuRepository = sysMenuRepository;
+            _currentUserService = currentUserService;
+            _sysUserRoleRepository = sysUserRoleRepository;
         }
         #endregion
 
@@ -217,6 +225,24 @@ namespace AdminBlog.Application
             return true;
         }
 
+        /// <summary>
+        /// 获取当前登录用户拥有的角色菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("currentUserRoleMenus")]
+        public async Task<List<ResultSysMenuDto>> GetCurrentUserRoleMenus()
+        {
+            //获取当前登录用户
+            SysUser sysUser = await _currentUserService.GetCurrentUserAsync();
+            //获取当前登录用户拥有的角色ID集合
+            long[] roleIds = await _sysUserRoleRepository.Where(a => a.UserID == sysUser.Id).Select(a => a.RoleID).ToArrayAsync();
+            //获取当前登录用户拥有的角色对应的菜单ID集合
+            long[] menuIds = await _sysRoleMenuRepository.Entities.Where(a => roleIds.Contains(a.RoleID)).Select(a => a.MenuID).ToArrayAsync();
+            //获取当前登录用户拥有的角色对应的菜单集合
+            List<SysMenu> menus = await _sysMenuRepository.Entities.Where(a => menuIds.Contains(a.Id)).OrderBy(a => a.SortIndex).ToListAsync();
+            List<ResultSysMenuDto> resultLst = await GetChildMenu(menus.Where(a => a.ParentModuleID == 0).ToList(), menus);
+            return resultLst;
+        }
         #endregion
     }
 }

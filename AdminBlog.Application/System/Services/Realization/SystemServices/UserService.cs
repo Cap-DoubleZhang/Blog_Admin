@@ -12,6 +12,7 @@ using Furion.LinqBuilder;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,10 @@ namespace AdminBlog.Application
         private readonly CurrentUserService _currentUserService;
         private readonly CurrentUserInfoOptions _currentUserInfoSetting;
         private readonly UserInfoConstOptions _userInfoConstOptions;
-        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUserService currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting, IOptions<UserInfoConstOptions> userInfoConstOptions)
+        private readonly IRepository<SysRole> _sysRoleRepository;
+        private readonly IRepository<SysUserRole> _sysUserRoleRepository;
+        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUserService currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting, IOptions<UserInfoConstOptions> userInfoConstOptions, IRepository<SysRole> sysRoleRepository,
+            IRepository<SysUserRole> sysUserRoleRepository)
         {
             _sysUserRepository = sysUserRepository;
             _sysUserInfoRepository = sysUserInfoRepository;
@@ -45,6 +49,9 @@ namespace AdminBlog.Application
             _currentUserService = currentUserService;
             _currentUserInfoSetting = currentUserInfoSetting.Value;
             _userInfoConstOptions = userInfoConstOptions.Value;
+            _sysRoleRepository = sysRoleRepository;
+            _sysUserRoleRepository = sysUserRoleRepository;
+
         }
         #endregion
 
@@ -129,10 +136,12 @@ namespace AdminBlog.Application
             SysUserInfo sysUserInfo = await _sysUserInfoRepository.SingleOrDefaultAsync(a => a.UserID == userId);
             SysUser sysUser = await _currentUserService.GetCurrentUserAsync();
             //取用户角色表中查询数据
-            List<string> roles = new List<string>()
-            {
-                new string("admin"),
-            };
+            long[] roleIds = await _sysUserRoleRepository.Where(a => a.UserID == sysUser.Id).Select(a => a.RoleID).ToArrayAsync();
+            List<string> roles = await _sysRoleRepository.Where(a => roleIds.Contains(a.Id)).Select(a => a.RoleName).ToListAsync();
+            //     roles = new List<string>
+            //{
+            //    new string("admin"),
+            //};
             ResultLoginUserDto resultLoginUserDto = new ResultLoginUserDto
             {
                 name = sysUserInfo.UserShowName,
