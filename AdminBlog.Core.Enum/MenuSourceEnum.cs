@@ -18,6 +18,6 @@ namespace AdminBlog.Core.Enum
         /// <summary>
         /// 网站后台菜单
         /// </summary>
-        AdminSite = 0,
+        AdminSite = 1,
     }
 }

@@ -27,6 +27,11 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("MenuCode")]
         public string MenuCode { get; set; }
+        /// <summary>
+        /// 组件名称
+        /// </summary>
+        [Column("Component")]
+        public string Component { get; set; }
 
         /// <summary>
         /// 菜单图标
@@ -87,5 +92,27 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("MenuSource")]
         public MenuSourceEnum MenuSource { get; set; }
+
+        /// <summary>
+        /// 当你一个路由下面的 children 声明的路由大于1个时，自动会变成嵌套的模式--如组件页面
+        /// 只有一个时，会将那个子路由当做根路由显示在侧边栏--如引导页面
+        /// 若你想不管路由下面的 children 声明的个数都显示你的根路由
+        /// 你可以设置 alwaysShow: true，这样它就会忽略之前定义的规则，一直显示根路由
+        /// </summary>
+        [Column("AlwaysShow")]
+        public bool AlwaysShow { get; set; }
+
+        /// <summary>
+        /// 重定向地址，在面包屑中点击会重定向去的地址
+        /// 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
+        /// </summary>
+        [Column("Redirect")]
+        public string Redirect { get; set; }
+
+        /// <summary>
+        /// true：不会被 keep-alive 缓存
+        /// </summary>
+        [Column("NoCache")]
+        public bool NoCache { get; set; }
     }
 }

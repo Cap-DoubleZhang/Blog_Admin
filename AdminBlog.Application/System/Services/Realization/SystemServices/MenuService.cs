@@ -160,6 +160,7 @@ namespace AdminBlog.Application
         [HttpPost("menu")]
         public async Task<bool> SaveSysMenuAsync(SaveSysMenuDto saveDto)
         {
+            
             if (saveDto.Id == 0)
             {
                 //判断菜单是否存在
@@ -168,6 +169,8 @@ namespace AdminBlog.Application
                     throw Oops.Oh(SysMenuErrorCodeEnum.MenuNameExist);
                 //新增菜单信息
                 SysMenu sysMenuAdd = saveDto.Adapt<SysMenu>();
+                if (string.IsNullOrWhiteSpace(sysMenuAdd.Redirect))
+                    sysMenuAdd.Redirect = "noRedirect";
                 sysMenuAdd.CreatedTime = DateTime.UtcNow;
                 await _sysMenuRepository.InsertNowAsync(sysMenuAdd);
             }
@@ -181,6 +184,8 @@ namespace AdminBlog.Application
                         throw Oops.Oh("该菜单的上级菜单不可选择该菜单.");
                     //更改菜单信息
                     SysMenu sysMenuUpdate = saveDto.Adapt<SysMenu>();
+                    if (string.IsNullOrWhiteSpace(sysMenuUpdate.Redirect))
+                        sysMenuUpdate.Redirect = "noRedirect";
                     sysMenuUpdate.UpdatedTime = DateTime.UtcNow;
                     await _sysMenuRepository.UpdateIncludeNowAsync(sysMenuUpdate, new[] {
                         nameof(sysMenuUpdate.MenuName),
@@ -190,7 +195,13 @@ namespace AdminBlog.Application
                         nameof(sysMenuUpdate.MenuTitle),
                         nameof(sysMenuUpdate.ParentModuleID),
                         nameof(sysMenuUpdate.MenuPath),
-                        nameof(sysMenuUpdate.SortIndex),}, true
+                        nameof(sysMenuUpdate.SortIndex),
+                        nameof(sysMenuUpdate.Hidden),
+                        nameof(sysMenuUpdate.Affix),
+                        nameof(sysMenuUpdate.Component),
+                        nameof(sysMenuUpdate.NoCache),
+                        nameof(sysMenuUpdate.AlwaysShow),
+                        nameof(sysMenuUpdate.Redirect),}, true
                         );
                 }
                 else
@@ -230,7 +241,7 @@ namespace AdminBlog.Application
         /// </summary>
         /// <returns></returns>
         [HttpGet("currentUserRoleMenus")]
-        public async Task<List<ResultSysMenuDto>> GetCurrentUserRoleMenus()
+        public async Task<List<ResultRouteDto>> GetCurrentUserRoleMenus()
         {
             //获取当前登录用户
             SysUser sysUser = await _currentUserService.GetCurrentUserAsync();
@@ -240,8 +251,30 @@ namespace AdminBlog.Application
             long[] menuIds = await _sysRoleMenuRepository.Entities.Where(a => roleIds.Contains(a.RoleID)).Select(a => a.MenuID).ToArrayAsync();
             //获取当前登录用户拥有的角色对应的菜单集合
             List<SysMenu> menus = await _sysMenuRepository.Entities.Where(a => menuIds.Contains(a.Id)).OrderBy(a => a.SortIndex).ToListAsync();
-            List<ResultSysMenuDto> resultLst = await GetChildMenu(menus.Where(a => a.ParentModuleID == 0).ToList(), menus);
+            List<ResultRouteDto> resultLst = await GetChildMenuRoute(menus.Where(a => a.ParentModuleID == 0).ToList(), menus);
             return resultLst;
+        }
+
+        /// <summary>
+        /// 递归获取子菜单
+        /// </summary>
+        /// <param name="childrenMenus"></param>
+        /// <param name="allMenus"></param>
+        /// <returns></returns>
+        private async Task<List<ResultRouteDto>> GetChildMenuRoute(List<SysMenu> childrenMenus, List<SysMenu> allMenus)
+        {
+            List<ResultRouteDto> resultDtos = new List<ResultRouteDto>();
+            foreach (var item in childrenMenus)
+            {
+                List<SysMenu> children = allMenus.Where(a => a.ParentModuleID == item.Id).OrderBy(a => a.SortIndex).ToList();
+                ResultRouteDto sysMenuDto = item.Adapt<ResultRouteDto>();
+                if (children.Count() > 0)
+                {
+                    sysMenuDto.children = await GetChildMenuRoute(children, allMenus);
+                }
+                resultDtos.Add(sysMenuDto);
+            }
+            return resultDtos;
         }
         #endregion
     }
