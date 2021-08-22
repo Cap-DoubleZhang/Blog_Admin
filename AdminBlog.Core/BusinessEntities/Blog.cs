@@ -57,5 +57,10 @@ namespace AdminBlog.Core
         /// 内容
         /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        /// 是否允许评论
+        /// </summary>
+        public bool IsAllowedComments { get; set; }
     }
 }

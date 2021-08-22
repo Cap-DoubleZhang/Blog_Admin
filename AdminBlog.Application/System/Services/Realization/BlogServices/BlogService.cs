@@ -110,8 +110,9 @@ namespace AdminBlog.Application
                         nameof(blog.Cover),
                         nameof(blog.Synopsis),
                         nameof(blog.Tags),
-                        nameof(blog.Content),}, true
-                        );
+                        nameof(blog.Content),
+                        nameof(blog.IsAllowedComments),
+                    }, true);
                 }
                 else
                 {

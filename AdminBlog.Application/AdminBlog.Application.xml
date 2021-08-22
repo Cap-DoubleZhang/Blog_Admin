@@ -77,6 +77,32 @@
             <param name="baseBatchUpdateDto"></param>
             <returns></returns>
         </member>
+        <member name="T:AdminBlog.Application.FriendlyLinksService">
+            <summary>
+            友链/公告 业务
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.FriendlyLinksService.GetPagedBlogAsync(AdminBlog.Dtos.SearchFriendlyLinksDto)">
+            <summary>
+            获取分页友链/公告列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.FriendlyLinksService.SaveFriendlyLinkAsync(AdminBlog.Dtos.SaveFriendlyLinksDto)">
+            <summary>
+            保存友链详情
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.FriendlyLinksService.DeleteBlogAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
+            <summary>
+            单个/批量删除友链
+            </summary>
+            <param name="baseBatchUpdateDto"></param>
+            <returns></returns>
+        </member>
         <member name="T:AdminBlog.Application.CurrentUserService">
             <summary>
             获取当前登录用户

@@ -1,5 +1,6 @@
 ﻿using Furion;
 using Furion.DatabaseAccessor;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace AdminBlog.EntityFramework.Core
@@ -10,7 +11,10 @@ namespace AdminBlog.EntityFramework.Core
         {
             services.AddDatabaseAccessor(options =>
             {
-                options.AddDbPool<DefaultDbContext>();
+                options.AddDbPool<DefaultDbContext>(providerName: default, optionBuilder: opt =>
+                {
+                    opt.UseBatchEF_MSSQL();
+                });
             }, "AdminBlog.Database.Migrations");
         }
     }

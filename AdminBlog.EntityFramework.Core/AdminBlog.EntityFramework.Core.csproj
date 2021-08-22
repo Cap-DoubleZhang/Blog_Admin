@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.7" />
+    <PackageReference Include="Zack.EFCore.Batch.MSSQL" Version="1.4.8" />
   </ItemGroup>
 
   <ItemGroup>

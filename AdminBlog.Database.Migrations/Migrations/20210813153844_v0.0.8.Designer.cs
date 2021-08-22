@@ -4,14 +4,16 @@ using AdminBlog.EntityFramework.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminBlog.Database.Migrations.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210813153844_v0.0.8")]
+    partial class v008
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,49 +138,6 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.ToTable("Comment");
                 });
 
-            modelBuilder.Entity("AdminBlog.Core.FriendlyLinks", b =>
-                {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CreateBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LinkType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SortIndex")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("UpdateBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FriendlyLinks");
-                });
-
             modelBuilder.Entity("AdminBlog.Core.SysDictionary", b =>
                 {
                     b.Property<long>("Id")
@@ -220,7 +179,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160774000443461L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 213, DateTimeKind.Unspecified).AddTicks(8475), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 757, DateTimeKind.Unspecified).AddTicks(3477), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "博客类型"
@@ -229,7 +188,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160776633155653L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 213, DateTimeKind.Unspecified).AddTicks(9148), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 757, DateTimeKind.Unspecified).AddTicks(3989), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "邮箱类型"
@@ -238,7 +197,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 169581276397637L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 213, DateTimeKind.Unspecified).AddTicks(9155), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 757, DateTimeKind.Unspecified).AddTicks(3993), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "文章标签"
@@ -289,7 +248,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160774000443461L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7490), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1282), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "InformalEssay",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -299,7 +258,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160776633155653L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7537), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1362), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Article",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -309,7 +268,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022405L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7539), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1364), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "TencentCompanyEmail",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -319,7 +278,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022406L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7540), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1368), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "163FreeEmail",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -329,7 +288,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022407L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7542), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1370), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Java",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -339,7 +298,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022408L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7545), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1379), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "C#",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -349,7 +308,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022409L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7547), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1381), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "NET Core",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -359,7 +318,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022410L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7548), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1382), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "JS",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -369,7 +328,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022411L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 217, DateTimeKind.Unspecified).AddTicks(7550), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 762, DateTimeKind.Unspecified).AddTicks(1384), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Vue",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -680,7 +639,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 156951674213412L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 242, DateTimeKind.Unspecified).AddTicks(6008), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 787, DateTimeKind.Unspecified).AddTicks(7094), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsOnline = 0,
                             IsUse = 0,
@@ -754,7 +713,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 111111L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 21, 14, 14, 43, 245, DateTimeKind.Unspecified).AddTicks(6580), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 8, 13, 15, 38, 43, 791, DateTimeKind.Unspecified).AddTicks(910), new TimeSpan(0, 0, 0, 0, 0)),
                             HeadPortrait = "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
                             IsDeleted = false,
                             UserID = 156951674213412L,

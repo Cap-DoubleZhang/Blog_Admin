@@ -121,7 +121,12 @@ namespace AdminBlog.Application
         [HttpPut("roleIsUse")]
         public async Task<bool> UpdateRoleIsUseAsync(UpdateSysRoleUseDto updateDto)
         {
-            await _sysRoleRepository.Where(a => updateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { IsUse = updateDto.IsUse }, new List<string> { nameof(SysRole.IsUse) });
+            //await _sysRoleRepository.Where(a => updateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { IsUse = updateDto.IsUse }, new List<string> { nameof(SysRole.IsUse) });
+
+            await _sysRoleRepository.Context.BatchUpdate<SysRole>()
+                .Set(a => a.IsUse, a => updateDto.IsUse)
+                .Where(a => updateDto.ids.Contains(a.Id))
+                .ExecuteAsync();
             return true;
         }
 
@@ -133,7 +138,12 @@ namespace AdminBlog.Application
         [HttpPut("roleAdminFlag")]
         public async Task<bool> UpdateRoleIsAdminAsync(UpdateSysRoleAdminDto updateDto)
         {
-            await _sysRoleRepository.Where(a => updateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { AdminFlag = updateDto.adminFlag }, new List<string> { nameof(SysRole.AdminFlag) });
+            //await _sysRoleRepository.Where(a => updateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { AdminFlag = updateDto.adminFlag }, new List<string> { nameof(SysRole.AdminFlag) });
+
+            await _sysRoleRepository.Context.BatchUpdate<SysRole>()
+                .Set(a => a.AdminFlag, a => updateDto.adminFlag)
+                .Where(a => updateDto.ids.Contains(a.Id))
+                .ExecuteAsync();
             return true;
         }
 
@@ -145,7 +155,9 @@ namespace AdminBlog.Application
         [HttpDelete]
         public async Task<bool> DeleteRoleAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysRoleRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { IsDeleted = true }, new List<string> { nameof(SysRole.IsDeleted) });
+            //await _sysRoleRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysRole { IsDeleted = true }, new List<string> { nameof(SysRole.IsDeleted) });
+
+            await _sysRoleRepository.Context.DeleteRangeAsync<SysRole>(a => baseBatchUpdateDto.ids.Contains(a.Id));
 
             return true;
         }

@@ -1,4 +1,5 @@
 ﻿using AdminBlog.Core.Enum;
+using Furion.DataValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -47,6 +48,11 @@ namespace AdminBlog.Dtos
         /// 内容
         /// </summary>
         [Required(ErrorMessage = "内容不能为空.")]
+        [DataValidation(ValidationTypes.Url, ErrorMessage = "请输入有效的头像地址.")]
         public string content { get; set; }
+        /// <summary>
+        /// 是否允许评论
+        /// </summary>
+        public bool isAllowedComments { get; set; }
     }
 }

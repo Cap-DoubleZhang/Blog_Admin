@@ -76,10 +76,10 @@ namespace AdminBlog.Dtos
         /// </summary>
         public bool noCache { get; set; }
 
-        /// <summary>
-        /// 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
-        /// </summary>
-        public string redirect { get; set; }
+        ///// <summary>
+        ///// 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
+        ///// </summary>
+        //public string redirect { get; set; }
 
         /// <summary>
         /// 菜单类型（按钮/页面）

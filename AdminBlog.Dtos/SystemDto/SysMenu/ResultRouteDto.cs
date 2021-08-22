@@ -35,10 +35,10 @@ namespace AdminBlog.Dtos
         /// 子路由菜单显示内容
         /// </summary>
         public Meta meta { get; set; }
-        /// <summary>
-        /// 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
-        /// </summary>
-        public string redirect { get; set; }
+        ///// <summary>
+        ///// 当设置 noRedirect 的时候该路由在面包屑导航中不可被点击
+        ///// </summary>
+        //public string redirect { get; set; }
         /// <summary>
         /// 设定路由的名字，一定要填写不然使用<keep-alive>时会出现各种问题
         /// </summary>

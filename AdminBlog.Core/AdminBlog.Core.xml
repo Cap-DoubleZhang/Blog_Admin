@@ -59,6 +59,11 @@
             内容
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.Blog.IsAllowedComments">
+            <summary>
+            是否允许评论
+            </summary>
+        </member>
         <member name="T:AdminBlog.Core.Comment">
             <summary>
             博客评论表
@@ -117,6 +122,41 @@
         <member name="P:AdminBlog.Core.Comment.Value">
             <summary>
             评论内容
+            </summary>
+        </member>
+        <member name="T:AdminBlog.Core.FriendlyLinks">
+            <summary>
+            友链/公告表
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.FriendlyLinks.LinkType">
+            <summary>
+            链接类型
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.FriendlyLinks.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.FriendlyLinks.Image">
+            <summary>
+            图片
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.FriendlyLinks.Url">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.FriendlyLinks.Description">
+            <summary>
+            简述
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.FriendlyLinks.SortIndex">
+            <summary>
+            排序
             </summary>
         </member>
         <member name="T:AdminBlog.Core.EntityExtend">

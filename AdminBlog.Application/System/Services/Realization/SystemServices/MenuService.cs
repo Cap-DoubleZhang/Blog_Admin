@@ -29,13 +29,16 @@ namespace AdminBlog.Application
         private readonly CurrentUserService _currentUserService;
         private readonly IRepository<SysUserRole> _sysUserRoleRepository;
         private readonly IRepository<SysRoleMenu> _sysRoleMenuRepository;
+        private readonly IRepository<SysRole> _sysRoleRepository;
 
-        public MenuService(IRepository<SysMenu> sysMenuRepository, CurrentUserService currentUserService, IRepository<SysUserRole> sysUserRoleRepository, IRepository<SysRoleMenu> sysRoleMenuRepository)
+
+        public MenuService(IRepository<SysMenu> sysMenuRepository, CurrentUserService currentUserService, IRepository<SysUserRole> sysUserRoleRepository, IRepository<SysRoleMenu> sysRoleMenuRepository, IRepository<SysRole> sysRoleRepository)
         {
             _sysRoleMenuRepository = sysRoleMenuRepository;
             _sysMenuRepository = sysMenuRepository;
             _currentUserService = currentUserService;
             _sysUserRoleRepository = sysUserRoleRepository;
+            _sysRoleRepository = sysRoleRepository;
         }
         #endregion
 
@@ -160,7 +163,7 @@ namespace AdminBlog.Application
         [HttpPost("menu")]
         public async Task<bool> SaveSysMenuAsync(SaveSysMenuDto saveDto)
         {
-            
+
             if (saveDto.Id == 0)
             {
                 //判断菜单是否存在
@@ -245,10 +248,29 @@ namespace AdminBlog.Application
         {
             //获取当前登录用户
             SysUser sysUser = await _currentUserService.GetCurrentUserAsync();
-            //获取当前登录用户拥有的角色ID集合
-            long[] roleIds = await _sysUserRoleRepository.Where(a => a.UserID == sysUser.Id).Select(a => a.RoleID).ToArrayAsync();
+            ////获取当前登录用户拥有的角色ID集合
+            //long[] roleIds = await _sysUserRoleRepository.Where(a => a.UserID == sysUser.Id).Select(a => a.RoleID).ToArrayAsync();
+
+            var linq = from ur in _sysUserRoleRepository.Where(a => a.UserID == sysUser.Id)
+                       join role in _sysRoleRepository.AsQueryable() on ur.RoleID equals role.Id into result
+                       from role in result.DefaultIfEmpty()
+                       select new
+                       {
+                           ur.RoleID,
+                           role.AdminFlag,
+                       };
             //获取当前登录用户拥有的角色对应的菜单ID集合
-            long[] menuIds = await _sysRoleMenuRepository.Entities.Where(a => roleIds.Contains(a.RoleID)).Select(a => a.MenuID).ToArrayAsync();
+            long[] menuIds = new long[linq.Count()];
+            if (linq.Where(a => a.AdminFlag == AdminTypeEnum.Yes).Count() > 0)
+            {
+                menuIds = await _sysMenuRepository.Entities.Select(a => a.Id).ToArrayAsync();
+            }
+            else
+            {
+                long[] roleIds = await _sysUserRoleRepository.Where(a => a.UserID == sysUser.Id).Select(a => a.RoleID).ToArrayAsync();
+                menuIds = await _sysRoleMenuRepository.Entities.Where(a => roleIds.Contains(a.RoleID)).Select(a => a.MenuID).ToArrayAsync();
+            }
+
             //获取当前登录用户拥有的角色对应的菜单集合
             List<SysMenu> menus = await _sysMenuRepository.Entities.Where(a => menuIds.Contains(a.Id)).OrderBy(a => a.SortIndex).ToListAsync();
             List<ResultRouteDto> resultLst = await GetChildMenuRoute(menus.Where(a => a.ParentModuleID == 0).ToList(), menus);

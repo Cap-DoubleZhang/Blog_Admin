@@ -52,5 +52,9 @@ namespace AdminBlog.Dtos
         /// 内容
         /// </summary>
         public string Content { get; set; }
+        /// <summary>
+        /// 是否允许评论
+        /// </summary>
+        public bool isAllowedComments { get; set; }
     }
 }
