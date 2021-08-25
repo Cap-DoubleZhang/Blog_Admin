@@ -15,4 +15,10 @@
     <ProjectReference Include="..\AdminBlog.Database.Migrations\AdminBlog.Database.Migrations.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="coreSetting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,18 @@
+﻿{
+  "SpecificationDocumentSettings": {
+    "DocumentTitle": "Furion | 规范化接口",
+    "GroupOpenApiInfos": [
+      {
+        "Group": "Default",
+        "Title": "规范化接口演示",
+        "Description": "让 .NET 开发更简单，更通用，更流行。",
+        "Version": "1.0.0"
+      }
+    ]
+  },
+  // 错误提示配置
+  "FriendlyExceptionSettings": {
+    // 是否隐藏错误码
+    "HideErrorCode": true
+  }
+}

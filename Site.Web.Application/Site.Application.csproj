@@ -2,13 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <NoWarn>1701;1702;1591</NoWarn>
-    <DocumentationFile>AdminBlog.Application.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="applicationsettings.json" />
-    <None Remove="AdminBlog.Application.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,21 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EFCore.BulkExtensions" Version="5.2.3" />
-    <PackageReference Include="Yitter.IdGenerator" Version="1.0.12" />
-    <PackageReference Include="Zack.EFCore.Batch.MSSQL" Version="1.4.8" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AdminBlog.Common\AdminBlog.Common.csproj" />
     <ProjectReference Include="..\AdminBlog.Core.Enum\AdminBlog.Core.Enum.csproj" />
     <ProjectReference Include="..\AdminBlog.Core\AdminBlog.Core.csproj" />
     <ProjectReference Include="..\AdminBlog.Dtos\AdminBlog.Dtos.csproj" />
-    <ProjectReference Include="..\AdminBlog.MapperConfig\AdminBlog.MapperConfig.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="System\Services\Interface\ISystemServices\" />
+    <Folder Include="Blog\Services\Interface\" />
   </ItemGroup>
 
 </Project>
