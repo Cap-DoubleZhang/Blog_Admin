@@ -54,6 +54,11 @@
             发布类型
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.Blog.IsTop">
+            <summary>
+            是否置顶
+            </summary>
+        </member>
         <member name="P:AdminBlog.Core.Blog.Content">
             <summary>
             内容

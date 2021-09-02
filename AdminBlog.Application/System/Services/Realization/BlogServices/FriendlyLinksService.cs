@@ -117,8 +117,6 @@ namespace AdminBlog.Application
         [HttpDelete("link")]
         public async Task<bool> DeleteBlogAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            //await _friendlyLinksRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new Blog { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(Blog.IsDeleted), nameof(Blog.UpdatedTime) });
-
             await _friendlyLinksRepository.Context.DeleteRangeAsync<FriendlyLinks>(a => baseBatchUpdateDto.ids.Contains(a.Id));
 
             return true;

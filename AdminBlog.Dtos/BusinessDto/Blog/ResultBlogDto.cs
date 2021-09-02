@@ -49,6 +49,10 @@ namespace AdminBlog.Dtos
         /// </summary>
         public BlogPublishTypeEnum PublishType { get; set; }
         /// <summary>
+        /// 是否置顶
+        /// </summary>
+        public bool isTop { get; set; }
+        /// <summary>
         /// 内容
         /// </summary>
         public string Content { get; set; }

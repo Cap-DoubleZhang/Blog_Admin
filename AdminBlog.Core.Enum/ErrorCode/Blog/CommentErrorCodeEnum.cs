@@ -18,5 +18,11 @@ namespace AdminBlog.Core.Enum
         /// </summary>
         [ErrorCodeItemMetadata("该博客不存在,无法评论.")]
         CommentBlogNonExist,
+
+        /// <summary>
+        /// 该博客未开放评论权限
+        /// </summary>
+        [ErrorCodeItemMetadata("该博客不存在,无法评论.")]
+        CommentBlogNonComment,
     }
 }

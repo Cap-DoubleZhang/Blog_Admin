@@ -54,6 +54,10 @@ namespace AdminBlog.Core
         /// </summary>
         public BlogPublishTypeEnum PublishType { get; set; }
         /// <summary>
+        /// 是否置顶
+        /// </summary>
+        public bool IsTop { get; set; }
+        /// <summary>
         /// 内容
         /// </summary>
         public string Content { get; set; }

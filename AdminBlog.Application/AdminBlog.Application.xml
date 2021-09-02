@@ -63,13 +63,6 @@
             <param name="searchDto"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.CommentService.SaveCommentAsync(AdminBlog.Dtos.SaveCommentDto)">
-            <summary>
-            新增/编辑 评论
-            </summary>
-            <param name="saveDto"></param>
-            <returns></returns>
-        </member>
         <member name="M:AdminBlog.Application.CommentService.DeleteCommentAsync(AdminBlog.Dtos.BaseBatchUpdateDto)">
             <summary>
             单个/批量删除评论

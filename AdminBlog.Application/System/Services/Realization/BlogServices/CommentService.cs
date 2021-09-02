@@ -124,29 +124,29 @@ namespace AdminBlog.Application
             return commentDto;
         }
 
-        /// <summary>
-        /// 新增/编辑 评论
-        /// </summary>
-        /// <param name="saveDto"></param>
-        /// <returns></returns>
-        [HttpPost("comment")]
-        public async Task<bool> SaveCommentAsync(SaveCommentDto saveDto)
-        {
-            //判断博客是否存在
-            bool IsExist = await _blogRepository.AnyAsync(a => a.Id == saveDto.blogId && a.PublishType == BlogPublishTypeEnum.Publish);
-            if (IsExist)
-            {
-                //新增评论信息
-                Comment commentAdd = saveDto.Adapt<Comment>();
-                commentAdd.CreatedTime = DateTime.UtcNow;
-                await _commentRepository.InsertNowAsync(commentAdd);
-            }
-            else
-            {
-                throw Oops.Oh(CommentErrorCodeEnum.CommentBlogNonExist);
-            }
-            return true;
-        }
+        ///// <summary>
+        ///// 新增/编辑 评论
+        ///// </summary>
+        ///// <param name="saveDto"></param>
+        ///// <returns></returns>
+        //[HttpPost("comment")]
+        //public async Task<bool> SaveCommentAsync(SaveCommentDto saveDto)
+        //{
+        //    //判断博客是否存在
+        //    bool IsExist = await _blogRepository.AnyAsync(a => a.Id == saveDto.blogId && a.PublishType == BlogPublishTypeEnum.Publish);
+        //    if (IsExist)
+        //    {
+        //        //新增评论信息
+        //        Comment commentAdd = saveDto.Adapt<Comment>();
+        //        commentAdd.CreatedTime = DateTime.UtcNow;
+        //        await _commentRepository.InsertNowAsync(commentAdd);
+        //    }
+        //    else
+        //    {
+        //        throw Oops.Oh(CommentErrorCodeEnum.CommentBlogNonExist);
+        //    }
+        //    return true;
+        //}
 
         /// <summary>
         /// 单个/批量删除评论

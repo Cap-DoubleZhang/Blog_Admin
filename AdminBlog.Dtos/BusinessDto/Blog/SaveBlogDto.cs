@@ -51,6 +51,10 @@ namespace AdminBlog.Dtos
         [DataValidation(ValidationTypes.Url, ErrorMessage = "请输入有效的头像地址.")]
         public string content { get; set; }
         /// <summary>
+        /// 是否置顶
+        /// </summary>
+        public bool isTop { get; set; }
+        /// <summary>
         /// 是否允许评论
         /// </summary>
         public bool isAllowedComments { get; set; }

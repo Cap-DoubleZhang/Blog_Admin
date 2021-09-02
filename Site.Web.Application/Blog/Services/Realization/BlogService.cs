@@ -8,6 +8,7 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ namespace Site.Application
         /// </summary>
         /// <param name="searchDto"></param>
         /// <returns></returns>
-        [HttpGet("blogs")]
+        [HttpGet("blogLists")]
         public async Task<PagedList<ResultBlogDto>> GetPagedBlogAsync([FromQuery] SearchBlogDto searchDto)
         {
             #region 关键词进行条件查询 多条件使用空格分开
@@ -66,7 +67,7 @@ namespace Site.Application
             }
             #endregion
 
-            PagedList<Blog> pagedBlogs = await _blogRepository.Where(expression).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
+            PagedList<Blog> pagedBlogs = await _blogRepository.Where(expression).OrderByDescending(a => a.IsTop).ThenByDescending(a => a.PublishTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
             return pagedBlogs.Adapt<PagedList<ResultBlogDto>>();
         }
     }

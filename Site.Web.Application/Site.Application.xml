@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Site.Application</name>
+    </assembly>
+    <members>
+        <member name="T:Site.Application.BlogService">
+            <summary>
+            博客 业务
+            </summary>
+        </member>
+        <member name="M:Site.Application.BlogService.GetPagedBlogAsync(AdminBlog.Dtos.SearchBlogDto)">
+            <summary>
+            获取分页博客列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Site.Application.CommentService">
+            <summary>
+            博客评论 业务
+            </summary>
+        </member>
+        <member name="M:Site.Application.CommentService.GetPagedCommentByBlogAsync(AdminBlog.Dtos.SearchBlogCommonentDto)">
+            <summary>
+            根据博客获取分页评论列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Site.Application.CommentService.SaveCommentAsync(AdminBlog.Dtos.SaveCommentDto)">
+            <summary>
+            新增/编辑 评论
+            </summary>
+            <param name="saveDto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Site.Application.FriendlyLinksService">
+            <summary>
+            友链/公告 业务
+            </summary>
+        </member>
+        <member name="M:Site.Application.FriendlyLinksService.GetLinksAsync">
+            <summary>
+            获取分页友链/公告列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

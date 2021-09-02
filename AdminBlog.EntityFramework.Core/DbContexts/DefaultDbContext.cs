@@ -1,4 +1,4 @@
-﻿using AdminBlog.Application;
+﻿using AdminBlog.User;
 using AdminBlog.Core;
 using Furion;
 using Furion.DatabaseAccessor;
@@ -68,7 +68,7 @@ namespace AdminBlog.EntityFramework.Core
             var entities = dbContext.ChangeTracker.Entries()
                         .Where(u => u.State == EntityState.Added || u.State == EntityState.Modified);
 
-            var userManager = App.GetService<CurrentUserService>();
+            var userManager = App.GetService<CurrentUser>();
             var userId = string.IsNullOrWhiteSpace(userManager.UserName) ? 0 : userManager?.UserId;//登录时没有用户，操作人则不进行记录
 
             foreach (var entity in entities)

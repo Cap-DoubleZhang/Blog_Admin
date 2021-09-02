@@ -21,6 +21,7 @@ using System.Linq.Expressions;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AdminBlog.User;
 
 namespace AdminBlog.Application
 {
@@ -35,12 +36,12 @@ namespace AdminBlog.Application
         private readonly IRepository<SysUser> _sysUserRepository;
         private readonly IRepository<SysUserInfo> _sysUserInfoRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly CurrentUserService _currentUserService;
+        private readonly CurrentUser _currentUserService;
         private readonly CurrentUserInfoOptions _currentUserInfoSetting;
         private readonly UserInfoConstOptions _userInfoConstOptions;
         private readonly IRepository<SysRole> _sysRoleRepository;
         private readonly IRepository<SysUserRole> _sysUserRoleRepository;
-        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUserService currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting, IOptions<UserInfoConstOptions> userInfoConstOptions, IRepository<SysRole> sysRoleRepository,
+        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUser currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting, IOptions<UserInfoConstOptions> userInfoConstOptions, IRepository<SysRole> sysRoleRepository,
             IRepository<SysUserRole> sysUserRoleRepository)
         {
             _sysUserRepository = sysUserRepository;

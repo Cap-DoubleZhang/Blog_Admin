@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,8 +50,9 @@ namespace AdminBlog.Dtos
         /// </summary>
         public string qq { get; set; }
         /// <summary>
-        /// 评论内容
+        /// 评论内容(需进行脱敏处理)
         /// </summary>
+        [SensitiveDetection('*')]
         public string value { get; set; }
     }
 }

@@ -74,7 +74,6 @@ namespace AdminBlog.Application
             expression = expression.AndIf(searchDto.PublishBeginTime != null, a => a.CreatedTime >= searchDto.PublishBeginTime);
             expression = expression.AndIf(searchDto.PublishEndTime != null, a => a.CreatedTime <= searchDto.PublishEndTime);
 
-
             PagedList<Blog> pagedBlogs = await _blogRepository.Where(expression).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
             return pagedBlogs.Adapt<PagedList<ResultBlogDto>>();
         }
@@ -111,6 +110,7 @@ namespace AdminBlog.Application
                         nameof(blog.Synopsis),
                         nameof(blog.Tags),
                         nameof(blog.Content),
+                        nameof(blog.IsTop),
                         nameof(blog.IsAllowedComments),
                     }, true);
                 }
@@ -130,7 +130,10 @@ namespace AdminBlog.Application
         [HttpDelete("blog")]
         public async Task<bool> DeleteBlogAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _blogRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new Blog { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(Blog.IsDeleted), nameof(Blog.UpdatedTime) });
+            await _blogRepository.Context.BatchUpdate<Blog>()
+                                            .Set(a => a.IsDeleted, a => true)
+                                            .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
+                                            .ExecuteAsync();
 
             return true;
         }
@@ -143,7 +146,10 @@ namespace AdminBlog.Application
         [HttpPut("blogPublishType")]
         public async Task<bool> UpdateBlogPublishTypeAsync(UpdateBlogPublishTypeDto baseBatchUpdatePublishTypeDto)
         {
-            await _blogRepository.Where(a => baseBatchUpdatePublishTypeDto.ids.Contains(a.Id)).BatchUpdateAsync(new Blog { PublishType = baseBatchUpdatePublishTypeDto.publishType }, new List<string> { nameof(Blog.IsDeleted), nameof(Blog.UpdatedTime) });
+            await _blogRepository.Context.BatchUpdate<Blog>()
+                                            .Set(a => a.PublishType, a => baseBatchUpdatePublishTypeDto.publishType)
+                                            .Where(a => baseBatchUpdatePublishTypeDto.ids.Contains(a.Id))
+                                            .ExecuteAsync();
 
             return true;
         }
