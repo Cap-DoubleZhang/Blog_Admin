@@ -16,6 +16,13 @@
             <param name="searchDto"></param>
             <returns></returns>
         </member>
+        <member name="M:Site.Application.BlogService.GetBlogInfoAsync(System.Int64)">
+            <summary>
+            获取博客详情
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Site.Application.CommentService">
             <summary>
             博客评论 业务
@@ -44,7 +51,6 @@
             <summary>
             获取分页友链/公告列表
             </summary>
-            <param name="searchDto"></param>
             <returns></returns>
         </member>
     </members>

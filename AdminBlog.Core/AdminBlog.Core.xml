@@ -405,6 +405,14 @@
             true：不会被 keep-alive 缓存
             </summary>
         </member>
+        <member name="M:AdminBlog.Core.SysMenu.HasData(Microsoft.EntityFrameworkCore.DbContext,System.Type)">
+            <summary>
+            增加种子数据
+            </summary>
+            <param name="dbContext"></param>
+            <param name="dbContextLocator"></param>
+            <returns></returns>
+        </member>
         <member name="T:AdminBlog.Core.SysRole">
             <summary>
             系统角色表

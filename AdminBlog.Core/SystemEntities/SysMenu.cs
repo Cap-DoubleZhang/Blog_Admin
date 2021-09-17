@@ -1,4 +1,5 @@
 ﻿using AdminBlog.Core.Enum;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -114,5 +115,32 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("NoCache")]
         public bool NoCache { get; set; }
+
+        /// <summary>
+        /// 增加种子数据
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <param name="dbContextLocator"></param>
+        /// <returns></returns>
+        public IEnumerable<SysMenu> HasData(DbContext dbContext, Type dbContextLocator)
+        {
+            return new List<SysMenu>
+            {
+                new SysMenu { Id = 183496627462213, MenuName = "博客管理目录", MenuCode = "BlogManager",MenuIcon="el-icon-notebook-1",MenuTitle="博客管理",ParentModuleID=0,MenuPath="/blog",Component="layout",AlwaysShow=true,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 183500800106565, MenuName = "博客管理", MenuCode = "BlogList",MenuIcon="el-icon-notebook-1",MenuTitle="博客管理",ParentModuleID=183496627462213,MenuPath="blog",Component="blog",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 184831157919813, MenuName = "系统管理", MenuCode = "System",MenuIcon="el-icon-s-operation",MenuTitle="系统管理",ParentModuleID=0,MenuPath="/system",SortIndex=2,Component="layout",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 184831279587397, MenuName = "用户管理", MenuCode = "UserList",MenuIcon="el-icon-s-custom",MenuTitle="用户管理",ParentModuleID=184831157919813,MenuPath="users",SortIndex=0,Component="user",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 184831426105413, MenuName = "角色管理", MenuCode = "RoleList",MenuIcon="el-icon-user",MenuTitle="角色管理",ParentModuleID=184831157919813,MenuPath="roles",SortIndex=1,Component="role",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 184831587602501, MenuName = "菜单管理", MenuCode = "MenusList",MenuIcon="el-icon-menu",MenuTitle="菜单管理",ParentModuleID=184831157919813,MenuPath="menus",SortIndex=2,Component="menu",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 184831951908933, MenuName = "字典管理", MenuCode = "Dic",MenuIcon="el-icon-notebook-2",MenuTitle="字典管理",ParentModuleID=184831157919813,MenuPath="dictionary",SortIndex=3,Component="dictionary",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 184832096215109, MenuName = "瀑布流图片", MenuCode = "waterfallImages",MenuIcon="fa fa-image",MenuTitle="瀑布流图片",ParentModuleID=184831157919813,MenuPath="waterfallImages",SortIndex=4,Component="waterfallImages",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 188986113056837, MenuName = "创建", MenuCode = "createBlog",MenuIcon="",MenuTitle="博客详情",ParentModuleID=184831157919813,MenuPath="createBlog",SortIndex=-2,Component="createBlog",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 188992024399941, MenuName = "编辑", MenuCode = "editBlog",MenuIcon="",MenuTitle="博客详情",ParentModuleID=184831157919813,MenuPath="editBlog/:id(\\d+)",SortIndex=-1,Component="editBlog",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 189020521594949, MenuName = "用户信息", MenuCode = "userinfo",MenuIcon="el-icon-s-custom",MenuTitle="用户信息",ParentModuleID=184831157919813,MenuPath="userinfo",SortIndex=0,Component="userinfo",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 189025873809477, MenuName = "上传图片", MenuCode = "uploadWaterfallImage",MenuIcon="el-icon-picture",MenuTitle="上传图片",ParentModuleID=184831157919813,MenuPath="uploadWaterfallImage",SortIndex=5,Component="uploadWaterfallImage",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 194102723149893, MenuName = "链接管理目录", MenuCode = "LinksManager",MenuIcon="el-icon-link",MenuTitle="链接管理",ParentModuleID=0,MenuPath="/link",SortIndex=1,Component="layout",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 194092013764677, MenuName = "友链管理", MenuCode = "FriendlyLinks",MenuIcon="el-icon-link",MenuTitle="友链管理",ParentModuleID=194102723149893,MenuPath="links",SortIndex=1,Component="links",AlwaysShow=true,CreatedTime=DateTimeOffset.UtcNow },
+            };
+        }
     }
 }

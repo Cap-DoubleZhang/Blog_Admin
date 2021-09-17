@@ -70,5 +70,17 @@ namespace Site.Application
             PagedList<Blog> pagedBlogs = await _blogRepository.Where(expression).OrderByDescending(a => a.IsTop).ThenByDescending(a => a.PublishTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
             return pagedBlogs.Adapt<PagedList<ResultBlogDto>>();
         }
+
+        /// <summary>
+        /// 获取博客详情
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpGet("{Id}")]
+        public async Task<ResultBlogDto> GetBlogInfoAsync(long Id)
+        {
+            Blog blog = await _blogRepository.FindAsync(Id);
+            return blog.Adapt<ResultBlogDto>();
+        }
     }
 }

@@ -48,7 +48,6 @@ namespace AdminBlog.Dtos
         /// 内容
         /// </summary>
         [Required(ErrorMessage = "内容不能为空.")]
-        [DataValidation(ValidationTypes.Url, ErrorMessage = "请输入有效的头像地址.")]
         public string content { get; set; }
         /// <summary>
         /// 是否置顶

@@ -19,7 +19,7 @@ namespace Site.Web.Core
         /// 构造函数
         /// </summary>
         /// <param name="format"></param>
-        public DateTimeJsonConverter(string format = "yyyy-MM-dd HH:mm:ss")
+        public DateTimeJsonConverter(string format = "yyyy.MM.dd")
         {
             Format = format;
         }

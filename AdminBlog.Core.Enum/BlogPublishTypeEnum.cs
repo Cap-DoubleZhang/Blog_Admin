@@ -12,12 +12,12 @@ namespace AdminBlog.Core.Enum
     public enum BlogPublishTypeEnum
     {
         /// <summary>
+        /// 暂不发布
+        /// </summary>
+        NoPublish,
+        /// <summary>
         /// 发布
         /// </summary>
         Publish,
-        /// <summary>
-        /// 暂不发布
-        /// </summary>
-        NoPublish
     }
 }
