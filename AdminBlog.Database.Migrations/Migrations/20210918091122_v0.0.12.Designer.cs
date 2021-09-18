@@ -4,14 +4,16 @@ using AdminBlog.EntityFramework.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminBlog.Database.Migrations.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210918091122_v0.0.12")]
+    partial class v0012
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,7 +225,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160774000443461L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 65, DateTimeKind.Unspecified).AddTicks(8452), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 52, DateTimeKind.Unspecified).AddTicks(6969), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "博客类型"
@@ -232,7 +234,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160776633155653L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 65, DateTimeKind.Unspecified).AddTicks(8889), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 52, DateTimeKind.Unspecified).AddTicks(7423), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "邮箱类型"
@@ -241,7 +243,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 169581276397637L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 65, DateTimeKind.Unspecified).AddTicks(8893), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 52, DateTimeKind.Unspecified).AddTicks(7428), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "文章标签"
@@ -292,7 +294,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160774000443461L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7849), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7264), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "InformalEssay",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -302,7 +304,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160776633155653L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7888), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7305), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Article",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -312,7 +314,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022405L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7890), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7307), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "TencentCompanyEmail",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -322,7 +324,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022406L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7892), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7309), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "163FreeEmail",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -332,7 +334,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022407L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7894), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7310), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Java",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -342,7 +344,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022408L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7897), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7314), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "C#",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -352,7 +354,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022409L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7899), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7315), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "NET Core",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -362,7 +364,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022410L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7901), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7317), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "JS",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -372,7 +374,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022411L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 68, DateTimeKind.Unspecified).AddTicks(7902), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 55, DateTimeKind.Unspecified).AddTicks(7319), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Vue",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -544,302 +546,6 @@ namespace AdminBlog.Database.Migrations.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sys_Menu");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 183496627462213L,
-                            Affix = false,
-                            AlwaysShow = true,
-                            Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5363), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "BlogManager",
-                            MenuIcon = "el-icon-notebook-1",
-                            MenuName = "博客管理目录",
-                            MenuPath = "/blog",
-                            MenuSource = 0,
-                            MenuTitle = "博客管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 0L,
-                            SortIndex = 0
-                        },
-                        new
-                        {
-                            Id = 183500800106565L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "blog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5414), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "BlogList",
-                            MenuIcon = "el-icon-notebook-1",
-                            MenuName = "博客管理",
-                            MenuPath = "blog",
-                            MenuSource = 0,
-                            MenuTitle = "博客管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 183496627462213L,
-                            SortIndex = 0
-                        },
-                        new
-                        {
-                            Id = 184831157919813L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5712), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "System",
-                            MenuIcon = "el-icon-s-operation",
-                            MenuName = "系统管理",
-                            MenuPath = "/system",
-                            MenuSource = 0,
-                            MenuTitle = "系统管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 0L,
-                            SortIndex = 2
-                        },
-                        new
-                        {
-                            Id = 184831279587397L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "user",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5718), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "UserList",
-                            MenuIcon = "el-icon-s-custom",
-                            MenuName = "用户管理",
-                            MenuPath = "users",
-                            MenuSource = 0,
-                            MenuTitle = "用户管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = 0
-                        },
-                        new
-                        {
-                            Id = 184831426105413L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "role",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5720), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "RoleList",
-                            MenuIcon = "el-icon-user",
-                            MenuName = "角色管理",
-                            MenuPath = "roles",
-                            MenuSource = 0,
-                            MenuTitle = "角色管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = 1
-                        },
-                        new
-                        {
-                            Id = 184831587602501L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "menu",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5730), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "MenusList",
-                            MenuIcon = "el-icon-menu",
-                            MenuName = "菜单管理",
-                            MenuPath = "menus",
-                            MenuSource = 0,
-                            MenuTitle = "菜单管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = 2
-                        },
-                        new
-                        {
-                            Id = 184831951908933L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "dictionary",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5767), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "Dic",
-                            MenuIcon = "el-icon-notebook-2",
-                            MenuName = "字典管理",
-                            MenuPath = "dictionary",
-                            MenuSource = 0,
-                            MenuTitle = "字典管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = 3
-                        },
-                        new
-                        {
-                            Id = 184832096215109L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "waterfallImages",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5769), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "waterfallImages",
-                            MenuIcon = "fa fa-image",
-                            MenuName = "瀑布流图片",
-                            MenuPath = "waterfallImages",
-                            MenuSource = 0,
-                            MenuTitle = "瀑布流图片",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = 4
-                        },
-                        new
-                        {
-                            Id = 188986113056837L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "createBlog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5771), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "createBlog",
-                            MenuIcon = "",
-                            MenuName = "创建",
-                            MenuPath = "createBlog",
-                            MenuSource = 0,
-                            MenuTitle = "博客详情",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = -2
-                        },
-                        new
-                        {
-                            Id = 188992024399941L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "editBlog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5774), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "editBlog",
-                            MenuIcon = "",
-                            MenuName = "编辑",
-                            MenuPath = "editBlog/:id(\\d+)",
-                            MenuSource = 0,
-                            MenuTitle = "博客详情",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = -1
-                        },
-                        new
-                        {
-                            Id = 189020521594949L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "userinfo",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5776), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "userinfo",
-                            MenuIcon = "el-icon-s-custom",
-                            MenuName = "用户信息",
-                            MenuPath = "userinfo",
-                            MenuSource = 0,
-                            MenuTitle = "用户信息",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = 0
-                        },
-                        new
-                        {
-                            Id = 189025873809477L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "uploadWaterfallImage",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5778), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "uploadWaterfallImage",
-                            MenuIcon = "el-icon-picture",
-                            MenuName = "上传图片",
-                            MenuPath = "uploadWaterfallImage",
-                            MenuSource = 0,
-                            MenuTitle = "上传图片",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = 5
-                        },
-                        new
-                        {
-                            Id = 194102723149893L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5780), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "LinksManager",
-                            MenuIcon = "el-icon-link",
-                            MenuName = "链接管理目录",
-                            MenuPath = "/link",
-                            MenuSource = 0,
-                            MenuTitle = "链接管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 0L,
-                            SortIndex = 1
-                        },
-                        new
-                        {
-                            Id = 194092013764677L,
-                            Affix = false,
-                            AlwaysShow = true,
-                            Component = "links",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 80, DateTimeKind.Unspecified).AddTicks(5781), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "FriendlyLinks",
-                            MenuIcon = "el-icon-link",
-                            MenuName = "友链管理",
-                            MenuPath = "links",
-                            MenuSource = 0,
-                            MenuTitle = "友链管理",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 194102723149893L,
-                            SortIndex = 1
-                        });
                 });
 
             modelBuilder.Entity("AdminBlog.Core.SysRole", b =>
@@ -979,7 +685,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 156951674213412L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 87, DateTimeKind.Unspecified).AddTicks(7257), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 75, DateTimeKind.Unspecified).AddTicks(6371), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsOnline = 0,
                             IsUse = 0,
@@ -1053,7 +759,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 111111L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 13, 53, 90, DateTimeKind.Unspecified).AddTicks(2369), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 18, 9, 11, 21, 78, DateTimeKind.Unspecified).AddTicks(798), new TimeSpan(0, 0, 0, 0, 0)),
                             HeadPortrait = "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
                             IsDeleted = false,
                             UserID = 156951674213412L,

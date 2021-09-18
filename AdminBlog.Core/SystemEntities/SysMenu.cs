@@ -1,4 +1,5 @@
 ﻿using AdminBlog.Core.Enum;
+using Furion.DatabaseAccessor;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace AdminBlog.Core
     /// </summary>
     [Table("Sys_Menu")]
     [Description("后台菜单表")]
-    public class SysMenu : EntityExtend
+    public class SysMenu : EntityExtend, IEntitySeedData<SysMenu>
     {
         /// <summary>
         /// 菜单名称
@@ -133,9 +134,9 @@ namespace AdminBlog.Core
                 new SysMenu { Id = 184831426105413, MenuName = "角色管理", MenuCode = "RoleList",MenuIcon="el-icon-user",MenuTitle="角色管理",ParentModuleID=184831157919813,MenuPath="roles",SortIndex=1,Component="role",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
                 new SysMenu { Id = 184831587602501, MenuName = "菜单管理", MenuCode = "MenusList",MenuIcon="el-icon-menu",MenuTitle="菜单管理",ParentModuleID=184831157919813,MenuPath="menus",SortIndex=2,Component="menu",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
                 new SysMenu { Id = 184831951908933, MenuName = "字典管理", MenuCode = "Dic",MenuIcon="el-icon-notebook-2",MenuTitle="字典管理",ParentModuleID=184831157919813,MenuPath="dictionary",SortIndex=3,Component="dictionary",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
-                new SysMenu { Id = 184832096215109, MenuName = "瀑布流图片", MenuCode = "waterfallImages",MenuIcon="fa fa-image",MenuTitle="瀑布流图片",ParentModuleID=184831157919813,MenuPath="waterfallImages",SortIndex=4,Component="waterfallImages",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
-                new SysMenu { Id = 188986113056837, MenuName = "创建", MenuCode = "createBlog",MenuIcon="",MenuTitle="博客详情",ParentModuleID=184831157919813,MenuPath="createBlog",SortIndex=-2,Component="createBlog",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
-                new SysMenu { Id = 188992024399941, MenuName = "编辑", MenuCode = "editBlog",MenuIcon="",MenuTitle="博客详情",ParentModuleID=184831157919813,MenuPath="editBlog/:id(\\d+)",SortIndex=-1,Component="editBlog",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 184832096215109, MenuName = "瀑布流图片", MenuCode = "waterfallImages",MenuIcon="fa fa-image",MenuTitle="瀑布流图片",ParentModuleID=184831157919813,MenuPath="waterfallImages",SortIndex=4,Hidden=true,Component="waterfallImages",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 188986113056837, MenuName = "创建", MenuCode = "createBlog",MenuIcon="",MenuTitle="博客详情",ParentModuleID=183496627462213,MenuPath="createBlog",SortIndex=-2,Component="createBlog",Hidden=true,AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
+                new SysMenu { Id = 188992024399941, MenuName = "编辑", MenuCode = "editBlog",MenuIcon="",MenuTitle="博客详情",ParentModuleID=183496627462213,MenuPath="editBlog/:id(\\d+)",SortIndex=-1,Component="editBlog",Hidden=true,AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
                 new SysMenu { Id = 189020521594949, MenuName = "用户信息", MenuCode = "userinfo",MenuIcon="el-icon-s-custom",MenuTitle="用户信息",ParentModuleID=184831157919813,MenuPath="userinfo",SortIndex=0,Component="userinfo",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
                 new SysMenu { Id = 189025873809477, MenuName = "上传图片", MenuCode = "uploadWaterfallImage",MenuIcon="el-icon-picture",MenuTitle="上传图片",ParentModuleID=184831157919813,MenuPath="uploadWaterfallImage",SortIndex=5,Component="uploadWaterfallImage",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },
                 new SysMenu { Id = 194102723149893, MenuName = "链接管理目录", MenuCode = "LinksManager",MenuIcon="el-icon-link",MenuTitle="链接管理",ParentModuleID=0,MenuPath="/link",SortIndex=1,Component="layout",AlwaysShow=false,CreatedTime=DateTimeOffset.UtcNow },

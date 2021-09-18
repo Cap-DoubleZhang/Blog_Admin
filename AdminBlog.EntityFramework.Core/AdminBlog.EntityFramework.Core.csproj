@@ -25,10 +25,4 @@
     <ProjectReference Include="..\AdminBlog.User\AdminBlog.User.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Yitter.IdGenerator">
-      <HintPath>..\AdminBlog.Web.Entry\bin\Debug\net5.0\Yitter.IdGenerator.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
