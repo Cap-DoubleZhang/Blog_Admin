@@ -4,14 +4,16 @@ using AdminBlog.EntityFramework.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AdminBlog.Database.Migrations.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    partial class DefaultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210919164737_v0.0.14")]
+    partial class v0014
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,7 +225,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160774000443461L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 337, DateTimeKind.Unspecified).AddTicks(1293), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 991, DateTimeKind.Unspecified).AddTicks(9876), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "博客类型"
@@ -232,7 +234,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160776633155653L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 337, DateTimeKind.Unspecified).AddTicks(1873), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 992, DateTimeKind.Unspecified).AddTicks(716), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "邮箱类型"
@@ -241,7 +243,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 169581276397637L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 337, DateTimeKind.Unspecified).AddTicks(1882), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 992, DateTimeKind.Unspecified).AddTicks(727), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "文章标签"
@@ -292,7 +294,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160774000443461L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1793), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8425), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "InformalEssay",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -302,7 +304,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160776633155653L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1923), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8666), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Article",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -312,7 +314,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022405L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1930), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8683), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "TencentCompanyEmail",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -322,7 +324,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022406L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1935), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8688), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "163FreeEmail",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -332,7 +334,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022407L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1939), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8692), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Java",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -342,7 +344,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022408L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1963), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8703), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "C#",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -352,7 +354,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022409L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1974), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8707), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "NET Core",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -362,7 +364,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022410L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1984), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8710), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "JS",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -372,7 +374,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022411L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1994), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 35, 999, DateTimeKind.Unspecified).AddTicks(8714), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Vue",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -552,7 +554,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = true,
                             Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(4317), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(1627), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -573,7 +575,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "blog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(4439), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(1704), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -594,7 +596,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5045), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2112), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -615,7 +617,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "user",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5061), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2125), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -636,7 +638,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "role",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5066), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2129), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -657,7 +659,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "menu",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5086), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2137), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -678,7 +680,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "dictionary",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5091), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2140), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -699,7 +701,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "waterfallImages",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5677), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2522), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = true,
                             IsDeleted = false,
                             IsUse = 0,
@@ -720,7 +722,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "createBlog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5694), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2534), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = true,
                             IsDeleted = false,
                             IsUse = 0,
@@ -741,14 +743,14 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "editBlog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5710), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2541), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = true,
                             IsDeleted = false,
                             IsUse = 0,
                             MenuCode = "editBlog",
                             MenuIcon = "",
                             MenuName = "编辑",
-                            MenuPath = "editBlog/:id",
+                            MenuPath = "editBlog/:id(\\d+)",
                             MenuSource = 0,
                             MenuTitle = "博客详情",
                             MenuType = 0,
@@ -762,7 +764,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "userinfo",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5715), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2544), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -783,7 +785,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "uploadWaterfallImage",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5743), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2547), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -804,7 +806,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5748), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2551), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -825,7 +827,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = true,
                             Component = "links",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5754), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 27, DateTimeKind.Unspecified).AddTicks(2554), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -887,7 +889,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 156951674213412L,
                             AdminFlag = 1,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 392, DateTimeKind.Unspecified).AddTicks(5424), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 33, DateTimeKind.Unspecified).AddTicks(327), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsUse = 0,
                             RoleName = "Admin"
@@ -990,7 +992,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 156951674213412L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 412, DateTimeKind.Unspecified).AddTicks(2001), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 41, DateTimeKind.Unspecified).AddTicks(5316), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsOnline = 0,
                             IsUse = 0,
@@ -1064,7 +1066,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 111111L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 417, DateTimeKind.Unspecified).AddTicks(1229), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 45, DateTimeKind.Unspecified).AddTicks(2995), new TimeSpan(0, 0, 0, 0, 0)),
                             HeadPortrait = "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
                             IsDeleted = false,
                             UserID = 156951674213412L,
@@ -1108,7 +1110,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 156951674213412L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 419, DateTimeKind.Unspecified).AddTicks(7396), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 47, 36, 49, DateTimeKind.Unspecified).AddTicks(3007), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             RoleID = 156951674213412L,
                             UserID = 156951674213412L

@@ -1,4 +1,6 @@
 ﻿using AdminBlog.Core.Enum;
+using Furion.DatabaseAccessor;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +16,7 @@ namespace AdminBlog.Core
     /// </summary>
     [Table("Sys_Role")]
     [Description("角色表")]
-    public class SysRole : EntityExtend
+    public class SysRole : EntityExtend, IEntitySeedData<SysRole>
     {
         /// <summary>
         /// 角色名称
@@ -36,5 +38,19 @@ namespace AdminBlog.Core
         /// </summary>
         [Column("IsUse")]
         public UseTypeEnum IsUse { get; set; }
+
+        /// <summary>
+        /// 增加种子数据
+        /// </summary>
+        /// <param name="dbContext"></param>
+        /// <param name="dbContextLocator"></param>
+        /// <returns></returns>
+        public IEnumerable<SysRole> HasData(DbContext dbContext, Type dbContextLocator)
+        {
+            return new List<SysRole>
+            {
+                new SysRole { Id = 156951674213412, RoleName = "Admin", AdminFlag = AdminTypeEnum.Yes,CreatedTime=DateTimeOffset.UtcNow },
+            };
+        }
     }
 }

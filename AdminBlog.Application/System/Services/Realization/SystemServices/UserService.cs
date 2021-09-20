@@ -139,10 +139,7 @@ namespace AdminBlog.Application
             //取用户角色表中查询数据
             long[] roleIds = await _sysUserRoleRepository.Where(a => a.UserID == sysUser.Id).Select(a => a.RoleID).ToArrayAsync();
             List<string> roles = await _sysRoleRepository.Where(a => roleIds.Contains(a.Id)).Select(a => a.RoleName).ToListAsync();
-            //     roles = new List<string>
-            //{
-            //    new string("admin"),
-            //};
+            roles.Add("Visiter");//ElementUIAdmin 需要起码一个角色，则给一个默认角色，此默认角色没有权限。
             ResultLoginUserDto resultLoginUserDto = new ResultLoginUserDto
             {
                 name = sysUserInfo.UserShowName,

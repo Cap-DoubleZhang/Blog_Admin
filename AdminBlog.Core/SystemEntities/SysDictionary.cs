@@ -47,7 +47,7 @@ namespace AdminBlog.Core
             {
                 new SysDictionary { Id = 160774000443461, Code = "BlogType", Name = "博客类型",CreatedTime=DateTimeOffset.UtcNow },
                 new SysDictionary { Id = 160776633155653, Code = "EmailType", Name = "邮箱类型",CreatedTime=DateTimeOffset.UtcNow },
-                new SysDictionary { Id = 169581276397637, Code = "BlogLabel", Name = "文章标签",CreatedTime=DateTimeOffset.UtcNow },
+                new SysDictionary { Id = 169581276397637, Code = "BlogLabel", Name = "文章标签",IsCanMultiple=true,CreatedTime=DateTimeOffset.UtcNow },
 
             };
         }

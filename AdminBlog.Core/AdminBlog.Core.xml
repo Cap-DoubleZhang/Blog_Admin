@@ -438,6 +438,14 @@
             是否禁用
             </summary>
         </member>
+        <member name="M:AdminBlog.Core.SysRole.HasData(Microsoft.EntityFrameworkCore.DbContext,System.Type)">
+            <summary>
+            增加种子数据
+            </summary>
+            <param name="dbContext"></param>
+            <param name="dbContextLocator"></param>
+            <returns></returns>
+        </member>
         <member name="T:AdminBlog.Core.SysRoleMenu">
             <summary>
             角色对应的菜单表
@@ -565,6 +573,14 @@
             <summary>
             角色ID
             </summary>
+        </member>
+        <member name="M:AdminBlog.Core.SysUserRole.HasData(Microsoft.EntityFrameworkCore.DbContext,System.Type)">
+            <summary>
+            增加种子数据
+            </summary>
+            <param name="dbContext"></param>
+            <param name="dbContextLocator"></param>
+            <returns></returns>
         </member>
         <member name="P:AdminBlog.Core.SysWaterfallImages.Name">
             <summary>
