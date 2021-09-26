@@ -14,8 +14,10 @@ namespace Site.Web.Entry
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.Inject()
-                                     .UseStartup<Startup>();
+                    webBuilder
+                    .UseUrls("http://*:5000")
+                    .Inject()
+                    .UseStartup<Startup>();
                 });
     }
 }
