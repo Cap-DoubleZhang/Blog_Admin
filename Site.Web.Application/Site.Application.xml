@@ -16,11 +16,14 @@
             <param name="searchDto"></param>
             <returns></returns>
         </member>
-        <member name="M:Site.Application.BlogService.GetBlogInfoAsync(System.Int64)">
+        <member name="M:Site.Application.BlogService.GetBlogInfoAsync(System.Int32,System.Int32,System.Int32,System.String)">
             <summary>
             获取博客详情
             </summary>
-            <param name="Id"></param>
+            <param name="year"></param>
+            <param name="month"></param>
+            <param name="day"></param>
+            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="T:Site.Application.CommentService">

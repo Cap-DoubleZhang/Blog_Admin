@@ -58,10 +58,21 @@ namespace AdminBlog.Core
         /// </summary>
         public bool IsTop { get; set; }
         /// <summary>
-        /// 内容
+        /// 内容（Markdown 格式字符串）
         /// </summary>
         public string Content { get; set; }
-
+        /// <summary>
+        /// 内容（Html 格式字符串）
+        /// </summary>
+        public string ContentHtml { get; set; }
+        /// <summary>
+        /// 关键词（文章关键词，友好SEO）
+        /// </summary>
+        public string Keyword { get; set; }
+        /// <summary>
+        /// 友好链接，用于URL
+        /// </summary>
+        public string FriendUrl { get; set; }
         /// <summary>
         /// 是否允许评论
         /// </summary>

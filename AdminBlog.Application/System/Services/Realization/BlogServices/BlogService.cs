@@ -56,7 +56,9 @@ namespace AdminBlog.Application
                                                           || x.BlogType.Contains(item)
                                                           || x.Synopsis.Contains(item)
                                                           || x.Tags.Contains(item)
-                                                          || x.Content.Contains(item));
+                                                          || x.Content.Contains(item)
+                                                          || x.Keyword.Contains(item)
+                                                          || x.FriendUrl.Contains(item));
                         }
                         else
                         {
@@ -64,7 +66,9 @@ namespace AdminBlog.Application
                                                           || x.BlogType.Contains(item)
                                                           || x.Synopsis.Contains(item)
                                                           || x.Tags.Contains(item)
-                                                          || x.Content.Contains(item));
+                                                          || x.Content.Contains(item)
+                                                          || x.Keyword.Contains(item)
+                                                          || x.FriendUrl.Contains(item));
                         }
                     }
                 }
@@ -110,6 +114,9 @@ namespace AdminBlog.Application
                         nameof(blog.Synopsis),
                         nameof(blog.Tags),
                         nameof(blog.Content),
+                        nameof(blog.ContentHtml),
+                        nameof(blog.FriendUrl),
+                        nameof(blog.Keyword),
                         nameof(blog.IsTop),
                         nameof(blog.IsAllowedComments),
                     }, true);
@@ -159,6 +166,7 @@ namespace AdminBlog.Application
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
+        
         [HttpGet("detail/{Id}")]
         public async Task<SaveBlogDto> GetBlogDetailAsync([Required(ErrorMessage = "必要参数传入错误.")] long Id)
         {

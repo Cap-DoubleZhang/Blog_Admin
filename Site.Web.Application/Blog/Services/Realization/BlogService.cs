@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Site.Application
@@ -34,8 +35,8 @@ namespace Site.Application
         /// </summary>
         /// <param name="searchDto"></param>
         /// <returns></returns>
-        [HttpGet("blogLists")]
-        public async Task<PagedList<ResultBlogDto>> GetPagedBlogAsync([FromQuery] SearchBlogDto searchDto)
+        [HttpGet("blogs")]
+        public async Task<PagedList<ResultSiteBlogsDto>> GetPagedBlogAsync([FromQuery] SearchBlogDto searchDto)
         {
             #region 关键词进行条件查询 多条件使用空格分开
             Expression<Func<Blog, bool>> expression = t => t.PublishType == BlogPublishTypeEnum.Publish;
@@ -68,19 +69,28 @@ namespace Site.Application
             #endregion
 
             PagedList<Blog> pagedBlogs = await _blogRepository.Where(expression).OrderByDescending(a => a.IsTop).ThenByDescending(a => a.PublishTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
-            return pagedBlogs.Adapt<PagedList<ResultBlogDto>>();
+            return pagedBlogs.Adapt<PagedList<ResultSiteBlogsDto>>();
         }
 
         /// <summary>
         /// 获取博客详情
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{Id}")]
-        public async Task<ResultBlogDto> GetBlogInfoAsync(long Id)
+        [HttpGet("{year}/{month}/{day}/{id}")]
+        public async Task<ResultSiteBlogDto> GetBlogInfoAsync(int year, int month, int day, string id)
         {
-            Blog blog = await _blogRepository.FindAsync(Id);
-            return blog.Adapt<ResultBlogDto>();
+            long idL = 0;
+            if (new Regex(@"^\d+$").IsMatch(id))
+            {
+                idL = long.Parse(id);
+            }
+            Blog blog = await _blogRepository.SingleOrDefaultAsync(x => x.PublishTime.Year == year && x.PublishTime.Month == month &&
+            x.PublishTime.Day == day && (x.FriendUrl == id || x.Id == idL));
+            return blog.Adapt<ResultSiteBlogDto>();
         }
     }
 }

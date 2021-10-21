@@ -61,7 +61,22 @@
         </member>
         <member name="P:AdminBlog.Core.Blog.Content">
             <summary>
-            内容
+            内容（Markdown 格式字符串）
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.ContentHtml">
+            <summary>
+            内容（Html 格式字符串）
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.Keyword">
+            <summary>
+            关键词（文章关键词，友好SEO）
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.Blog.FriendUrl">
+            <summary>
+            友好链接，用于URL
             </summary>
         </member>
         <member name="P:AdminBlog.Core.Blog.IsAllowedComments">

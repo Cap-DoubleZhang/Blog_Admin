@@ -15,7 +15,7 @@ namespace Site.Web.Entry
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                    .UseUrls("http://*:5000")
+                    //.UseUrls("http://*:5000")
                     .Inject()
                     .UseStartup<Startup>();
                 });

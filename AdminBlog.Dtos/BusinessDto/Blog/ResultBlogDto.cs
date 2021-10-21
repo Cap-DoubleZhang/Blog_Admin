@@ -15,50 +15,72 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title { get; set; }
+        public string title { get; set; }
         /// <summary>
         /// 文章类型
         /// </summary>
-        public string BlogType { get; set; }
+        public string blogType { get; set; }
         /// <summary>
         /// 发布时间
         /// </summary>
-        public DateTimeOffset PublishTime { get; set; }
-        /// <summary>
-        /// 封面
-        /// </summary>
-        public string Cover { get; set; }
-        /// <summary>
-        /// 简介
-        /// </summary>
-        public string Synopsis { get; set; }
-        /// <summary>
-        /// 标签
-        /// </summary>
-        public string Tags { get; set; }
-        /// <summary>
-        /// 阅读数
-        /// </summary>
-        public int ReadingVolume { get; set; }
-        /// <summary>
-        /// 点赞数
-        /// </summary>
-        public int Likes { get; set; }
+        public DateTimeOffset publishTime { get; set; }
         /// <summary>
         /// 发布类型
         /// </summary>
-        public BlogPublishTypeEnum PublishType { get; set; }
+        public BlogPublishTypeEnum publishType { get; set; }
+        /// <summary>
+        /// 封面
+        /// </summary>
+        public string cover { get; set; }
+        /// <summary>
+        /// 简介
+        /// </summary>
+        public string synopsis { get; set; }
+        /// <summary>
+        /// 标签
+        /// </summary>
+        public string tags { get; set; }
+        /// <summary>
+        /// 阅读数
+        /// </summary>
+        public int readingVolume { get; set; }
+        /// <summary>
+        /// 点赞数
+        /// </summary>
+        public int likes { get; set; }
         /// <summary>
         /// 是否置顶
         /// </summary>
         public bool isTop { get; set; }
         /// <summary>
-        /// 内容
+        /// 内容（Markdown 格式）
         /// </summary>
-        public string Content { get; set; }
+        public string content { get; set; }
+        /// <summary>
+        /// 内容（Html 格式）
+        /// </summary>
+        public string contentHtml { get; set; }
+        /// <summary>
+        /// 关键词（利于Seo）
+        /// </summary>
+        public string keyword { get; set; }
         /// <summary>
         /// 是否允许评论
         /// </summary>
         public bool isAllowedComments { get; set; }
+        /// <summary>
+        /// 定义的友好链接
+        /// </summary>
+        public string friendUrl { get; set; }
+        /// <summary>
+        /// 友好链接
+        /// </summary>
+        public string friendUrlStr
+        {
+            get
+            {
+                return $"{publishTime.Year}/{publishTime.Month}/{publishTime.Day}/{(!string.IsNullOrWhiteSpace(friendUrl) ? friendUrl : Id)}.html";
+            }
+        }
     }
 }
