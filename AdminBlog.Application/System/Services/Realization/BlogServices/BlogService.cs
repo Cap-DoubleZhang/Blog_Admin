@@ -78,7 +78,8 @@ namespace AdminBlog.Application
             expression = expression.AndIf(searchDto.PublishBeginTime != null, a => a.CreatedTime >= searchDto.PublishBeginTime);
             expression = expression.AndIf(searchDto.PublishEndTime != null, a => a.CreatedTime <= searchDto.PublishEndTime);
 
-            PagedList<Blog> pagedBlogs = await _blogRepository.Where(expression).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
+            //按置顶排序、发布时间排序
+            PagedList<Blog> pagedBlogs = await _blogRepository.Where(expression).OrderByDescending(a => a.IsTop).ThenByDescending(a => a.PublishTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
             return pagedBlogs.Adapt<PagedList<ResultBlogDto>>();
         }
 
@@ -166,7 +167,7 @@ namespace AdminBlog.Application
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        
+
         [HttpGet("detail/{Id}")]
         public async Task<SaveBlogDto> GetBlogDetailAsync([Required(ErrorMessage = "必要参数传入错误.")] long Id)
         {

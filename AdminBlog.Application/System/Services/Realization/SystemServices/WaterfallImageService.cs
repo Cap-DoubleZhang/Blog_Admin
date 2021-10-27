@@ -2,7 +2,7 @@
 using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
-using EFCore.BulkExtensions;
+//using EFCore.BulkExtensions;
 using Furion;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
@@ -47,7 +47,7 @@ namespace AdminBlog.Application
         /// <param name="file"></param>
         /// <returns></returns>
         [HttpPost("image")]
-        public async Task SaveImage(List<IFormFile> file)
+        public async Task<string> SaveImage(List<IFormFile> file)
         {
             if (file == null || file.Count() <= 0)
                 throw Oops.Oh(FileEnum.InputFileNonExist);
@@ -77,6 +77,7 @@ namespace AdminBlog.Application
                 }
                 SysWaterfallImages images = new SysWaterfallImages
                 {
+                    Id = YitIdHelper.NextId(),
                     //Name = dto.name,
                     //Remark = dto.remark,
                     Src = $"{IpStr}/Uploads/WaterfallImage/{finalName}",
@@ -85,6 +86,7 @@ namespace AdminBlog.Application
             }
             await _sysFileRepository.Context.BulkInsertAsync(lst);
 
+            return lst[0].Src;
         }
 
         /// <summary>

@@ -26,6 +26,8 @@
   },
   //上传的文件路径
   "FilePath": {
-    "RealFilePath": "E:\\Gitee\\FurionAdminBlog\\AdminBlog.Web.Entry"
+    "RealFilePath": "E:\\Gitee\\FurionAdminBlog\\AdminBlog.Web.Entry",
+    //本地文件上传链接前缀
+    "UploadLocalhost": "https://localhost:5001"
   }
 }
