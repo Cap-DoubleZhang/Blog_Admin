@@ -51,5 +51,9 @@ namespace AdminBlog.Dtos
         /// 是否允许评论
         /// </summary>
         public bool isAllowedComments { get; set; }
+        /// <summary>
+        /// 关键词（利于文章SEO）
+        /// </summary>
+        public string keyword { get; set; }
     }
 }

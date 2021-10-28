@@ -89,13 +89,15 @@ namespace AdminBlog.Application
         /// <param name="saveDto"></param>
         /// <returns></returns>
         [HttpPost("blog")]
-        public async Task<bool> SaveBlogAsync(SaveBlogDto saveDto)
+        public async Task<long> SaveBlogAsync(SaveBlogDto saveDto)
         {
+            long Id = 0;
             if (saveDto.Id == 0)
             {
                 //新增博客信息
                 Blog blogAdd = saveDto.Adapt<Blog>();
                 await _blogRepository.InsertNowAsync(blogAdd);
+                Id = blogAdd.Id;
             }
             else
             {
@@ -127,7 +129,7 @@ namespace AdminBlog.Application
                     throw Oops.Oh(BlogErrorCodeEnum.BlogNonExist);
                 }
             }
-            return true;
+            return Id;//为新增时跳转编辑页面
         }
 
         /// <summary>
