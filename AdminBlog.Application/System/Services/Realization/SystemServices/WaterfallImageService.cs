@@ -2,6 +2,10 @@
 using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
+using COSXML;
+using COSXML.Auth;
+using COSXML.Model.Bucket;
+using COSXML.Transfer;
 //using EFCore.BulkExtensions;
 using Furion;
 using Furion.DatabaseAccessor;
@@ -42,11 +46,11 @@ namespace AdminBlog.Application
 
         #region 图片操作
         /// <summary>
-        /// 上传图片
+        /// 批量上传图片
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        [HttpPost("image")]
+        [HttpPost("images")]
         public async Task<string> SaveImage(List<IFormFile> file)
         {
             if (file == null || file.Count() <= 0)
@@ -87,6 +91,74 @@ namespace AdminBlog.Application
             await _sysFileRepository.Context.BulkInsertAsync(lst);
 
             return lst[0].Src;
+        }
+
+        /// <summary>
+        /// 上传单张图片
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public async Task<string> UploadImage(IFormFile file)
+        {
+            if (file == null)
+                throw Oops.Oh(FileEnum.InputFileNonExist);
+
+            string secretId = "AKID62jALHsVmpfHentPs9E6lBMJ2XnnsTzH"; //"云 API 密钥 SecretId";
+            string secretKey = "CC0c1DAtNdfS0IPIvISRFtIUSCUYTAgy";//"云 API 密钥 secretKey";
+            string region = "";
+
+            CosXmlConfig config = new CosXmlConfig.Builder()
+                                    .IsHttps(true)  //设置默认 HTTPS 请求
+                                    .SetRegion(region)  //设置一个默认的存储桶地域
+                                    .SetDebugLog(true)  //显示日志
+                                    .Build();
+
+            long durationSecond = 600;  //每次请求签名有效时长，单位为秒
+            QCloudCredentialProvider cosCredentialProvider = new DefaultQCloudCredentialProvider(
+              secretId, secretKey, durationSecond);
+
+            #region 创建存储桶
+            CosXml cosXml = new CosXmlServer(config, cosCredentialProvider);
+            string bucket = ""; //格式：BucketName-APPID
+            PutBucketRequest request = new PutBucketRequest(bucket);
+            //执行请求
+            PutBucketResult result = cosXml.PutBucket(request);
+            //请求成功
+            Console.WriteLine(result.GetResultInfo());
+            #endregion
+
+            #region 上传文件
+            // 初始化 TransferConfig
+            TransferConfig transferConfig = new TransferConfig();
+
+            // 初始化 TransferManager
+            TransferManager transferManager = new TransferManager(cosXml, transferConfig);
+
+            String cosPath = "exampleobject"; //对象在存储桶中的位置标识符，即称对象键
+            String srcPath = @"temp-source-file";//本地文件绝对路径
+
+            // 上传对象
+            COSXMLUploadTask uploadTask = new COSXMLUploadTask(bucket, cosPath);
+            uploadTask.SetSrcPath(srcPath);
+
+            uploadTask.progressCallback = delegate (long completed, long total)
+            {
+                Console.WriteLine(String.Format("progress = {0:##.##}%", completed * 100.0 / total));
+            };
+
+            try
+            {
+                COSXML.Transfer.COSXMLUploadTask.UploadTaskResult resultFile = await
+                  transferManager.UploadAsync(uploadTask);
+                Console.WriteLine(result.GetResultInfo());
+                string eTag = resultFile.eTag;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("CosException: " + e);
+            }
+            #endregion
+            return null;
         }
 
         /// <summary>

@@ -72,6 +72,7 @@ namespace AdminBlog.Core
         /// <summary>
         /// 友好链接，用于URL
         /// </summary>
+        
         public string FriendUrl { get; set; }
         /// <summary>
         /// 是否允许评论

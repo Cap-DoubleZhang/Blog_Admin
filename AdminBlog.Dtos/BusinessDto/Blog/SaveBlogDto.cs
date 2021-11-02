@@ -59,6 +59,7 @@ namespace AdminBlog.Dtos
         /// <summary>
         /// 友好链接
         /// </summary>
+        [RegularExpression("^[A-Za-z0-9_-]+$")]
         public string friendUrl { get; set; }
         /// <summary>
         /// 是否置顶
