@@ -409,7 +409,14 @@
         </member>
         <member name="M:AdminBlog.Application.WaterfallImageService.SaveImage(System.Collections.Generic.List{Microsoft.AspNetCore.Http.IFormFile})">
             <summary>
-            上传图片
+            批量上传图片
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.WaterfallImageService.UploadImage(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传单张图片
             </summary>
             <param name="file"></param>
             <returns></returns>
