@@ -511,6 +511,33 @@
             菜单ID 
             </summary>
         </member>
+        <member name="T:AdminBlog.Core.SystemEntities.SysUploadConfig">
+            <summary>
+            上传文件
+            
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUploadConfig.Flag">
+            <summary>
+            上传位置（本地、腾讯云、阿里云）
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUploadConfig.SecretId">
+            <summary>
+            密钥（以下为密钥查看链接）
+            腾讯云：https://console.cloud.tencent.com/cam/capi
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUploadConfig.SecretKey">
+            <summary>
+            密钥
+            </summary>
+        </member>
+        <member name="P:AdminBlog.Core.SystemEntities.SysUploadConfig.IsDefault">
+            <summary>
+            是否为默认上传地址
+            </summary>
+        </member>
         <member name="T:AdminBlog.Core.SysUser">
             <summary>
             用户登录信息表

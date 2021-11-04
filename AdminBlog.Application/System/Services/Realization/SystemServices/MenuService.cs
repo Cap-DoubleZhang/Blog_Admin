@@ -272,7 +272,7 @@ namespace AdminBlog.Application
             }
 
             //获取当前登录用户拥有的角色对应的菜单集合
-            List<SysMenu> menus = await _sysMenuRepository.Entities.Where(a => menuIds.Contains(a.Id)).OrderBy(a => a.SortIndex).ToListAsync();
+            List<SysMenu> menus = await _sysMenuRepository.Entities.Where(a => menuIds.Contains(a.Id) && a.IsUse == UseTypeEnum.Active).OrderBy(a => a.SortIndex).ToListAsync();
             List<ResultRouteDto> resultLst = await GetChildMenuRoute(menus.Where(a => a.ParentModuleID == 0).ToList(), menus);
             return resultLst;
         }
