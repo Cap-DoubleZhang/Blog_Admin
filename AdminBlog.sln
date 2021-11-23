@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30223.230
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminBlog.Application", "AdminBlog.Application\AdminBlog.Application.csproj", "{AB699EE9-43A8-46F2-A855-04A26DE63372}"
 EndProject
@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminBlog.User", "AdminBlog
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 Image", "2 Image", "{3DCCA4EB-D449-44EC-8767-5A9F456D3A93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image.Entry", "Image.Entry\Image.Entry.csproj", "{B1D1576E-8196-417A-8ADC-CE3BD81E8C75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image.Entry", "Image.Entry\Image.Entry.csproj", "{EFA08663-31A8-488A-97BC-7DFEB4F468A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,10 +101,10 @@ Global
 		{649EDC41-DF58-4828-A6FA-27A2B4BAEF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{649EDC41-DF58-4828-A6FA-27A2B4BAEF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{649EDC41-DF58-4828-A6FA-27A2B4BAEF17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B1D1576E-8196-417A-8ADC-CE3BD81E8C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B1D1576E-8196-417A-8ADC-CE3BD81E8C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B1D1576E-8196-417A-8ADC-CE3BD81E8C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B1D1576E-8196-417A-8ADC-CE3BD81E8C75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFA08663-31A8-488A-97BC-7DFEB4F468A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFA08663-31A8-488A-97BC-7DFEB4F468A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFA08663-31A8-488A-97BC-7DFEB4F468A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFA08663-31A8-488A-97BC-7DFEB4F468A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,7 +117,7 @@ Global
 		{B4DB5A72-A594-4820-8787-8420C8567AC7} = {5B4EC8E1-D4EE-42D2-B8E4-63285C4ED1A2}
 		{34EBCFB5-66F4-4B07-A601-6A89C43F21DB} = {5B4EC8E1-D4EE-42D2-B8E4-63285C4ED1A2}
 		{649EDC41-DF58-4828-A6FA-27A2B4BAEF17} = {671FA95A-5DE4-45ED-A992-300F29405076}
-		{B1D1576E-8196-417A-8ADC-CE3BD81E8C75} = {3DCCA4EB-D449-44EC-8767-5A9F456D3A93}
+		{EFA08663-31A8-488A-97BC-7DFEB4F468A5} = {3DCCA4EB-D449-44EC-8767-5A9F456D3A93}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2073C2C-0FD3-452B-8047-8134D68E12CE}
