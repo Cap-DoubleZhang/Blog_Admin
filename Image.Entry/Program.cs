@@ -1,21 +1,11 @@
-var builder = WebApplication.CreateBuilder(args);
-
+var builder = WebApplication.CreateBuilder(args).Inject();
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
 //定向到HTTPS
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 //启用静态文件浏览
 app.UseStaticFiles();
+//跨域限制
+app.UseCorsAccessor();
 
-app.UseRouting();
-
-app.UseAuthorization();
-
+app.UseInject(string.Empty);
 app.Run();

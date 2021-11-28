@@ -26,6 +26,10 @@ namespace AdminBlog.Core
         /// </summary>
         public long FileSize { get; set; }
         /// <summary>
+        /// 文件对应的MD5值
+        /// </summary>
+        public string MD5Value { get; set; }
+        /// <summary>
         /// 文件下载次数
         /// </summary>
         public int DownTimes { get; set; }
