@@ -39,6 +39,8 @@ namespace Image.Core
             //启用静态文件浏览
             app.UseStaticFiles();
 
+            app.UseRouting();
+
             app.UseCorsAccessor();
 
             app.UseInject(string.Empty);

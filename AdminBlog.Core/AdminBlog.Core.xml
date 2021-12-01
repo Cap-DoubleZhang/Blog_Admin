@@ -361,6 +361,11 @@
             文件大小
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.SysFile.MD5Value">
+            <summary>
+            文件对应的MD5值
+            </summary>
+        </member>
         <member name="P:AdminBlog.Core.SysFile.DownTimes">
             <summary>
             文件下载次数

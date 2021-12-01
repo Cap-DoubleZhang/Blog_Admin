@@ -48,9 +48,11 @@ namespace Image.Application
                 throw Oops.Oh(FileEnum.InputFileNonExist);
             //要保存到哪个路径(本地的真实路径)
             var filePath = Path.Combine($"{App.WebHostEnvironment.WebRootPath}\\images\\{filePathName}\\");
+            //用于存储对应文件的网络路径
             string[] paths = new string[files.Count()];
             foreach (var file in files)
             {
+                FileHelper.GetMD5HashFromFile(file.FileName);
                 //上传的文件大小  KB
                 long fileSize = file.Length / 1024;
 
@@ -70,12 +72,13 @@ namespace Image.Application
 
                 SysFile sysFile = new SysFile
                 {
+                    Id = YitIdHelper.NextId(),
                     FileName = file.FileName,
-                    RealPath = filePath + finalName,
+                    RealPath = $"/images/{filePathName}/{finalName}",
                     FileSize = fileSize,
                 };
                 await _sysFileRepository.InsertNowAsync(sysFile);
-                paths.Append($"{_filePathOptions.UploadLocalhost}/images/" + filePathName + "/" + finalName);
+                paths.Append($"{_filePathOptions.UploadLocalhost}/images/{filePathName}/{finalName}");
             }
             //返回文件的网络路径(应写在配置文件中或自动获取)
             return paths;

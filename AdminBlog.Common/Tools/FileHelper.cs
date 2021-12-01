@@ -22,16 +22,18 @@ namespace AdminBlog.Common
         {
             try
             {
-                //using (var md5 = MD5.Create())
-                //{
-                //    var result = md5.ComputeHash(Encoding.UTF8.GetBytes(content));
-                //    string md5Str = BitConverter.ToString(result);
-                //    md5Str = md5Str.Replace("-", "");
-                //    md5Str = isUpper ? md5Str : md5Str.ToLower();
-                //    return is16 ? md5Str.Substring(8, 16) : md5Str;
-                //}
-
-                return null;
+                using (FileStream file = new FileStream(fileName, System.IO.FileMode.Open))
+                {
+                    MD5 md5 = new MD5CryptoServiceProvider();
+                    byte[] retVal = md5.ComputeHash(file);
+                    file.Close();
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < retVal.Length; i++)
+                    {
+                        sb.Append(retVal[i].ToString("x2"));
+                    }
+                    return sb.ToString();
+                }
             }
             catch (Exception ex)
             {
