@@ -414,13 +414,6 @@
             <param name="file"></param>
             <returns></returns>
         </member>
-        <member name="M:AdminBlog.Application.WaterfallImageService.UploadImage(Microsoft.AspNetCore.Http.IFormFile)">
-            <summary>
-            上传单张图片
-            </summary>
-            <param name="file"></param>
-            <returns></returns>
-        </member>
         <member name="M:AdminBlog.Application.WaterfallImageService.GetWaterfallImages(AdminBlog.Dtos.SearchWaterfallImageDto)">
             <summary>
              获取所有瀑布流图片

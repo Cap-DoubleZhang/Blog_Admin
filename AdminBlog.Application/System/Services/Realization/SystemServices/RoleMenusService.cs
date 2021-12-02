@@ -1,7 +1,6 @@
 ﻿using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
-using EFCore.BulkExtensions;
 using Furion;
 using Furion.DatabaseAccessor;
 using Furion.DataEncryption;

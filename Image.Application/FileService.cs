@@ -52,7 +52,7 @@ namespace Image.Application
             string[] paths = new string[files.Count()];
             foreach (var file in files)
             {
-                FileHelper.GetMD5HashFromFile(file.FileName);
+
                 //上传的文件大小  KB
                 long fileSize = file.Length / 1024;
 
@@ -68,17 +68,29 @@ namespace Image.Application
                 {
                     await file.CopyToAsync(stream);
                     await stream.FlushAsync();
-                }
 
-                SysFile sysFile = new SysFile
-                {
-                    Id = YitIdHelper.NextId(),
-                    FileName = file.FileName,
-                    RealPath = $"/images/{filePathName}/{finalName}",
-                    FileSize = fileSize,
-                };
-                await _sysFileRepository.InsertNowAsync(sysFile);
-                paths.Append($"{_filePathOptions.UploadLocalhost}/images/{filePathName}/{finalName}");
+                    //根据MD5值判断当前文件是否已经存在
+                    string MD5Value = FileHelper.GetMD5HashFromFile(stream);
+                    SysFile sysFileOld = await _sysFileRepository.SingleOrDefaultAsync(a => a.MD5Value == MD5Value);
+                    if (sysFileOld != null && sysFileOld.Id > 0)
+                    {
+                        File.Delete(filePath + finalName);
+                        paths.Append($"{_filePathOptions.UploadLocalhost}/{sysFileOld.RealPath}");
+                    }
+                    else
+                    {
+                        SysFile sysFile = new SysFile
+                        {
+                            Id = YitIdHelper.NextId(),
+                            FileName = file.FileName,
+                            RealPath = $"/images/{filePathName}/{finalName}",
+                            FileSize = fileSize,
+                            MD5Value = string.Empty,
+                        };
+                        await _sysFileRepository.InsertNowAsync(sysFile);
+                        paths.Append($"{_filePathOptions.UploadLocalhost}/images/{filePathName}/{finalName}");
+                    }
+                }
             }
             //返回文件的网络路径(应写在配置文件中或自动获取)
             return paths;

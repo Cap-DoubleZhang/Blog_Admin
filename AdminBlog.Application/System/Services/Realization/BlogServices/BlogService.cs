@@ -1,7 +1,6 @@
 ﻿using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
-using EFCore.BulkExtensions;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
@@ -160,7 +159,6 @@ namespace AdminBlog.Application
                                             .Set(a => a.PublishType, a => baseBatchUpdatePublishTypeDto.publishType)
                                             .Where(a => baseBatchUpdatePublishTypeDto.ids.Contains(a.Id))
                                             .ExecuteAsync();
-
             return true;
         }
 

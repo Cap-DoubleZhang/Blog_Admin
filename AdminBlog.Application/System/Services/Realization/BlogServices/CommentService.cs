@@ -1,7 +1,6 @@
 ﻿using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
-using EFCore.BulkExtensions;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
@@ -156,7 +155,10 @@ namespace AdminBlog.Application
         [HttpDelete]
         public async Task<bool> DeleteCommentAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _commentRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new Comment { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(Comment.IsDeleted), nameof(Comment.UpdatedTime) });
+            await _commentRepository.Context.BatchUpdate<Comment>()
+                                            .Set(a => a.IsDeleted, a => true)
+                                            .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
+                                            .ExecuteAsync();
 
             return true;
         }

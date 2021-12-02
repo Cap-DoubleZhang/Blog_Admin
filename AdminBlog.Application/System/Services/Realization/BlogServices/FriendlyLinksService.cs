@@ -1,7 +1,6 @@
 ﻿using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
-using EFCore.BulkExtensions;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
@@ -76,7 +75,7 @@ namespace AdminBlog.Application
         /// <param name="saveDto"></param>
         /// <returns></returns>
         [HttpPost("link")]
-        public async Task<bool> SaveFriendlyLinkAsync([FromBody]SaveFriendlyLinksDto saveDto)
+        public async Task<bool> SaveFriendlyLinkAsync([FromBody] SaveFriendlyLinksDto saveDto)
         {
             if (saveDto.Id == 0)
             {
@@ -117,8 +116,10 @@ namespace AdminBlog.Application
         [HttpDelete("link")]
         public async Task<bool> DeleteBlogAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _friendlyLinksRepository.Context.DeleteRangeAsync<FriendlyLinks>(a => baseBatchUpdateDto.ids.Contains(a.Id));
-
+            await _friendlyLinksRepository.Context.BatchUpdate<FriendlyLinks>()
+                                           .Set(a => a.IsDeleted, a => true)
+                                           .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
+                                           .ExecuteAsync();
             return true;
         }
         #endregion

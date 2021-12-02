@@ -1,7 +1,6 @@
 ﻿using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
-using EFCore.BulkExtensions;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
@@ -121,10 +120,15 @@ namespace AdminBlog.Application
         {
             //删除字典明细
             string[] dictionaries = _sysDictionaryRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).Select(a => a.Code).ToArray();
-            await _sysDictionaryDetailRepository.Where(a => dictionaries.Contains(a.Code)).BatchUpdateAsync(new SysDictionaryDetail { IsDeleted = true }, new List<string> { nameof(SysDictionaryDetail.IsDeleted) });
+            await _sysDictionaryDetailRepository.Context.BatchUpdate<SysDictionaryDetail>()
+                                          .Set(a => a.IsDeleted, a => true)
+                                          .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
+                                          .ExecuteAsync();
 
-            await _sysDictionaryRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysDictionary { IsDeleted = true }, new List<string> { nameof(SysDictionary.IsDeleted) });
-
+            await _sysDictionaryDetailRepository.Context.BatchUpdate<SysDictionary>()
+                                          .Set(a => a.IsDeleted, a => true)
+                                          .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
+                                          .ExecuteAsync();
             return true;
         }
         #endregion
@@ -218,8 +222,10 @@ namespace AdminBlog.Application
         [HttpDelete("dictionaryDetail")]
         public async Task<bool> DeleteDictionaryDetailAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysDictionaryDetailRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysDictionaryDetail { IsDeleted = true }, new List<string> { nameof(SysDictionaryDetail.IsDeleted) });
-
+            await _sysDictionaryDetailRepository.Context.BatchUpdate<SysRole>()
+                .Set(a => a.IsDeleted, a => true)
+                .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
+                .ExecuteAsync();
             return true;
         }
         #endregion

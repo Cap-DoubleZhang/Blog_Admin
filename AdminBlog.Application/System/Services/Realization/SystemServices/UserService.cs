@@ -2,7 +2,6 @@
 using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
-using EFCore.BulkExtensions;
 using Furion;
 using Furion.DatabaseAccessor;
 using Furion.DataEncryption;
@@ -307,7 +306,10 @@ namespace AdminBlog.Application
         [HttpPut("userIsUse")]
         public async Task<bool> UpdateUserIsUseAsync(UpdateSysUserUseDto updateSysUserUseDto)
         {
-            await _sysUserRepository.Where(a => updateSysUserUseDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsUse = updateSysUserUseDto.IsUse, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysUser.IsUse), nameof(SysUser.UpdatedTime), nameof(SysUser.UpdateBy) });
+            await _sysUserRepository.Context.BatchUpdate<SysUser>()
+                .Set(a => a.IsUse, a => updateSysUserUseDto.IsUse)
+                .Where(a => updateSysUserUseDto.ids.Contains(a.Id))
+                .ExecuteAsync();
             return true;
         }
 
@@ -343,8 +345,10 @@ namespace AdminBlog.Application
         [HttpDelete]
         public async Task<bool> DeleteUserAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysUserRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysUser { IsDeleted = true, UpdatedTime = DateTimeOffset.Now }, new List<string> { nameof(SysUser.IsDeleted), nameof(SysUser.UpdatedTime), nameof(SysUser.UpdateBy) });
-
+            await _sysUserRepository.Context.BatchUpdate<SysUser>()
+                .Set(a => a.IsDeleted, a => true)
+                .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
+                .ExecuteAsync();
             return true;
         }
 

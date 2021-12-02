@@ -1,7 +1,6 @@
 ﻿using AdminBlog.Core;
 using AdminBlog.Core.Enum;
 using AdminBlog.Dtos;
-using EFCore.BulkExtensions;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
@@ -222,7 +221,10 @@ namespace AdminBlog.Application
         [HttpPut("menuIsUse")]
         public async Task<bool> UpdateMenuIsUseAsync(UpdateSysMenuUseDto updateDto)
         {
-            await _sysMenuRepository.Where(a => updateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysMenu { IsUse = updateDto.IsUse, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysMenu.IsUse), nameof(SysMenu.UpdatedTime) });
+            await _sysMenuRepository.Context.BatchUpdate<SysMenu>()
+                                         .Set(a => a.IsUse, a => updateDto.IsUse)
+                                         .Where(a => updateDto.ids.Contains(a.Id))
+                                         .ExecuteAsync();
             return true;
         }
 
@@ -234,8 +236,10 @@ namespace AdminBlog.Application
         [HttpDelete("menu")]
         public async Task<bool> DeleteMenuAsync(BaseBatchUpdateDto baseBatchUpdateDto)
         {
-            await _sysMenuRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).BatchUpdateAsync(new SysMenu { IsDeleted = true, UpdatedTime = DateTime.UtcNow }, new List<string> { nameof(SysMenu.IsDeleted), nameof(SysMenu.UpdatedTime) });
-
+            await _sysMenuRepository.Context.BatchUpdate<SysMenu>()
+                                         .Set(a => a.IsDeleted, a => true)
+                                         .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
+                                         .ExecuteAsync();
             return true;
         }
 

@@ -95,64 +95,6 @@ namespace AdminBlog.Application
         }
 
         /// <summary>
-        /// 上传单张图片
-        /// </summary>
-        /// <param name="file"></param>
-        /// <returns></returns>
-        [HttpPost("image")]
-        public async Task<string> UploadImage(IFormFile file)
-        {
-            if (file == null)
-                throw Oops.Oh(FileEnum.InputFileNonExist);
-
-            string secretId = "AKIDvgJfkZ7PQAdroVv60dz4tRiiSw95lAI9"; //"云 API 密钥 SecretId";
-            string secretKey = "bvykFUS9ZiaCYeaGfnfGaeSzFEwOZS4Q";//"云 API 密钥 secretKey";
-            string region = "ap-shanghai";
-
-            CosXmlConfig config = new CosXmlConfig.Builder()
-                                    .IsHttps(true)  //设置默认 HTTPS 请求
-                                    .SetRegion(region)  //设置一个默认的存储桶地域
-                                    .SetDebugLog(true)  //显示日志
-                                    .Build();
-
-            long durationSecond = 600;  //每次请求签名有效时长，单位为秒
-            QCloudCredentialProvider cosCredentialProvider = new DefaultQCloudCredentialProvider(
-              secretId, secretKey, durationSecond);
-
-            #region 创建存储桶
-            CosXml cosXml = new CosXmlServer(config, cosCredentialProvider);
-            //string bucket = ""; //格式：BucketName-APPID
-            //PutBucketRequest request = new PutBucketRequest(bucket);
-            ////执行请求
-            //PutBucketResult result = cosXml.PutBucket(request);
-            ////请求成功
-            //Console.WriteLine(result.GetResultInfo());
-            #endregion
-
-            #region 上传文件
-            // 初始化 TransferConfig
-            TransferConfig transferConfig = new TransferConfig();
-
-            // 初始化 TransferManager
-            TransferManager transferManager = new TransferManager(cosXml, transferConfig);
-
-            string appid = "1305151950";
-            string bucket = "blog-image-1305151950";
-            string key = "exampleobject"; //对象在存储桶中的名称
-            var stream = File.Create("test.jpg");
-            await file.CopyToAsync(stream);
-
-            PutObjectRequest request = new PutObjectRequest(bucket, key, stream);
-            //执行请求
-            PutObjectResult result = cosXml.PutObject(request);
-            //对象的 eTag
-            string eTag = result.eTag;
-
-            #endregion
-            return null;
-        }
-
-        /// <summary>
         ///  获取所有瀑布流图片
         /// </summary>
         /// <returns></returns>

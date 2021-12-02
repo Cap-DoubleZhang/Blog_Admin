@@ -18,11 +18,11 @@ namespace AdminBlog.Common
         /// </summary>
         /// <param name="fileName">文件绝对路径</param>
         /// <returns>MD5值</returns>
-        public static string GetMD5HashFromFile(string fileName)
+        public static string GetMD5HashFromFile(FileStream fileStream)
         {
             try
             {
-                using (FileStream file = new FileStream(fileName, System.IO.FileMode.Open))
+                using (FileStream file = fileStream)
                 {
                     MD5 md5 = new MD5CryptoServiceProvider();
                     byte[] retVal = md5.ComputeHash(file);
