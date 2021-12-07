@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Furion" Version="3.0.0" />
-    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="3.0.0" />
+    <PackageReference Include="Furion" Version="3.0.5" />
+    <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="3.0.5" />
   </ItemGroup>
 
   <ItemGroup>

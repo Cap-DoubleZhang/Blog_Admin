@@ -143,7 +143,6 @@ namespace AdminBlog.Application
                                             .Set(a => a.IsDeleted, a => true)
                                             .Where(a => baseBatchUpdateDto.ids.Contains(a.Id))
                                             .ExecuteAsync();
-
             return true;
         }
 

@@ -1,5 +1,6 @@
 ﻿using Furion;
 using Furion.DatabaseAccessor;
+using Zack.EFCore.Batch;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

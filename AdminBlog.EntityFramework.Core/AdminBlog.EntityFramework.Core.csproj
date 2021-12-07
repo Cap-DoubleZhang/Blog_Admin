@@ -16,9 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
     <PackageReference Include="Yitter.IdGenerator" Version="1.0.12" />
-    <PackageReference Include="Zack.EFCore.Batch.MSSQL" Version="1.4.9" />
+    <PackageReference Include="Zack.EFCore.Batch.MSSQL_NET6" Version="6.0.3" />
   </ItemGroup>
 
   <ItemGroup>
