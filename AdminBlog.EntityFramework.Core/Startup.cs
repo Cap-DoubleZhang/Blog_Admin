@@ -14,7 +14,7 @@ namespace AdminBlog.EntityFramework.Core
             {
                 options.AddDbPool<DefaultDbContext>(providerName: default, optionBuilder: opt =>
                 {
-                    opt.UseBatchEF_MSSQL();
+                    opt.UseBatchEF_MySQLPomelo();
                 });
             }, "AdminBlog.Database.Migrations");
         }

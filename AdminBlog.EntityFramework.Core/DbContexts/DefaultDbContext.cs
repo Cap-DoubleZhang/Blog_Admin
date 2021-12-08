@@ -12,7 +12,7 @@ using Yitter.IdGenerator;
 
 namespace AdminBlog.EntityFramework.Core
 {
-    [AppDbContext("ConnectionStrings:DbConnectionString", DbProvider.SqlServer)]
+    [AppDbContext("ConnectionStrings:DbConnectionString", DbProvider.MySql)]
     public class DefaultDbContext : AppDbContext<DefaultDbContext>, IModelBuilderFilter
     {
         public DefaultDbContext(DbContextOptions<DefaultDbContext> options) : base(options)

@@ -3,23 +3,23 @@ using System;
 using AdminBlog.EntityFramework.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+
+#nullable disable
 
 namespace AdminBlog.Database.Migrations.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210919164918_v0.0.15")]
-    partial class v0015
+    [Migration("20211207130324_v0.0.1")]
+    partial class v001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.10")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("AdminBlog.Core.Blog", b =>
                 {
@@ -27,34 +27,43 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("BlogType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ContentHtml")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Cover")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("FriendUrl")
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("IsAllowedComments")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsTop")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Keyword")
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("PublishTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("PublishType")
                         .HasColumnType("int");
@@ -63,19 +72,19 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Synopsis")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Tags")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -91,50 +100,50 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Browser")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("EMail")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("HeadPortrait")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("IP")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("IPHome")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("QQ")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ShowName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Site")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("SystemVersion")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Value")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("varchar(500)");
 
                     b.HasKey("Id");
 
@@ -150,22 +159,22 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("LinkType")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("SortIndex")
                         .HasColumnType("int");
@@ -174,10 +183,10 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -190,31 +199,31 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsCanMultiple")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -225,7 +234,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160774000443461L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 337, DateTimeKind.Unspecified).AddTicks(1293), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 149, DateTimeKind.Unspecified).AddTicks(1431), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "博客类型"
@@ -234,7 +243,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160776633155653L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 337, DateTimeKind.Unspecified).AddTicks(1873), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 149, DateTimeKind.Unspecified).AddTicks(1434), new TimeSpan(0, 0, 0, 0, 0)),
                             IsCanMultiple = false,
                             IsDeleted = false,
                             Name = "邮箱类型"
@@ -243,8 +252,8 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 169581276397637L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 337, DateTimeKind.Unspecified).AddTicks(1882), new TimeSpan(0, 0, 0, 0, 0)),
-                            IsCanMultiple = false,
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 149, DateTimeKind.Unspecified).AddTicks(1435), new TimeSpan(0, 0, 0, 0, 0)),
+                            IsCanMultiple = true,
                             IsDeleted = false,
                             Name = "文章标签"
                         });
@@ -256,22 +265,22 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("DetailCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("SortIndex")
                         .HasColumnType("int");
@@ -280,10 +289,10 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -294,7 +303,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160774000443461L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1793), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1382), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "InformalEssay",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -304,7 +313,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 160776633155653L,
                             Code = "BlogType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1923), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1385), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Article",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -314,7 +323,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022405L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1930), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1386), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "TencentCompanyEmail",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -324,7 +333,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022406L,
                             Code = "EmailType",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1935), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1387), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "163FreeEmail",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -334,7 +343,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022407L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1939), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1388), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Java",
                             IsDeleted = false,
                             SortIndex = 0,
@@ -344,7 +353,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022408L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1963), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1390), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "C#",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -354,7 +363,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022409L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1974), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1391), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "NET Core",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -364,7 +373,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022410L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1984), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1392), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "JS",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -374,7 +383,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 161765323022411L,
                             Code = "BlogLabel",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 345, DateTimeKind.Unspecified).AddTicks(1994), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 150, DateTimeKind.Unspecified).AddTicks(1393), new TimeSpan(0, 0, 0, 0, 0)),
                             DetailCode = "Vue",
                             IsDeleted = false,
                             SortIndex = 1,
@@ -391,28 +400,28 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("EmailPassword")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("EmailType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("EmailUserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SmtpUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
@@ -431,28 +440,31 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("DownTimes")
                         .HasColumnType("int");
 
                     b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long>("FileSize")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("MD5Value")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RealPath")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -465,48 +477,48 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<bool>("Affix")
-                        .HasColumnType("bit")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("Affix");
 
                     b.Property<bool>("AlwaysShow")
-                        .HasColumnType("bit")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("AlwaysShow");
 
                     b.Property<string>("Component")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("Component");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("Hidden")
-                        .HasColumnType("bit")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("Hidden");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("IsUse")
                         .HasColumnType("int")
                         .HasColumnName("IsUse");
 
                     b.Property<string>("MenuCode")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("MenuCode");
 
                     b.Property<string>("MenuIcon")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("MenuIcon");
 
                     b.Property<string>("MenuName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("MenuName");
 
                     b.Property<string>("MenuPath")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("MenuPath");
 
                     b.Property<int>("MenuSource")
@@ -514,7 +526,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnName("MenuSource");
 
                     b.Property<string>("MenuTitle")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("MenuTitle");
 
                     b.Property<int>("MenuType")
@@ -522,7 +534,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnName("MenuType");
 
                     b.Property<bool>("NoCache")
-                        .HasColumnType("bit")
+                        .HasColumnType("tinyint(1)")
                         .HasColumnName("NoCache");
 
                     b.Property<long>("ParentModuleID")
@@ -530,7 +542,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnName("ParentModuleID");
 
                     b.Property<string>("Redirect")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("Redirect");
 
                     b.Property<int>("SortIndex")
@@ -541,7 +553,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -554,7 +566,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = true,
                             Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(4317), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1087), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -575,7 +587,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "blog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(4439), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1093), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -596,7 +608,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5045), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1094), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -617,7 +629,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "user",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5061), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1096), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -638,7 +650,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "role",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5066), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1097), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -659,7 +671,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "menu",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5086), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1099), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -680,7 +692,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "dictionary",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5091), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1100), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -701,7 +713,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "waterfallImages",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5677), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1102), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = true,
                             IsDeleted = false,
                             IsUse = 0,
@@ -722,7 +734,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "createBlog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5694), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1103), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = true,
                             IsDeleted = false,
                             IsUse = 0,
@@ -743,7 +755,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "editBlog",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5710), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1105), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = true,
                             IsDeleted = false,
                             IsUse = 0,
@@ -760,32 +772,11 @@ namespace AdminBlog.Database.Migrations.Migrations
                         },
                         new
                         {
-                            Id = 189020521594949L,
-                            Affix = false,
-                            AlwaysShow = false,
-                            Component = "userinfo",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5715), new TimeSpan(0, 0, 0, 0, 0)),
-                            Hidden = false,
-                            IsDeleted = false,
-                            IsUse = 0,
-                            MenuCode = "userinfo",
-                            MenuIcon = "el-icon-s-custom",
-                            MenuName = "用户信息",
-                            MenuPath = "userinfo",
-                            MenuSource = 0,
-                            MenuTitle = "用户信息",
-                            MenuType = 0,
-                            NoCache = false,
-                            ParentModuleID = 184831157919813L,
-                            SortIndex = 0
-                        },
-                        new
-                        {
                             Id = 189025873809477L,
                             Affix = false,
                             AlwaysShow = false,
                             Component = "uploadWaterfallImage",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5743), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1106), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -806,7 +797,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = false,
                             Component = "layout",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5748), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1107), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -827,7 +818,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                             Affix = false,
                             AlwaysShow = true,
                             Component = "links",
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 379, DateTimeKind.Unspecified).AddTicks(5754), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 154, DateTimeKind.Unspecified).AddTicks(1108), new TimeSpan(0, 0, 0, 0, 0)),
                             Hidden = false,
                             IsDeleted = false,
                             IsUse = 0,
@@ -857,28 +848,28 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("IsUse")
                         .HasColumnType("int")
                         .HasColumnName("IsUse");
 
                     b.Property<string>("RoleDesc")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("RoleDesc");
 
                     b.Property<string>("RoleName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("RoleName");
 
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -889,7 +880,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         {
                             Id = 156951674213412L,
                             AdminFlag = 1,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 392, DateTimeKind.Unspecified).AddTicks(5424), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 162, DateTimeKind.Unspecified).AddTicks(79), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsUse = 0,
                             RoleName = "Admin"
@@ -905,10 +896,10 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<long>("MenuID")
                         .HasColumnType("bigint")
@@ -922,7 +913,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -938,15 +929,15 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Descripts")
                         .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)")
+                        .HasColumnType("varchar(200)")
                         .HasColumnName("Descripts");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("IsOnline")
                         .HasColumnType("int")
@@ -957,11 +948,11 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnName("IsUse");
 
                     b.Property<string>("LastLoginIP")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("LastLoginIP");
 
                     b.Property<DateTime?>("LastLoginTime")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("LastLoginTime");
 
                     b.Property<int>("LoginTimes")
@@ -972,16 +963,16 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("UserLoginName")
                         .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)")
+                        .HasColumnType("varchar(32)")
                         .HasColumnName("UserLoginName");
 
                     b.Property<string>("UserPassword")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("varchar(100)")
                         .HasColumnName("UserPassword");
 
                     b.HasKey("Id");
@@ -992,7 +983,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 156951674213412L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 412, DateTimeKind.Unspecified).AddTicks(2001), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 164, DateTimeKind.Unspecified).AddTicks(453), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             IsOnline = 0,
                             IsUse = 0,
@@ -1008,54 +999,54 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("BirthDate");
 
                     b.Property<long?>("CreateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("EMail")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("EMail");
 
                     b.Property<string>("HeadPortrait")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("HeadPortrait");
 
                     b.Property<string>("IDCard")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("IDCard");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("Phone");
 
                     b.Property<string>("QQ")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("QQ");
 
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<long>("UserID")
                         .HasColumnType("bigint")
                         .HasColumnName("UserID");
 
                     b.Property<string>("UserShowName")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("UserShowName");
 
                     b.Property<string>("WeChat")
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("longtext")
                         .HasColumnName("WeChat");
 
                     b.HasKey("Id");
@@ -1066,7 +1057,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 111111L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 417, DateTimeKind.Unspecified).AddTicks(1229), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 165, DateTimeKind.Unspecified).AddTicks(3027), new TimeSpan(0, 0, 0, 0, 0)),
                             HeadPortrait = "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
                             IsDeleted = false,
                             UserID = 156951674213412L,
@@ -1083,10 +1074,10 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<long>("RoleID")
                         .HasColumnType("bigint")
@@ -1096,7 +1087,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<long>("UserID")
                         .HasColumnType("bigint")
@@ -1110,7 +1101,7 @@ namespace AdminBlog.Database.Migrations.Migrations
                         new
                         {
                             Id = 156951674213412L,
-                            CreatedTime = new DateTimeOffset(new DateTime(2021, 9, 19, 16, 49, 16, 419, DateTimeKind.Unspecified).AddTicks(7396), new TimeSpan(0, 0, 0, 0, 0)),
+                            CreatedTime = new DateTimeOffset(new DateTime(2021, 12, 7, 13, 3, 24, 166, DateTimeKind.Unspecified).AddTicks(533), new TimeSpan(0, 0, 0, 0, 0)),
                             IsDeleted = false,
                             RoleID = 156951674213412L,
                             UserID = 156951674213412L
@@ -1126,25 +1117,25 @@ namespace AdminBlog.Database.Migrations.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Src")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTimeOffset?>("UpdatedTime")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
