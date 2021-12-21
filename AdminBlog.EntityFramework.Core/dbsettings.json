@@ -1,6 +1,6 @@
 {
   "ConnectionStrings": {
     //数据库连接字符串
-    "DbConnectionString": "Server=150.158.144.192;Database=AdminBlog;Uid=root;Pwd=123456;"
+    "DbConnectionString": "Server=.;Database=AdminBlog;Uid=root;Pwd=123456;"
   }
 }

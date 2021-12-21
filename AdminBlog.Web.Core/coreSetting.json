@@ -12,6 +12,6 @@
   },
   "CorsAccessorSettings": {
     "PolicyName": "×Ô¶¨Òå¿çÓò",
-    "WithOrigins": [ "http://localhost:9527" ]
+    "WithOrigins": [ "http://localhost:9527", "http://adminblog.doublezh.com", "https://adminblog.doublezh.com" ]
   }
 }
