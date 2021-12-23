@@ -42,14 +42,14 @@ namespace Image.Application
         /// <param name="filePathName"></param>
         /// <returns></returns>
         [HttpPost("file")]
-        public async Task<string[]> UploadFile(List<IFormFile> files, string filePathName)
+        public async Task<List<string>> UploadFile(List<IFormFile> files, string filePathName)
         {
             if (files == null || files.Count() <= 0)
                 throw Oops.Oh(FileEnum.InputFileNonExist);
             //要保存到哪个路径(本地的真实路径)
-            var filePath = Path.Combine($"{App.WebHostEnvironment.WebRootPath}\\images\\{filePathName}\\");
+            var filePath = Path.Combine($"{App.WebHostEnvironment.WebRootPath}\\{filePathName}\\{DateTime.Now.Year}\\{DateTime.Now.Month}\\{DateTime.Now.Day}\\");
             //用于存储对应文件的网络路径
-            string[] paths = new string[files.Count()];
+            List<string> paths = new List<string>(files.Count());
             foreach (var file in files)
             {
 
@@ -75,7 +75,7 @@ namespace Image.Application
                     if (sysFileOld != null && sysFileOld.Id > 0)
                     {
                         File.Delete(filePath + finalName);
-                        paths.Append($"{_filePathOptions.UploadLocalhost}/{sysFileOld.RealPath}");
+                        paths.Append($"{_filePathOptions.UploadLocalhost}/{sysFileOld.Id}{sysFileOld.FileType}");
                     }
                     else
                     {
@@ -83,12 +83,13 @@ namespace Image.Application
                         {
                             Id = YitIdHelper.NextId(),
                             FileName = file.FileName,
-                            RealPath = $"/images/{filePathName}/{finalName}",
+                            RealPath = $"/{filePathName}/{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.Now.Day}/{finalName}",
                             FileSize = fileSize,
                             MD5Value = string.Empty,
+                            FileType = fileSuffix,
                         };
                         await _sysFileRepository.InsertNowAsync(sysFile);
-                        paths.Append($"{_filePathOptions.UploadLocalhost}/images/{filePathName}/{finalName}");
+                        paths.Add($"{_filePathOptions.UploadLocalhost}/{sysFile.Id}{sysFile.FileType}");
                     }
                 }
             }
@@ -102,7 +103,7 @@ namespace Image.Application
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("download/{id}")]
-        public async Task<IActionResult> DownFile(long id)
+        private async Task<IActionResult> DownFile(long id)
         {
             if (id <= 0)
                 throw Oops.Oh("必要参数为空.");
@@ -113,7 +114,65 @@ namespace Image.Application
             sysFile.DownTimes += 1;
             await _sysFileRepository.UpdateAsync(sysFile);
 
-            return new FileStreamResult(new FileStream(sysFile.RealPath, FileMode.Open), "application/octet-stream") { FileDownloadName = sysFile.FileName };
+            return new FileStreamResult(new FileStream($"{App.WebHostEnvironment.WebRootPath}/{sysFile.RealPath}", FileMode.Open), "application/octet-stream") { FileDownloadName = sysFile.FileName };
+        }
+
+        /// <summary>
+        /// 下载文件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("/{id}")]
+        public async Task<IActionResult> look(string id)
+        {
+            if (id.Length <= 0)
+                throw Oops.Oh("必要参数为空.");
+            string[] fileName = id.Split('.');
+            if (fileName.Length != 2)
+                throw Oops.Oh(FileEnum.FileNonExist);
+            long.TryParse(fileName[0], out long fileId);
+            if (fileId <= 0)
+                throw Oops.Oh(FileEnum.FileNonExist);
+            //获取文件
+            SysFile sysFile = await _sysFileRepository.SingleOrDefaultAsync(x => x.Id == fileId && x.FileType == $".{fileName[1]}");
+            if (sysFile == null || sysFile.Id <= 0)
+                throw Oops.Oh(FileEnum.FileNonExist);
+
+            //获取图片的返回类型
+            var contentTypDict = new Dictionary<string, string>
+            {
+                { ".jpg", "image/jpeg"},
+                { ".jpeg", "image/jpeg"},
+                { ".jpe", "image/jpeg"},
+                { ".png", "image/png"},
+                { ".gif", "image/gif"},
+                { ".ico", "image/x-ico"},
+                { ".tif", "image/tiff"},
+                { ".tiff", "image/tiff"},
+                { ".fax", "image/fax"},
+                { ".wbmp", "image/nd.wap.wbmp"},
+                { ".rp", "imagend.rn-realpix"},
+            };
+            string fileTypeStr = sysFile.FileType;
+            //非图片进行下载，图片进行预览
+            if (!contentTypDict.ContainsKey(fileTypeStr))
+            {
+                //更新下载次数
+                sysFile.DownTimes += 1;
+                await _sysFileRepository.UpdateAsync(sysFile);
+                return new FileStreamResult(new FileStream($"{App.WebHostEnvironment.WebRootPath}/{sysFile.RealPath}", FileMode.Open), "application/octet-stream") { FileDownloadName = sysFile.FileName };
+            }
+            else
+            {
+                using (FileStream fs = new FileStream($"{App.WebHostEnvironment.WebRootPath}/{sysFile.RealPath}", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    var bytes = new byte[fs.Length];
+                    fs.Read(bytes, 0, bytes.Length);
+                    fs.Close();
+                    string str = Path.GetExtension(sysFile.RealPath).ToLower();
+                    return new FileContentResult(bytes, contentTypDict[fileTypeStr]);
+                }
+            }
         }
         #endregion
     }

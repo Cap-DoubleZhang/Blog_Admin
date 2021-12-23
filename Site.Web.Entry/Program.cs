@@ -16,7 +16,7 @@ namespace Site.Web.Entry
                 {
                     webBuilder
                     .Inject()
-                    .UseUrls("http://*:5002")
+                    //.UseUrls("http://*:5002")
                     .UseStartup<Startup>();
                 });
     }

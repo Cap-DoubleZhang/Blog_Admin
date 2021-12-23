@@ -351,6 +351,11 @@
             文件名称
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.SysFile.FileType">
+            <summary>
+            文件类型
+            </summary>
+        </member>
         <member name="P:AdminBlog.Core.SysFile.RealPath">
             <summary>
             真实文件路径

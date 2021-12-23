@@ -1,8 +1,6 @@
 //var builder = WebApplication.CreateBuilder(args).Inject();
 //var app = builder.Build();
-////app.Run();
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+//app.Run();
 
 namespace AdminBlog.Web.Entry
 {
@@ -19,7 +17,7 @@ namespace AdminBlog.Web.Entry
                 {
                     webBuilder
                     .Inject()
-                    .UseUrls("http://*:5000")
+                    //.UseUrls("http://127.0.0.1:5000")
                     .UseStartup<Startup>();
                 });
     }

@@ -18,6 +18,10 @@ namespace AdminBlog.Core
         /// </summary>
         public string FileName { get; set; }
         /// <summary>
+        /// 文件类型
+        /// </summary>
+        public string FileType { get; set; }
+        /// <summary>
         /// 真实文件路径
         /// </summary>
         public string RealPath { get; set; }
