@@ -47,7 +47,7 @@ namespace Image.Application
             if (files == null || files.Count() <= 0)
                 throw Oops.Oh(FileEnum.InputFileNonExist);
             //要保存到哪个路径(本地的真实路径)
-            var filePath = Path.Combine($"{App.WebHostEnvironment.WebRootPath}\\{filePathName}\\{DateTime.Now.Year}\\{DateTime.Now.Month}\\{DateTime.Now.Day}\\");
+            var filePath = Path.Combine($"{App.WebHostEnvironment.WebRootPath}/{filePathName}/{DateTime.Now.Year}/{DateTime.Now.Month}/{DateTime.Now.Day}/");
             //用于存储对应文件的网络路径
             List<string> paths = new List<string>(files.Count());
             foreach (var file in files)
@@ -169,7 +169,6 @@ namespace Image.Application
                     var bytes = new byte[fs.Length];
                     fs.Read(bytes, 0, bytes.Length);
                     fs.Close();
-                    string str = Path.GetExtension(sysFile.RealPath).ToLower();
                     return new FileContentResult(bytes, contentTypDict[fileTypeStr]);
                 }
             }

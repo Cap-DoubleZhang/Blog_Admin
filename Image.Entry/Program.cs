@@ -1,3 +1,3 @@
 var builder = WebApplication.CreateBuilder(args).Inject();
 var app = builder.Build();
-app.Run();
+app.Run("http://*:5004");
