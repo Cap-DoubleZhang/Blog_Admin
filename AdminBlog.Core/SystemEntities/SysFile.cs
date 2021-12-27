@@ -37,5 +37,9 @@ namespace AdminBlog.Core
         /// 文件下载次数
         /// </summary>
         public int DownTimes { get; set; }
+        /// <summary>
+        /// 文件类型，所属站点
+        /// </summary>
+        public string Site { get; set; }
     }
 }

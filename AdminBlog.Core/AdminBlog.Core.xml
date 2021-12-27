@@ -376,6 +376,11 @@
             文件下载次数
             </summary>
         </member>
+        <member name="P:AdminBlog.Core.SysFile.Site">
+            <summary>
+            文件类型，所属站点
+            </summary>
+        </member>
         <member name="T:AdminBlog.Core.SysMenu">
             <summary>
             后台菜单表

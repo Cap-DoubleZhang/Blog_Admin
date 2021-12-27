@@ -89,7 +89,7 @@ namespace Site.Application
                 idL = long.Parse(id);
             }
             Blog blog = await _blogRepository.SingleOrDefaultAsync(x => x.PublishTime.Year == year && x.PublishTime.Month == month &&
-            x.PublishTime.Day == day && (x.FriendUrl == id || x.Id == idL));
+            x.PublishTime.Day == day && x.PublishType == BlogPublishTypeEnum.Publish && (x.FriendUrl == id || x.Id == idL));
             return blog.Adapt<ResultSiteBlogDto>();
         }
     }

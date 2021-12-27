@@ -1,10 +1,12 @@
 ﻿using AdminBlog.Common;
 using AdminBlog.Core;
 using AdminBlog.Core.Enum;
+using AdminBlog.Dtos;
 using Furion;
 using Furion.DatabaseAccessor;
 using Furion.DynamicApiController;
 using Furion.FriendlyException;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -87,6 +89,7 @@ namespace Image.Application
                             FileSize = fileSize,
                             MD5Value = string.Empty,
                             FileType = fileSuffix,
+                            Site = filePathName,
                         };
                         await _sysFileRepository.InsertNowAsync(sysFile);
                         paths.Add($"{_filePathOptions.UploadLocalhost}/{sysFile.Id}{sysFile.FileType}");
@@ -95,26 +98,6 @@ namespace Image.Application
             }
             //返回文件的网络路径(应写在配置文件中或自动获取)
             return paths;
-        }
-
-        /// <summary>
-        /// 下载文件
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("download/{id}")]
-        private async Task<IActionResult> DownFile(long id)
-        {
-            if (id <= 0)
-                throw Oops.Oh("必要参数为空.");
-            SysFile sysFile = await _sysFileRepository.FindOrDefaultAsync(id);
-            if (sysFile == null || sysFile.Id <= 0)
-                throw Oops.Oh(FileEnum.FileNonExist);
-            //更新下载次数
-            sysFile.DownTimes += 1;
-            await _sysFileRepository.UpdateAsync(sysFile);
-
-            return new FileStreamResult(new FileStream($"{App.WebHostEnvironment.WebRootPath}/{sysFile.RealPath}", FileMode.Open), "application/octet-stream") { FileDownloadName = sysFile.FileName };
         }
 
         /// <summary>
@@ -172,6 +155,46 @@ namespace Image.Application
                     return new FileContentResult(bytes, contentTypDict[fileTypeStr]);
                 }
             }
+        }
+
+        /// <summary>
+        ///  获取所有二次元图片
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("acgn")]
+        public async Task<List<ResultSysImagesDto>> GetACGNImages([FromQuery] SearchWaterfallImageDto dto)
+        {
+            PagedList<SysFile> files = await _sysFileRepository.Entities.OrderByDescending(a => a.CreatedTime).ToPagedListAsync(dto.pageIndex, 30);
+            //获取图片的返回类型
+            var contentTypDict = new Dictionary<string, string>
+            {
+                { ".jpg", "image/jpeg"},
+                { ".jpeg", "image/jpeg"},
+                { ".jpe", "image/jpeg"},
+                { ".png", "image/png"},
+                { ".gif", "image/gif"},
+                { ".ico", "image/x-ico"},
+                { ".tif", "image/tiff"},
+                { ".tiff", "image/tiff"},
+                { ".fax", "image/fax"},
+                { ".wbmp", "image/nd.wap.wbmp"},
+                { ".rp", "imagend.rn-realpix"},
+            };
+            List<ResultSysImagesDto> result = new List<ResultSysImagesDto>();
+            foreach (var item in files.Items)
+            {
+                using (FileStream fs = new FileStream($"{App.WebHostEnvironment.WebRootPath}/{item.RealPath}", FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    var bytes = new byte[fs.Length];
+                    fs.Read(bytes, 0, bytes.Length);
+                    fs.Close();
+                    result.Add(new ResultSysImagesDto
+                    {
+                        image = new FileContentResult(bytes, contentTypDict[item.FileType]),
+                    });
+                }
+            }
+            return result;
         }
         #endregion
     }
