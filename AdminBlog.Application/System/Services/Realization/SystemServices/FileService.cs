@@ -42,6 +42,42 @@ namespace AdminBlog.Application
 
         #region 文件操作
         /// <summary>
+        /// 获取系统文件分页列表
+        /// </summary>
+        /// <param name="searchDto"></param>
+        /// <returns></returns>
+        [HttpGet("files")]
+        public async Task<PagedList<ResultSysFileDto>> GetPagedDictionariesAsync([FromQuery] SearchSysFileDto searchDto)
+        {
+            #region 关键词进行条件查询 多条件使用空格分开
+            Expression<Func<SysFile, bool>> expression = t => true;
+            if (!string.IsNullOrWhiteSpace(searchDto.keyword))
+            {
+                string[] keys = searchDto.keyword.Trim().Split(' ');
+                if (!string.IsNullOrWhiteSpace(keys[0]))
+                {
+                    foreach (var item in keys)
+                    {
+                        if (item == keys[0])
+                        {
+                            expression = expression.And(x => x.FileName.Contains(item)
+                                                          || x.FileType.Contains(item));
+                        }
+                        else
+                        {
+                            expression = expression.Or(x => x.FileName.Contains(item)
+                                                          || x.FileType.Contains(item));
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            PagedList<SysFile> files = await _sysFileRepository.Where(expression).OrderByDescending(x => x.CreatedTime).ToPagedListAsync(searchDto.pageIndex, searchDto.pageSize);
+            return files.Adapt<PagedList<ResultSysFileDto>>();
+        }
+
+        /// <summary>
         /// 上传文件
         /// </summary>
         /// <param name="file"></param>

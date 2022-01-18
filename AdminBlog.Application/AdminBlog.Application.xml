@@ -159,6 +159,13 @@
             系统文件
             </summary>
         </member>
+        <member name="M:AdminBlog.Application.FileService.GetPagedDictionariesAsync(AdminBlog.Dtos.SearchSysFileDto)">
+            <summary>
+            获取系统文件分页列表
+            </summary>
+            <param name="searchDto"></param>
+            <returns></returns>
+        </member>
         <member name="M:AdminBlog.Application.FileService.UploadFile(Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
             上传文件

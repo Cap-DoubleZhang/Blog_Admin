@@ -164,7 +164,7 @@ namespace Image.Application
         [HttpGet("acgn")]
         public async Task<List<ResultSysImagesDto>> GetACGNImages([FromQuery] SearchWaterfallImageDto dto)
         {
-            PagedList<SysFile> files = await _sysFileRepository.Entities.OrderByDescending(a => a.CreatedTime).ToPagedListAsync(dto.pageIndex, 30);
+            PagedList<SysFile> files = await _sysFileRepository.Entities.Where(x => x.Site == "acgn").OrderByDescending(a => a.CreatedTime).ToPagedListAsync(dto.pageIndex, 30);
             //获取图片的返回类型
             var contentTypDict = new Dictionary<string, string>
             {
@@ -195,6 +195,26 @@ namespace Image.Application
                 }
             }
             return result;
+        }
+
+        /// <summary>
+        /// 单个/批量删除文件
+        /// </summary>
+        /// <param name="baseBatchUpdateDto"></param>
+        /// <returns></returns>
+        [HttpDelete("files")]
+        public async Task<bool> DeleteFileAsync(BaseBatchUpdateDto baseBatchUpdateDto)
+        {
+            _sysFileRepository.Where(a => baseBatchUpdateDto.ids.Contains(a.Id)).ToList().ForEach(a =>
+            {
+                if (File.Exists($"{App.WebHostEnvironment.WebRootPath}{a.RealPath}"))
+                {
+                    File.Delete($"{App.WebHostEnvironment.WebRootPath}{a.RealPath}");
+                }
+            });
+            await _sysFileRepository.Context.DeleteRangeAsync<SysFile>(a => baseBatchUpdateDto.ids.Contains(a.Id));
+
+            return true;
         }
         #endregion
     }
