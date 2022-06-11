@@ -1,6 +1,6 @@
 {
   "CorsAccessorSettings": {
-    "PolicyName": "×Ô¶¨Òå¿çÓò",
+    "PolicyName": "è·¨åŸŸ",
     "WithOrigins": [ "http://localhost:9527", "http://localhost:3000", "http://localhost:63368" ]
   }
 }

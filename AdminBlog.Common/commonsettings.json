@@ -1,33 +1,33 @@
 {
-  //ÃÜÂëÅäÖÃ
+  //åŠ å¯†è®¾ç½®
   "PasswordSetting": {
-    //¼ÓÃÜ·½Ê½£¨0£º²»¼ÓÃÜ£»1£ºMD5¼ÓÃÜ£»2£ºMD5¼ÓÃÜºó½ØÈ¡£©
+    //0ï¼šä¸åŠ å¯†  1ï¼šMD5åŠ å¯†  2ï¼šMD5åŠ å¯†åŽå–æŸå‡ ä½
     "EncryptType": "2",
-    //ÃÜÂë½ØÈ¡¿ªÊ¼Ë÷Òý
+    //æˆªå–å¼€å§‹
     "SubStart": "6",
-    //ÃÜÂë½ØÈ¡Î»Êý
+    //æˆªå–å¤šå°‘
     "SubString": "20",
-    //³õÊ¼Ä¬ÈÏÃÜÂë
+    //é»˜è®¤å¯†ç 
     "DefaultPassword": "000000"
   },
-  //µ±Ç°µÇÂ¼ÓÃ»§±êÊ¶³£Á¿
+  //å½“å‰ç™»å½•ç”¨æˆ·æ ‡è¯†
   "CurrentUserInfo": {
     //USER ID
     "USERID": "USERID",
     //USER NAME
     "USERNAME": "USERNAME"
   },
-  //ÐÂÔöÓÃ»§ÐÅÏ¢Îª¿ÕÊ±£¬Ä¬ÈÏÐÅÏ¢
+  //ç”¨æˆ·é»˜è®¤è®¾ç½®
   "UserInfoConst": {
-    //Í·Ïñ
+    //å¤´å¤´åƒ
     "HeadPortrait": "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
-    //¼ò½é
-    "Introduction": "Õâ¸ö¼Ò»ïÌ«ÀÁÁË£¬Ê²Ã´¶¼Ã»ÁôÏÂ..."
+    //ç®€è¿°
+    "Introduction": "ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Ì«ï¿½ï¿½ï¿½Ë£ï¿½Ê²Ã´ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½..."
   },
-  //ÉÏ´«µÄÎÄ¼þÂ·¾¶
+  //æ–‡ä»¶ä¸Šä¼ è·¯å¾„
   "FilePath": {
     "RealFilePath": "E:\\Gitee\\FurionAdminBlog\\AdminBlog.Web.Entry",
-    //±¾µØÎÄ¼þÉÏ´«Á´½ÓÇ°×º
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½Ç°×º
     "UploadLocalhost": "https://localhost:5001"
   }
 }

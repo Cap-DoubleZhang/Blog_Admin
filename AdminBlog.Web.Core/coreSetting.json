@@ -1,17 +1,17 @@
 {
   "JWTSettings": {
-    "ValidateIssuerSigningKey": true, // ÊÇ·ñÑéÖ¤ÃÜÔ¿£¬bool ÀàĞÍ£¬Ä¬ÈÏtrue
-    "IssuerSigningKey": "h6ghjaUgaYG6g5rt4h7gFGhghSDFhhighugggJghg2f4fvWEYfg", // ÃÜÔ¿£¬string ÀàĞÍ£¬±ØĞëÊÇ¸´ÔÓÃÜÔ¿£¬³¤¶È´óÓÚ16
-    "ValidateIssuer": true, // ÊÇ·ñÑé546Ö¤Ç©·¢·½£¬bool ÀàĞÍ£¬Ä¬ÈÏtrue
-    "ValidIssuer": "Double Zhang", // Ç©·¢·½£¬string ÀàĞÍ
-    "ValidateAudience": true, // ÊÇ·ñÑéÖ¤Ç©ÊÕ·½£¬bool ÀàĞÍ£¬Ä¬ÈÏtrue
-    "ValidAudience": "Double Zhang", // Ç©ÊÕ·½£¬string ÀàĞÍ
-    "ValidateLifetime": true, // ÊÇ·ñÑéÖ¤¹ıÆÚÊ±¼ä£¬bool ÀàĞÍ£¬Ä¬ÈÏtrue£¬½¨Òétrue
-    "ExpiredTime": 30, // ¹ıÆÚÊ±¼ä£¬long ÀàĞÍ£¬µ¥Î»·ÖÖÓ£¬Ä¬ÈÏ20·ÖÖÓ
-    "ClockSkew": 5 // ¹ıÆÚÊ±¼äÈİ´íÖµ£¬long ÀàĞÍ£¬µ¥Î»Ãë£¬Ä¬ÈÏ 5Ãë
+    "ValidateIssuerSigningKey": true, // æ˜¯å¦éªŒè¯å¯†é’¥ï¼Œbool ç±»å‹ï¼Œé»˜è®¤true
+    "IssuerSigningKey": "h6ghjaUgaYG6g5rt4h7gFGhghSDFhhighugggJghg2f4fvWEYfg", // å¯†é’¥ï¼Œstring ç±»å‹ï¼Œå¿…é¡»æ˜¯å¤æ‚å¯†é’¥ï¼Œé•¿åº¦å¤§äº16
+    "ValidateIssuer": true, // æ˜¯å¦éªŒè¯ç­¾å‘æ–¹ï¼Œbool ç±»å‹ï¼Œé»˜è®¤true
+    "ValidIssuer": "Double Zhang", // ç­¾å‘æ–¹ï¼Œstring ç±»å‹
+    "ValidateAudience": true, // æ˜¯å¦éªŒè¯ç­¾æ”¶æ–¹ï¼Œbool ç±»å‹ï¼Œé»˜è®¤true
+    "ValidAudience": "Double Zhang", // ç­¾æ”¶æ–¹ï¼Œstring ç±»å‹
+    "ValidateLifetime": true, // æ˜¯å¦éªŒè¯è¿‡æœŸæ—¶é—´ï¼Œbool ç±»å‹ï¼Œé»˜è®¤trueï¼Œå»ºè®®true
+    "ExpiredTime": 30, // è¿‡æœŸæ—¶é—´ï¼Œlong ç±»å‹ï¼Œå•ä½åˆ†é’Ÿï¼Œé»˜è®¤20åˆ†é’Ÿ
+    "ClockSkew": 5 // è¿‡æœŸæ—¶é—´å®¹é”™å€¼ï¼Œlong ç±»å‹ï¼Œå•ä½ç§’ï¼Œé»˜è®¤ 5ç§’
   },
   "CorsAccessorSettings": {
-    "PolicyName": "×Ô¶¨Òå¿çÓò",
+    "PolicyName": "è·¨åŸŸ",
     "WithOrigins": [ "http://localhost:9527" ]
   }
 }
