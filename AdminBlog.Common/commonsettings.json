@@ -1,33 +1,33 @@
 {
-  //加密设置
+  //密码配置
   "PasswordSetting": {
-    //0：不加密  1：MD5加密  2：MD5加密后取某几位
+    //加密方式（0：不加密；1：MD5加密；2：MD5加密后截取）
     "EncryptType": "2",
-    //截取开始
+    //密码截取开始索引
     "SubStart": "6",
-    //截取多少
+    //密码截取位数
     "SubString": "20",
-    //默认密码
+    //初始默认密码
     "DefaultPassword": "000000"
   },
-  //当前登录用户标识
+  //当前登录用户标识常量
   "CurrentUserInfo": {
     //USER ID
     "USERID": "USERID",
     //USER NAME
     "USERNAME": "USERNAME"
   },
-  //用户默认设置
+  //新增用户信息为空时，默认信息
   "UserInfoConst": {
-    //头头像
+    //头像
     "HeadPortrait": "https://p1.music.126.net/RVcAosDFn4uLeSZ_byDGdg==/109951165726231133.jpg?param=1024y1024",
-    //简述
-    "Introduction": "����һ�̫���ˣ�ʲô��û����..."
+    //简介
+    "Introduction": "这个家伙太懒了，什么都没留下..."
   },
-  //文件上传路径
+  //上传的文件路径
   "FilePath": {
-    "RealFilePath": "E:\\Gitee\\FurionAdminBlog\\AdminBlog.Web.Entry",
-    //�����ļ��ϴ�����ǰ׺
-    "UploadLocalhost": "https://localhost:5001"
+    "RealFilePath": "E:\\PublishProjects\\Blogs\\Images",
+    //本地文件上传链接前缀
+    "UploadLocalhost": "https://images.doublezh.com"
   }
 }
