@@ -1,17 +1,17 @@
 {
   "JWTSettings": {
-    "ValidateIssuerSigningKey": true, // ÊÇ·ñÑéÖ¤ÃÜÔ¿£¬bool ÀàĞÍ£¬Ä¬ÈÏtrue
-    "IssuerSigningKey": "h6ghjaUgaYG6g5rt4h7gFGhghSDFhhighugggJghg2f4fvWEYfg", // ÃÜÔ¿£¬string ÀàĞÍ£¬±ØĞëÊÇ¸´ÔÓÃÜÔ¿£¬³¤¶È´óÓÚ16
-    "ValidateIssuer": true, // ÊÇ·ñÑé546Ö¤Ç©·¢·½£¬bool ÀàĞÍ£¬Ä¬ÈÏtrue
-    "ValidIssuer": "Double Zhang", // Ç©·¢·½£¬string ÀàĞÍ
-    "ValidateAudience": true, // ÊÇ·ñÑéÖ¤Ç©ÊÕ·½£¬bool ÀàĞÍ£¬Ä¬ÈÏtrue
-    "ValidAudience": "Double Zhang", // Ç©ÊÕ·½£¬string ÀàĞÍ
-    "ValidateLifetime": true, // ÊÇ·ñÑéÖ¤¹ıÆÚÊ±¼ä£¬bool ÀàĞÍ£¬Ä¬ÈÏtrue£¬½¨Òétrue
-    "ExpiredTime": 30, // ¹ıÆÚÊ±¼ä£¬long ÀàĞÍ£¬µ¥Î»·ÖÖÓ£¬Ä¬ÈÏ20·ÖÖÓ
-    "ClockSkew": 5 // ¹ıÆÚÊ±¼äÈİ´íÖµ£¬long ÀàĞÍ£¬µ¥Î»Ãë£¬Ä¬ÈÏ 5Ãë
+    "ValidateIssuerSigningKey": true, // ï¿½Ç·ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Ô¿ï¿½ï¿½bool ï¿½ï¿½ï¿½Í£ï¿½Ä¬ï¿½ï¿½true
+    "IssuerSigningKey": "h6ghjaUgaYG6g5rt4h7gFGhghSDFhhighugggJghg2f4fvWEYfg", // ï¿½ï¿½Ô¿ï¿½ï¿½string ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½16
+    "ValidateIssuer": true, // ï¿½Ç·ï¿½ï¿½ï¿½546Ö¤Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bool ï¿½ï¿½ï¿½Í£ï¿½Ä¬ï¿½ï¿½true
+    "ValidIssuer": "Double Zhang", // Ç©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½string ï¿½ï¿½ï¿½ï¿½
+    "ValidateAudience": true, // ï¿½Ç·ï¿½ï¿½ï¿½Ö¤Ç©ï¿½Õ·ï¿½ï¿½ï¿½bool ï¿½ï¿½ï¿½Í£ï¿½Ä¬ï¿½ï¿½true
+    "ValidAudience": "Double Zhang", // Ç©ï¿½Õ·ï¿½ï¿½ï¿½string ï¿½ï¿½ï¿½ï¿½
+    "ValidateLifetime": true, // ï¿½Ç·ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬bool ï¿½ï¿½ï¿½Í£ï¿½Ä¬ï¿½ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½true
+    "ExpiredTime": 30, // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬long ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ó£ï¿½Ä¬ï¿½ï¿½20ï¿½ï¿½ï¿½ï¿½
+    "ClockSkew": 5 // ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½İ´ï¿½Öµï¿½ï¿½long ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½Î»ï¿½ë£¬Ä¬ï¿½ï¿½ 5ï¿½ï¿½
   },
   "CorsAccessorSettings": {
-    "PolicyName": "×Ô¶¨Òå¿çÓò",
+    "PolicyName": "ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
     "WithOrigins": [ "http://localhost:9527", "http://adminblog.doublezh.com", "https://adminblog.doublezh.com" ]
   }
 }

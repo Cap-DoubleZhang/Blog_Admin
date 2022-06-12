@@ -29,6 +29,7 @@
     <ProjectReference Include="..\AdminBlog.Core\AdminBlog.Core.csproj" />
     <ProjectReference Include="..\AdminBlog.Dtos\AdminBlog.Dtos.csproj" />
     <ProjectReference Include="..\AdminBlog.MapperConfig\AdminBlog.MapperConfig.csproj" />
+    <ProjectReference Include="..\AdminBlog.SignalRApplication\AdminBlog.SignalRApplication.csproj" />
     <ProjectReference Include="..\AdminBlog.User\AdminBlog.User.csproj" />
   </ItemGroup>
 

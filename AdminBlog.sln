@@ -41,7 +41,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Image.Core", "Image.Core\Im
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Image.Application", "Image.Application\Image.Application.csproj", "{5B51BF34-41C8-411B-92D3-18A58E2639E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Image.Entry", "Image.Entry\Image.Entry.csproj", "{EEE3DFDA-7CCD-4DA7-945A-EC0797E783CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Image.Entry", "Image.Entry\Image.Entry.csproj", "{EEE3DFDA-7CCD-4DA7-945A-EC0797E783CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminBlog.SignalRApplication", "AdminBlog.SignalRApplication\AdminBlog.SignalRApplication.csproj", "{5F0399F7-E29B-4CFC-99BB-A900F4D80A7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{EEE3DFDA-7CCD-4DA7-945A-EC0797E783CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEE3DFDA-7CCD-4DA7-945A-EC0797E783CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEE3DFDA-7CCD-4DA7-945A-EC0797E783CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F0399F7-E29B-4CFC-99BB-A900F4D80A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F0399F7-E29B-4CFC-99BB-A900F4D80A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F0399F7-E29B-4CFC-99BB-A900F4D80A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F0399F7-E29B-4CFC-99BB-A900F4D80A7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{92EC082C-594B-4F94-9598-FB5B4CA619AD} = {3DCCA4EB-D449-44EC-8767-5A9F456D3A93}
 		{5B51BF34-41C8-411B-92D3-18A58E2639E0} = {3DCCA4EB-D449-44EC-8767-5A9F456D3A93}
 		{EEE3DFDA-7CCD-4DA7-945A-EC0797E783CC} = {3DCCA4EB-D449-44EC-8767-5A9F456D3A93}
+		{5F0399F7-E29B-4CFC-99BB-A900F4D80A7A} = {671FA95A-5DE4-45ED-A992-300F29405076}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B2073C2C-0FD3-452B-8047-8134D68E12CE}
