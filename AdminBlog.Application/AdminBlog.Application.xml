@@ -96,6 +96,26 @@
             <param name="baseBatchUpdateDto"></param>
             <returns></returns>
         </member>
+        <member name="T:AdminBlog.Application.CommunicationService">
+            <summary>
+            实时通讯
+            </summary>
+        </member>
+        <member name="M:AdminBlog.Application.CommunicationService.PushMessage(System.String)">
+            <summary>
+            推送消息
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AdminBlog.Application.CommunicationService.SendMessageToUser(System.Int64,System.String)">
+            <summary>
+            发送信息给某个用户
+            </summary>
+            <param name="uid">接收方ID</param>
+            <param name="content">发送内容</param>
+            <returns></returns>
+        </member>
         <member name="T:AdminBlog.Application.CurrentUserService">
             <summary>
             获取当前登录用户

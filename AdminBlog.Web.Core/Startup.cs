@@ -1,4 +1,5 @@
-﻿using Furion;
+﻿using AdminBlog.SignalRApplication;
+using Furion;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,8 @@ namespace AdminBlog.Web.Core
 
             //注册跨域
             services.AddCorsAccessor();
+
+            services.AddSignalR();
 
             //注册时间返回格式
             services.AddControllersWithViews().AddJsonOptions(options =>
@@ -52,6 +55,7 @@ namespace AdminBlog.Web.Core
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<SignalRHub>("communication");
                 endpoints.MapControllers();
             });
         }

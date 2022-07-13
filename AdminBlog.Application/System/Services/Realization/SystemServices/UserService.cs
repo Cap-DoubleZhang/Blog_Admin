@@ -21,6 +21,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AdminBlog.User;
+using AdminBlog.SignalRApplication;
+using Microsoft.AspNetCore.SignalR;
 
 namespace AdminBlog.Application
 {
@@ -40,8 +42,8 @@ namespace AdminBlog.Application
         private readonly UserInfoConstOptions _userInfoConstOptions;
         private readonly IRepository<SysRole> _sysRoleRepository;
         private readonly IRepository<SysUserRole> _sysUserRoleRepository;
-        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUser currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting, IOptions<UserInfoConstOptions> userInfoConstOptions, IRepository<SysRole> sysRoleRepository,
-            IRepository<SysUserRole> sysUserRoleRepository)
+        private readonly IHubContext<SignalRHub> _hubContext;
+        public UserService(IRepository<SysUser> sysUserRepository, IRepository<SysUserInfo> sysUserInfoRepository, CurrentUser currentUserService, IOptions<CurrentUserInfoOptions> currentUserInfoSetting, IOptions<UserInfoConstOptions> userInfoConstOptions, IRepository<SysRole> sysRoleRepository, IRepository<SysUserRole> sysUserRoleRepository, IHubContext<SignalRHub> hubContext)
         {
             _sysUserRepository = sysUserRepository;
             _sysUserInfoRepository = sysUserInfoRepository;
@@ -51,6 +53,7 @@ namespace AdminBlog.Application
             _userInfoConstOptions = userInfoConstOptions.Value;
             _sysRoleRepository = sysRoleRepository;
             _sysUserRoleRepository = sysUserRoleRepository;
+            _hubContext = hubContext;
 
         }
         #endregion
@@ -280,6 +283,7 @@ namespace AdminBlog.Application
             userLogin.LoginTimes += 1;
             userLogin.LastLoginIP = App.HttpContext.GetLocalIpAddressToIPv4();
             userLogin.LastLoginTime = DateTime.Now;
+            userLogin.IsOnline = OnlineTypeEnum.Online;
             await _sysUserRepository.UpdateAsync(userLogin);
 
             string accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>()

@@ -20,14 +20,7 @@ namespace AdminBlog.SignalRApplication
         {
             var cid = Context.ConnectionId;
 
-            //根据id获取指定客户端
-            var client = Clients.Client(cid);
-
-            //向指定用户发送消息
-            await client.SendAsync("Self", cid);
-
-            //像所有用户发送消息
-            await Clients.All.SendAsync("AddMsg", $"{cid}加入了聊天室");
+            await base.OnConnectedAsync();
         }
     }
 }
